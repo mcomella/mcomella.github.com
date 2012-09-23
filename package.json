@@ -1,8 +1,8 @@
 {
-  "name": "node-example",
+  "name": "mcomella",
   "version": "0.0.1",
   "dependencies": {
-    "express": "2.5.x"
+    "node-static": "0.6.x"
   },
   "engines": {
     "node": "0.8.x",

@@ -1,12 +1,8 @@
-var express = require('express');
+var static = require('node-static');
+var http = require('http');
 
-var app = express.createServer(express.logger());
+var file = new(static.Server)();
 
-app.get('/', function(request, response) {
-    response.send('Hello World! This is a test');
-});
-
-var port = process.env.PORT || 5000;
-app.listen(port, function() {
-    console.log("Listening on " + port);
-});
+http.createServer(function (req, res) {
+  file.serve(req, res);
+}).listen(8080);

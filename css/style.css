@@ -6,3 +6,16 @@
   float: left;
   padding-right: 4px;
 }
+
+A:link, A:visited, A:active {
+  color: #7E0BD6;
+  font-weight: bold;
+}
+A:hover {
+  color: #9C53D4;
+  font-weight: bold;
+}
+
+body {
+  font-family: Sans-Serif;
+}

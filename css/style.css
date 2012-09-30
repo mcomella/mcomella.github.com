@@ -1,0 +1,8 @@
+#header, #face {
+  height: 100px;
+}
+
+#face {
+  float: left;
+  padding-right: 4px;
+}

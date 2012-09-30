@@ -8,14 +8,18 @@
 }
 
 A:link, A:visited, A:active {
-  color: #7E0BD6;
+  color: #7e0bd6;
   font-weight: bold;
+  text-decoration: none;
 }
 A:hover {
-  color: #9C53D4;
+  color: #9c53d4;
   font-weight: bold;
+  text-decoration: none;
 }
 
 body {
+  color: #33322f;
+  background-color: #fffaed;
   font-family: Sans-Serif;
 }

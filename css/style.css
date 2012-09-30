@@ -1,5 +1,9 @@
+/* TODO: Set overflow attr. */
+/* TODO: Density independent units. */
+
 #site {
   max-width: 935px;
+  padding: 10px 10px 0 10px;
 }
 
 #main_nav {
@@ -12,6 +16,36 @@
   height: 125px;
   float: left;
   margin-right: 14px;
+}
+
+#title {
+  padding: 0;
+  margin: 0;
+}
+
+#main_nav_links {
+  /* TODO: Size. And get the columns working correctly. */
+  height: 100px;
+  width: 200px;
+  float: left;
+  line-height: 150%;
+}
+#main_nav_links ul {
+  font-weight: bold;
+  list-style-type: none;
+  margin: 0 0 0 27px;
+  padding: 0;
+  -moz-columns: 2 70px;
+  -webkit-columns: 2 70px;
+  -ms-columns: 2 70px;
+  -o-columns: 2 70px;
+  columns: 2 70px;
+  -moz-column-gap: 20px;
+  -webkit-column-gap: 20px;
+  -ms-column-gap: 20px;
+  -o-column-gap: 20px;
+  column-gap: 20px;
+  column-fill: auto;
 }
 
 #content {
@@ -30,28 +64,22 @@
   color: #fffaed;
   background-color: #7e0bd6;
 }
-.inverted > a:link, .inverted > a:visited {
+.inverted a:link, .inverted a:visited {
   color: #fffaed;
 }
-.inverted > a:hover {
+.inverted a:hover {
   text-decoration: underline;
 }
 
-h1 {
-  /* TODO: Why is the width of the link the whole page? */
-  padding: 0;
-  margin: 0;
-}
-
-a:link, a:visited, a:active {
-  color: #7e0bd6;
+a {
   font-weight: bold;
   text-decoration: none;
+}
+a:link, a:visited, a:active {
+  color: #7e0bd6;
 }
 a:hover {
   color: #9c53d4;
-  font-weight: bold;
-  text-decoration: none;
 }
 
 body {

@@ -8,7 +8,7 @@
 
 #main_nav {
   min-height: 125px;
-  border: solid #33322f 10px;
+  border: solid #444444 10px;
   padding: 14px;
 }
 
@@ -62,7 +62,7 @@
 .inverted {
   /* TODO: Text color should be different from link color. */
   color: #fffaed;
-  background-color: #7e0bd6;
+  background-color: #9c53d4;
 }
 .inverted a:link, .inverted a:visited {
   color: #fffaed;
@@ -76,14 +76,14 @@ a {
   text-decoration: none;
 }
 a:link, a:visited, a:active {
-  color: #7e0bd6;
+  color: #9c53d4;
 }
 a:hover {
-  color: #9c53d4;
+  color: #7e0bd6;
 }
 
 body {
-  color: #33322f;
+  color: #333333;
   background-color: #fffaed;
   font-family: Sans-Serif;
   font-size: 12pt;

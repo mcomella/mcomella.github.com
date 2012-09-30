@@ -1,13 +1,18 @@
+/*** PSEUDO CONSTANTS ***
+ * $headerHeight = "100px"
+ ***/
+
 #site {
   max-width: 920px;
   margin: auto;
 }
 
-#header, #face {
-  height: 100px;
+#header {
+  min-height: 100px; /* $headerHeight */
 }
 
 #face {
+  height: 100px; /* $headerHeight */
   float: left;
   padding-right: 4px;
 }

@@ -1,3 +1,8 @@
+#site {
+  max-width: 920px;
+  margin: auto;
+}
+
 #header, #face {
   height: 100px;
 }

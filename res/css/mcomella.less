@@ -1,3 +1,5 @@
+@body_bg: #ecece7;
+
 @nav_bg: #f24610;
 @nav_shadow: #444;
 @nav_primary: #fff;
@@ -12,12 +14,14 @@
   src: url('http://fonts.googleapis.com/css?family=Noto+Sans');
 }
 
-body {
+html {
+  background: @body_bg;
   font-family: 'Noto Sans', sans-serif;
 }
 
 a { text-decoration: none; }
 
+// TODO: Overflow?
 nav {
   height: 1.2em;
   padding: 4px 16px;
@@ -50,11 +54,19 @@ nav {
   a:hover { color: @nav_secondary; }
 }
 
-// TODO: Change these values.
+#content-padding { padding: 1.5em 18px; }
 #content {
-  width: 700px;
-  padding: 0;
+  max-width: 940px;
+  padding: 8px 12px;
   margin: 0 auto;
+  border: none;
+  border-radius: 6px;
   clear: both;
-  background: #f00;
+  color: @nav_primary;
+  background: @nav_bg;
+  box-shadow: 3px 3px 2px -1px @nav_shadow;
+  h1 {
+    padding: 0;
+    margin: 0;
+  }
 }

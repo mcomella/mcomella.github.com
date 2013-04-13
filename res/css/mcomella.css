@@ -6,8 +6,16 @@ html {
   background: #ecece7;
   font-family: 'Noto Sans', sans-serif;
 }
-a {
+a,
+a:visited {
+  color: #f24610;
   text-decoration: none;
+}
+a:hover {
+  color: #ac3009;
+}
+a:active {
+  color: #f24610;
 }
 nav {
   height: 1.2em;
@@ -57,7 +65,7 @@ nav a:hover {
   color: #dddddd;
 }
 #content-padding {
-  padding: 1.5em 18px;
+  padding: 1.5em 18px 16px 18px;
 }
 #content {
   max-width: 940px;
@@ -66,11 +74,27 @@ nav a:hover {
   border: none;
   border-radius: 6px;
   clear: both;
-  color: #ffffff;
+  color: #222;
   background: #f24610;
   box-shadow: 3px 3px 2px -1px #444444;
 }
 #content h1 {
   padding: 0;
   margin: 0;
+  color: #ffffff;
+  font-style: italic;
+}
+#info {
+  padding: 8px 8px;
+  margin: 4px 0px;
+  border: none;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 3px 3px 2px -1px #444444;
+}
+#info p:first-child {
+  margin-top: 0;
+}
+#info p:last-child {
+  margin-bottom: 0;
 }

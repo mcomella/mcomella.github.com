@@ -1,9 +1,7 @@
 ---
-layout: default
+layout: info
 title: about
 ---
-about
-=====
 Hello! My name is Michael Comella and I'm currently a senior at Brown
 University, majoring in Computer Science. This page is currently under
 development so please excuse the imperfection.

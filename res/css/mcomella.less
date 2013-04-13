@@ -1,9 +1,12 @@
 @body_bg: #ecece7;
+@shadow: #444;
 
 @nav_bg: #f24610;
-@nav_shadow: #444;
-@nav_primary: #fff;
-@nav_secondary: #ddd;
+@nav_fg: #fff;
+@nav_fg_secondary: #ddd;
+
+@content_bg: #000;
+@content_fg: #222;
 
 @nav_font_height: 16px;
 @nav_title_height: 24px;
@@ -19,7 +22,12 @@ html {
   font-family: 'Noto Sans', sans-serif;
 }
 
-a { text-decoration: none; }
+a, a:visited {
+  color: @nav_bg;
+  text-decoration: none;
+}
+a:hover { color: darken(@nav_bg, 15%); }
+a:active { color: @nav_bg; }
 
 // TODO: Overflow?
 nav {
@@ -28,7 +36,7 @@ nav {
   margin: 0;
   overflow: hidden;
   background: @nav_bg;
-  box-shadow: 6px 3px 2px -1px @nav_shadow;
+  box-shadow: 6px 3px 2px -1px @shadow;
   font-size: @nav_title_height;
   text-shadow: 1px 1px darken(@nav_bg, 5%);
 
@@ -50,11 +58,11 @@ nav {
     li:last-child { margin-right: 0; }
   }
 
-  a, a:visited { color: @nav_primary; }
-  a:hover { color: @nav_secondary; }
+  a, a:visited { color: @nav_fg; }
+  a:hover { color: @nav_fg_secondary; }
 }
 
-#content-padding { padding: 1.5em 18px; }
+#content-padding { padding: 1.5em 18px 16px 18px; }
 #content {
   max-width: 940px;
   padding: 8px 12px;
@@ -62,11 +70,24 @@ nav {
   border: none;
   border-radius: 6px;
   clear: both;
-  color: @nav_primary;
+  color: #222;
   background: @nav_bg;
-  box-shadow: 3px 3px 2px -1px @nav_shadow;
+  box-shadow: 3px 3px 2px -1px @shadow;
   h1 {
     padding: 0;
     margin: 0;
+    color: @nav_fg;
+    font-style: italic;
   }
+}
+
+#info {
+  padding: 8px 8px;
+  margin: 4px 0px;
+  border: none;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 3px 3px 2px -1px @shadow;
+  p:first-child { margin-top: 0; }
+  p:last-child { margin-bottom: 0; }
 }

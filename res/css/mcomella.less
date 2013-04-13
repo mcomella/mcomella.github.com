@@ -1,0 +1,54 @@
+@nav_bg: #f24610;
+@nav_primary: #fff;
+@nav_secondary: #ddd;
+
+@nav_font_height: 16px;
+@nav_title_height: 24px;
+@nav_center_offset: (@nav_title_height + 8px);
+
+@font-face {
+  font-family: 'Noto Sans';
+  src: url('http://fonts.googleapis.com/css?family=Noto+Sans');
+}
+
+a { text-decoration: none; }
+
+nav {
+  height: 1.2em;
+  padding: 4px 16px;
+  margin: 0;
+  overflow: hidden;
+  background: @nav_bg;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: @nav_title_height;
+
+  > * { display: inline-block; }
+  #title, #nav-local { float: left; }
+  #nav-external { float: right; }
+  #title { margin-right: 20px; }
+  ul {
+    padding: 0;
+    margin: 0;
+    font-size: @nav_font_height;
+    line-height: @nav_center_offset;
+    list-style: none;
+    li {
+      display: inline;
+      margin: 0 8px;
+    }
+    li:first-child { margin-left: 0; }
+    li:last-child { margin-right: 0; }
+  }
+
+  a, a:visited { color: @nav_primary; }
+  a:hover { color: @nav_secondary; }
+}
+
+// TODO: Change these values.
+#content {
+  width: 700px;
+  padding: 0;
+  margin: 0 auto;
+  clear: both;
+  background: #f00;
+}

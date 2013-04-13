@@ -1,66 +1,60 @@
-/* TODO: Set overflow attr. */
-/* TODO: Density independent units. */
-
-#site {
-  max-width: 935px;
-  padding: 10px 10px 0 10px;
+@font-face {
+  font-family: 'Noto Sans';
+  src: url('http://fonts.googleapis.com/css?family=Noto+Sans');
 }
-
-#main_nav {
-  min-height: 125px;
-  border: solid #444444 10px;
-  padding: 14px;
-}
-
-#face {
-  height: 125px;
-  float: left;
-  margin-right: 14px;
-}
-
-#title {
-  padding: 0;
-  margin: 0;
-}
-
-#content {
-  margin-left: 17px;
-  margin-right: 17px;
-}
-
-.center {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-}
-
-.inverted {
-  /* TODO: Text color should be different from link color. */
-  color: #fffaed;
-  background-color: #9c53d4;
-}
-.inverted a:link, .inverted a:visited {
-  color: #fffaed;
-}
-.inverted a:hover {
-  text-decoration: underline;
-}
-
 a {
-  font-weight: bold;
   text-decoration: none;
 }
-a:link, a:visited, a:active {
-  color: #9c53d4;
+nav {
+  height: 1.2em;
+  padding: 4px 16px;
+  margin: 0;
+  overflow: hidden;
+  background: #f24610;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 24px;
 }
-a:hover {
-  color: #7e0bd6;
+nav > * {
+  display: inline-block;
 }
-
-body {
-  color: #333333;
-  background-color: #fffaed;
-  font-family: Sans-Serif;
-  font-size: 12pt;
-  font-weight: normal;
+nav #title,
+nav #nav-local {
+  float: left;
+}
+nav #nav-external {
+  float: right;
+}
+nav #title {
+  margin-right: 20px;
+}
+nav ul {
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  line-height: 32px;
+  list-style: none;
+}
+nav ul li {
+  display: inline;
+  margin: 0 8px;
+}
+nav ul li:first-child {
+  margin-left: 0;
+}
+nav ul li:last-child {
+  margin-right: 0;
+}
+nav a,
+nav a:visited {
+  color: #ffffff;
+}
+nav a:hover {
+  color: #dddddd;
+}
+#content {
+  width: 700px;
+  padding: 0;
+  margin: 0 auto;
+  clear: both;
+  background: #f00;
 }

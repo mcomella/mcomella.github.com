@@ -15,7 +15,17 @@
   <link rel="stylesheet" href="res/css/mcomella.css" />
 </head>
 <body>
-  <div id="site" class="center">
+  <nav>
+    <h1>mcomella.me:~/ $</h1>
+    <div id="nav_local">
+      {% include nav_local.ext %}
+    </div>
+    <div id="nav_external">
+      {% include nav_external.ext %}
+    </div>
+  </nav>
+
+  <div id="content">
     {{ content }}
   </div>
 </body>

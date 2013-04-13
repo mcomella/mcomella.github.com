@@ -2,7 +2,7 @@
 <html lang="en-us">
 <head>
   <meta charset="utf-8" />
-  <title>mcomella.me</title>
+  <title>{% if page.title %}{{page.title}} | {% endif %}mcomella.me</title>
 
   <meta name="author" content="Michael Comella" />
   {% if page.location == 'index' %}

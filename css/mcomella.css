@@ -23,31 +23,6 @@
   margin: 0;
 }
 
-#main_nav_links {
-  /* TODO: Size. And get the columns working correctly. */
-  height: 100px;
-  width: 200px;
-  float: left;
-  line-height: 150%;
-}
-#main_nav_links ul {
-  font-weight: bold;
-  list-style-type: none;
-  margin: 0 0 0 27px;
-  padding: 0;
-  -moz-columns: 2 70px;
-  -webkit-columns: 2 70px;
-  -ms-columns: 2 70px;
-  -o-columns: 2 70px;
-  columns: 2 70px;
-  -moz-column-gap: 20px;
-  -webkit-column-gap: 20px;
-  -ms-column-gap: 20px;
-  -o-column-gap: 20px;
-  column-gap: 20px;
-  column-fill: auto;
-}
-
 #content {
   margin-left: 17px;
   margin-right: 17px;

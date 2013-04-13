@@ -2,6 +2,9 @@
   font-family: 'Noto Sans';
   src: url('http://fonts.googleapis.com/css?family=Noto+Sans');
 }
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
 a {
   text-decoration: none;
 }
@@ -12,7 +15,6 @@ nav {
   overflow: hidden;
   background: #f24610;
   box-shadow: 6px 3px 2px -1px #444444;
-  font-family: 'Noto Sans', sans-serif;
   font-size: 24px;
   text-shadow: 1px 1px #dd3e0c;
 }

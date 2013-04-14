@@ -107,6 +107,13 @@ nav a:active {
   margin-top: 1em;
   color: rgba(64, 138, 41, 0.75);
 }
+#content ul {
+  list-style: none;
+}
+#content li:before {
+  color: #444444;
+  content: "\2022\00A0\00A0";
+}
 #content a,
 #content a:visited {
   color: rgba(64, 138, 41, 0.75);

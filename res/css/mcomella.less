@@ -99,6 +99,14 @@ nav {
     color: @nav_bg;
   }
 
+  // Bullet color hack via:
+  // http://css-tricks.com/forums/discussion/comment/81122/#Comment_81122
+  ul { list-style: none; }
+  li:before {
+    color: @content_fg;
+    content:"\2022\00A0\00A0";
+  }
+
   a, a:visited { color: @nav_bg; }
   a:hover { color: darken(@nav_bg, 15%); }
   a:active { color: @nav_bg; }

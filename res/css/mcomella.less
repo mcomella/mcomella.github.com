@@ -18,6 +18,7 @@
 
 html {
   background: @body_bg;
+  min-width: 400px;
 }
 
 h1, h2 {
@@ -43,7 +44,7 @@ nav {
   height: @nav_height;
   padding: 4px 16px;
   margin: 0;
-  overflow: hidden;
+  overflow: show;
   box-shadow: 6px 3px 2px -1px @shadow;
   font-size: @nav_title_height;
   text-shadow: 1px 1px darken(@nav_bg, 5%);
@@ -51,7 +52,7 @@ nav {
   > * { display: inline-block; }
   #title, #nav-local { float: left; }
   #nav-external { float: right; }
-  #title { margin-right: 20px; }
+  #title { margin-right: 0.75em; }
   ul {
     padding: 0;
     margin: 0;
@@ -60,10 +61,10 @@ nav {
     list-style: none;
     li {
       display: inline;
-      margin: 0 8px;
+      margin: 0 0.6em;
     }
-    li:first-child { margin-left: 0; }
-    li:last-child { margin-right: 0; }
+    #nav-local:first-child { margin-left: 0; }
+    #nav-external:last-child { margin-right: 0; }
   }
 
   a, a:visited { color: @nav_fg; }

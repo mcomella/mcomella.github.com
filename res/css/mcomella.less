@@ -1,12 +1,12 @@
 @body_bg: #ecece7;
 @shadow: #444;
 
-@nav_bg: #f24610;
 @nav_fg: #fff;
 @nav_fg_secondary: #ddd;
+@nav_bg: #f24610;
 
-@content_bg: #fff;
 @content_fg: #222;
+@content_bg: #fff;
 
 @nav_font_height: 16px;
 @nav_title_height: 24px;
@@ -22,20 +22,18 @@ html {
   font-family: 'Noto Sans', sans-serif;
 }
 
-a, a:visited {
-  color: @nav_bg;
-  text-decoration: none;
-}
-a:hover { color: darken(@nav_bg, 15%); }
-a:active { color: @nav_bg; }
+a, a:visited { text-decoration: none; }
 
-// TODO: Overflow?
+nav, #shell {
+  color: @nav_fg;
+  background: @nav_bg;
+}
+
 nav {
   height: 1.2em;
   padding: 4px 16px;
   margin: 0;
   overflow: hidden;
-  background: @nav_bg;
   box-shadow: 6px 3px 2px -1px @shadow;
   font-size: @nav_title_height;
   text-shadow: 1px 1px darken(@nav_bg, 5%);
@@ -60,6 +58,7 @@ nav {
 
   a, a:visited { color: @nav_fg; }
   a:hover { color: @nav_fg_secondary; }
+  a:active { color: @nav_fg; }
 }
 
 #shell-padding { padding: 1.5em 18px 16px 18px; }
@@ -70,12 +69,10 @@ nav {
   border: none;
   border-radius: 6px;
   clear: both;
-  background: @nav_bg;
   box-shadow: 3px 3px 2px -1px @shadow;
   h1 {
     padding: 0;
     margin: 0;
-    color: @nav_fg;
     text-shadow: 1px 1px darken(@nav_bg, 5%);
     font-style: italic;
   }
@@ -91,4 +88,8 @@ nav {
   box-shadow: inset 0px 0px 2px 0px @shadow;
   p:first-child { margin-top: 0; }
   p:last-child { margin-bottom: 0; }
+
+  a, a:visited { color: @nav_bg; }
+  a:hover { color: darken(@nav_bg, 15%); }
+  a:active { color: @nav_bg; }
 }

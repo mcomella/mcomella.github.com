@@ -5,7 +5,7 @@
 @nav_fg: #fff;
 @nav_fg_secondary: #ddd;
 
-@content_bg: #000;
+@content_bg: #fff;
 @content_fg: #222;
 
 @nav_font_height: 16px;
@@ -70,13 +70,13 @@ nav {
   border: none;
   border-radius: 6px;
   clear: both;
-  color: #222;
   background: @nav_bg;
   box-shadow: 3px 3px 2px -1px @shadow;
   h1 {
     padding: 0;
     margin: 0;
     color: @nav_fg;
+    text-shadow: 1px 1px darken(@nav_bg, 5%);
     font-style: italic;
   }
 }
@@ -86,8 +86,9 @@ nav {
   margin: 4px 0px;
   border: none;
   border-radius: 4px;
-  background: #fff;
-  box-shadow: 3px 3px 2px -1px @shadow;
+  color: @content_fg;
+  background: @content_bg;
+  box-shadow: inset 0px 0px 2px 0px @shadow;
   p:first-child { margin-top: 0; }
   p:last-child { margin-bottom: 0; }
 }

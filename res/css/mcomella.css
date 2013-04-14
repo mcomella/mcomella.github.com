@@ -74,7 +74,6 @@ nav a:hover {
   border: none;
   border-radius: 6px;
   clear: both;
-  color: #222;
   background: #f24610;
   box-shadow: 3px 3px 2px -1px #444444;
 }
@@ -82,6 +81,7 @@ nav a:hover {
   padding: 0;
   margin: 0;
   color: #ffffff;
+  text-shadow: 1px 1px #dd3e0c;
   font-style: italic;
 }
 #info {
@@ -89,8 +89,9 @@ nav a:hover {
   margin: 4px 0px;
   border: none;
   border-radius: 4px;
-  background: #fff;
-  box-shadow: 3px 3px 2px -1px #444444;
+  color: #222222;
+  background: #ffffff;
+  box-shadow: inset 0px 0px 2px 0px #444444;
 }
 #info p:first-child {
   margin-top: 0;

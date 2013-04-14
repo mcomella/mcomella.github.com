@@ -102,7 +102,7 @@ nav a:hover {
   border-radius: 4px;
   color: #444444;
   background: #ffffff;
-  box-shadow: inset 0px 0px 2px 0px #cccccc;
+  box-shadow: inset 0px 0px 4px 1px #cccccc;
   font-size: 110%;
   line-height: 1.55;
 }

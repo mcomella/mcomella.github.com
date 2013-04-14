@@ -30,7 +30,14 @@ h1, h2 {
 p { margin: 0; }
 p + p { text-indent: 2em; }
 
-a, a:visited { text-decoration: none; }
+a, a:visited, a:hover {
+  text-decoration: none;
+  -webkit-transition: 0.3s ease 0s;
+     -moz-transition: 0.3s ease 0s;
+      -ms-transition: 0.3s ease 0s;
+       -o-transition: 0.3s ease 0s;
+          transition: 0.3s ease 0s;
+}
 
 ul { margin: 0; }
 
@@ -69,7 +76,6 @@ nav {
 
   a, a:visited { color: @nav_fg; }
   a:hover { color: @nav_fg_secondary; }
-  a:active { color: @nav_fg; }
 }
 
 #shell-padding { padding: 1.5em 18px 16px 18px; }
@@ -109,5 +115,4 @@ nav {
 
   a, a:visited { color: @nav_bg; }
   a:hover { color: darken(@nav_bg, 15%); }
-  a:active { color: @nav_bg; }
 }

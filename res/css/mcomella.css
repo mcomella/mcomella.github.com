@@ -16,8 +16,14 @@ p + p {
   text-indent: 2em;
 }
 a,
-a:visited {
+a:visited,
+a:hover {
   text-decoration: none;
+  -webkit-transition: 0.3s ease 0s;
+  -moz-transition: 0.3s ease 0s;
+  -ms-transition: 0.3s ease 0s;
+  -o-transition: 0.3s ease 0s;
+  transition: 0.3s ease 0s;
 }
 ul {
   margin: 0;
@@ -74,9 +80,6 @@ nav a:visited {
 nav a:hover {
   color: #e6e6e6;
 }
-nav a:active {
-  color: #ffffff;
-}
 #shell-padding {
   padding: 1.5em 18px 16px 18px;
 }
@@ -120,7 +123,4 @@ nav a:active {
 }
 #content a:hover {
   color: rgba(37, 79, 23, 0.75);
-}
-#content a:active {
-  color: rgba(64, 138, 41, 0.75);
 }

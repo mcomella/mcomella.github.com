@@ -6,32 +6,41 @@
 @nav_fg_secondary: darken(@nav_fg, 10%);
 @nav_bg: rgba(64, 138, 41, 0.75);
 
-@content_fg: #222;
+@content_fg: #444;
 @content_bg: #fff;
 
+@nav_height: 1.3em;
 @nav_font_height: 16px;
 @nav_title_height: 24px;
-@nav_center_offset: (@nav_title_height + 8px);
+@nav_center_offset: (@nav_title_height + 11px);
 
-@font-face {
-  font-family: 'Noto Sans';
-  src: url('http://fonts.googleapis.com/css?family=Noto+Sans');
-}
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic);
 
 html {
   background: @body_bg;
-  font-family: 'Noto Sans', sans-serif;
 }
+
+h1, h2 {
+  padding: 0;
+  margin: 0;
+  font-style: italic;
+}
+
+p { margin: 0; }
+p + p { text-indent: 2em; }
 
 a, a:visited { text-decoration: none; }
 
+ul { margin: 0; }
+
 nav, #shell {
+  font-family: "Source Sans Pro", sans-serif;
   color: @nav_fg;
   background: @nav_bg;
 }
 
 nav {
-  height: 1.2em;
+  height: @nav_height;
   padding: 4px 16px;
   margin: 0;
   overflow: hidden;
@@ -64,19 +73,14 @@ nav {
 
 #shell-padding { padding: 1.5em 18px 16px 18px; }
 #shell {
-  max-width: 940px;
+  max-width: 750px;
   padding: 8px 12px;
   margin: 0 auto;
   border: none;
   border-radius: 6px;
   clear: both;
   box-shadow: 3px 3px 2px -1px @shadow;
-  h1 {
-    padding: 0;
-    margin: 0;
-    text-shadow: 1px 1px darken(@nav_bg, 5%);
-    font-style: italic;
-  }
+  h1 { text-shadow: 1px 1px darken(@nav_bg, 5%); }
 }
 
 #content {
@@ -87,8 +91,12 @@ nav {
   color: @content_fg;
   background: @content_bg;
   box-shadow: inset 0px 0px 2px 0px @shadow;
-  p:first-child { margin-top: 0; }
-  p:last-child { margin-bottom: 0; }
+  font-size: 110%;
+  line-height: 1.55;
+  h2 {
+    margin-top: 1em;
+    color: @nav_bg;
+  }
 
   a, a:visited { color: @nav_bg; }
   a:hover { color: darken(@nav_bg, 15%); }

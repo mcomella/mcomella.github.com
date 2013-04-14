@@ -2,11 +2,14 @@
 layout: info
 title: about
 ---
-Hello! My name is Michael Comella and I'm currently a senior at Brown
-University, majoring in Computer Science.
+Hello! My name is Michael Comella and I'm currently a senior at studying
+Computer Science at [Brown University](https://brown.edu). I am a former intern
+of both [Google](https://google.com) and [Mozilla](https://mozilla.org) and,
+starting this summer, I will be returning to Mozilla to work on mobile
+full-time.
 
-Below you will find some external links to my activity on the web. Please
-enjoy! ^_^
+Below you will find some external links to my various escapades on the web.
+Please enjoy! ^_^
 
 Contact
 -------

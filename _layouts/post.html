@@ -2,17 +2,17 @@
 layout: default
 ---
 <article>
+  <p id="post-date">Posted on {{ page.date | date: "%d %B %Y" }}</p>
   {{ content }}
 </article>
 
 <hr>
 
-<div id="post-metadata">
-  <p id="post-date">Posted on {{ page.date | date: "%d %B %Y" }}.</p>
+<div id="post-changer">
   {% if page.previous.url %}
-    <a id="prev_post" href="{{ page.previous.url }}">Previous Post</a>
+    <a id="prev-post" href="{{ page.previous.url }}">Previous Post</a>
   {% endif %}
   {% if page.next.url %}
-    <a id="next_post" href="{{ page.next.url }}">Next Post</a>
+    <a id="next-post" href="{{ page.next.url }}">Next Post</a>
   {% endif %}
 </div>

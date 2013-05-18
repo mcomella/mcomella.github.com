@@ -105,6 +105,12 @@ nav {
     color: @nav_bg;
   }
   ul { padding: 0; }
+  hr {
+    width: 10%;
+    padding: 0;
+    margin: 1em auto;
+    border-color: lighten(@content_fg, 50%);
+  }
 
   // Bullet color hack via:
   // http://css-tricks.com/forums/discussion/comment/81122/#Comment_81122
@@ -116,4 +122,17 @@ nav {
 
   a, a:visited { color: @nav_bg; }
   a:hover { color: darken(@nav_bg, 15%); }
+}
+
+#post-changer {
+  height: 1.5em;
+  padding: 0 16px;
+  #next-post { float: right; }
+}
+#prev-post:before { content: "\21A9\00A0"; } // Left arrow.
+#next-post:after { content: "\00A0\21AA"; } // Right arrow.
+
+#post-date {
+  font-style: italic;
+  color: lighten(@content_fg, 30%);
 }

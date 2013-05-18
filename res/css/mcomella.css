@@ -113,6 +113,12 @@ nav a:hover {
 #content ul {
   padding: 0;
 }
+#content hr {
+  width: 10%;
+  padding: 0;
+  margin: 1em auto;
+  border-color: #c3c3c3;
+}
 #content ul {
   list-style: none;
 }
@@ -126,4 +132,21 @@ nav a:hover {
 }
 #content a:hover {
   color: rgba(37, 79, 23, 0.75);
+}
+#post-changer {
+  height: 1.5em;
+  padding: 0 16px;
+}
+#post-changer #next-post {
+  float: right;
+}
+#prev-post:before {
+  content: "\21A9\00A0";
+}
+#next-post:after {
+  content: "\00A0\21AA";
+}
+#post-date {
+  font-style: italic;
+  color: #919191;
 }

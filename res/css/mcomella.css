@@ -110,9 +110,6 @@ nav a:hover {
   margin-top: 1em;
   color: rgba(64, 138, 41, 0.75);
 }
-#content ul {
-  padding: 0;
-}
 #content hr {
   width: 10%;
   padding: 0;
@@ -132,6 +129,9 @@ nav a:hover {
 }
 #content a:hover {
   color: rgba(37, 79, 23, 0.75);
+}
+#post-list {
+  padding: 0;
 }
 #post-changer {
   height: 1.5em;

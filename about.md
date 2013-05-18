@@ -1,5 +1,5 @@
 ---
-layout: info
+layout: default
 title: about
 ---
 Hello! My name is Michael Comella and I'm currently a senior at studying

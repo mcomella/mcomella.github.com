@@ -1,5 +1,5 @@
 ---
-layout: info
+layout: default
 location: index
 title: blog
 ---

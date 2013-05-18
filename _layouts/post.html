@@ -8,11 +8,22 @@ layout: default
 
 <hr>
 
-<div id="post-changer">
-  {% if page.previous.url %}
-    <a id="prev-post" href="{{ page.previous.url }}">Previous Post</a>
-  {% endif %}
-  {% if page.next.url %}
-    <a id="next-post" href="{{ page.next.url }}">Next Post</a>
+<div id="post-metadata">
+  <div id="cc-license">
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a>
+  </div>
+  <div id="post-list-link">
+    <a href="/index.html">Post Listing</a>
+  </div>
+
+  {% if page.previous.url or page.next.url %}
+    <div id="post-nav">
+      {% if page.previous.url %}
+        <a id="prev-post" href="{{ page.previous.url }}">Previous Post</a>
+      {% endif %}
+      {% if page.next.url %}
+        <a id="next-post" href="{{ page.next.url }}">Next Post</a>
+      {% endif %}
+    </div>
   {% endif %}
 </div>

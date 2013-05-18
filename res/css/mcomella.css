@@ -133,11 +133,15 @@ nav a:hover {
 #post-list {
   padding: 0;
 }
-#post-changer {
+#post-metadata #cc-license,
+#post-metadata #post-list-link {
+  text-align: center;
+}
+#post-metadata #post-nav {
   height: 1.5em;
   padding: 0 16px;
 }
-#post-changer #next-post {
+#post-metadata #post-nav #next-post {
   float: right;
 }
 #prev-post:before {

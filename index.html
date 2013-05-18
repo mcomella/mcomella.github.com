@@ -1,0 +1,17 @@
+---
+layout: default
+location: index
+title: blog
+---
+{% if site.posts.size != 0 %}
+  <ul>
+    {% for post in site.posts %}
+      <li>{{ post.date | date: "%d %b %Y" }}&nbsp;&ndash; <a href="{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>
+    No articles have been published yet. Perhaps you'd like to find out more
+    <a href="/about.html">about me</a>.
+  </p>
+{% endif %}

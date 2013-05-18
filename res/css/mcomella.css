@@ -111,6 +111,9 @@ nav a:hover {
   color: rgba(64, 138, 41, 0.75);
 }
 #content ul {
+  padding: 0;
+}
+#content ul {
   list-style: none;
 }
 #content li:before {

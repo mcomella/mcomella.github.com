@@ -12,7 +12,8 @@ h2 {
 p {
   margin: 0;
 }
-p + p {
+p + p,
+.highlight + p {
   text-indent: 2em;
 }
 a,

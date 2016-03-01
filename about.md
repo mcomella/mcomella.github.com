@@ -1,13 +1,9 @@
 ---
 layout: about
 title: About
-author: Charlie
+author: Michael Comella
 permalink: /about/
 ---
 
-Hi! My name is <span class="highlight-span">Charlie</span>!
-
-> We think too much and feel too little.
-
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua.
+Hello! My name is Michael. I'm a developer at Mozilla working on Firefox for
+Android. I enjoy learning, cycling, and self discovery.

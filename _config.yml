@@ -5,12 +5,11 @@ url: http://localhost:4000
 
 source:      .
 destination: ./_site
-plugins:     ./_plugins
+plugins_dir: ./_plugins
 
 future:      true
 lsi:         false
-pygments:    true
-markdown:    rdiscount
+markdown:    kramdown
 permalink:   date
 
 exclude: [README.md]
@@ -33,7 +32,7 @@ kramdown:
   footnote_nr: 1
   entity_output: as_char
   toc_levels: 1..6
-  use_coderay: false
+  enable_coderay: false
 
   coderay:
     coderay_wrap: div

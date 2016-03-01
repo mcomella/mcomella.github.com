@@ -32,7 +32,7 @@ ul {
 nav,
 #shell {
   font-family: "Source Sans Pro", sans-serif;
-  color: #ffffff;
+  color: #fff;
   background: rgba(64, 138, 41, 0.75);
 }
 nav {
@@ -40,7 +40,7 @@ nav {
   padding: 4px 16px;
   margin: 0;
   overflow: show;
-  box-shadow: 6px 3px 2px -1px #cccccc;
+  box-shadow: 6px 3px 2px -1px #ccc;
   font-size: 24px;
   text-shadow: 1px 1px rgba(55, 118, 35, 0.75);
 }
@@ -76,7 +76,7 @@ nav ul #nav-external:last-child {
 }
 nav a,
 nav a:visited {
-  color: #ffffff;
+  color: #fff;
 }
 nav a:hover {
   color: #e6e6e6;
@@ -91,7 +91,7 @@ nav a:hover {
   border: none;
   border-radius: 6px;
   clear: both;
-  box-shadow: 3px 3px 2px -1px #cccccc;
+  box-shadow: 3px 3px 2px -1px #ccc;
 }
 #shell h1 {
   text-shadow: 1px 1px rgba(55, 118, 35, 0.75);
@@ -101,9 +101,9 @@ nav a:hover {
   margin: 4px 0px;
   border: none;
   border-radius: 4px;
-  color: #444444;
-  background: #ffffff;
-  box-shadow: inset 0px 0px 4px 1px #cccccc;
+  color: #444;
+  background: #fff;
+  box-shadow: inset 0px 0px 4px 1px #ccc;
   font-size: 110%;
   line-height: 1.55;
 }
@@ -121,7 +121,7 @@ nav a:hover {
   list-style: none;
 }
 #content li:before {
-  color: #444444;
+  color: #444;
   content: "\2022\00A0\00A0";
 }
 #content a,
@@ -157,11 +157,10 @@ nav a:hover {
 .highlight {
   margin: 0.5em 0;
   padding: 0;
-  font-size: 110%;
   line-height: 1.2em;
   overflow-x: auto;
   border-radius: 4px;
-  box-shadow: 3px 3px 2px -1px #cccccc;
+  box-shadow: 3px 3px 2px -1px #ccc;
 }
 .highlight pre {
   padding: 4px 8px;

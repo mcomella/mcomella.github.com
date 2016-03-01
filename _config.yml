@@ -8,10 +8,10 @@ description: > # this means to ignore newlines until "baseurl:"
   Michael Comella is a developer working on Firefox for Android
   at Mozilla. He enjoys learning, cycling, and self discovery.
 
-url: "http://bk2dcradle.gitub.io" # the base hostname & protocol for your site
+url: "http://mcomella.gitub.com" # the base hostname & protocol for your site
 baseurl: "" # the subpath of your site, e.g. /blog
-twitter_username: AnkitSultana
-github_username:  bk2dcradle
+twitter_username: michaelcomella
+github_username:  mcomella
 
 permalink:          /:year/:title.html
 
@@ -25,7 +25,7 @@ short_bio: >
     A day without laughter is a day wasted.
 profile_picture: http://img3.rnkr-static.com/list_img/11570/111570/C300/movies-and-films-directed-by-charlie-chaplin-u4.jpg
 
-google_analytics: true
+google_analytics: false
 tracking_id: # Your google analytics tracking id
 
 # Build settings | Do not edit anything below this

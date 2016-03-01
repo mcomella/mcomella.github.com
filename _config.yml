@@ -13,7 +13,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 twitter_username: michaelcomella
 github_username:  mcomella
 
-permalink:          /:year/:title.html
+permalink:          /blog/:year/:title.html
 
 paginate: 4
 paginate_path: "/page/:num"

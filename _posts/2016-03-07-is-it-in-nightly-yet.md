@@ -39,7 +39,7 @@ traditional development, where I might forget to update a variable.
 
 To be fair, I'll need to build a more complex app to really experience
 & understand what the benefits of React are -- and more importantly, its
-tradeoffs!
+trade-offs!
 
 ### Testing
 

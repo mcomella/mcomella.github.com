@@ -86,6 +86,12 @@ p {
 	font-weight: lighter;
 }
 
+/* mcomella: make it feel less claustrophobic in posts */
+.post p {
+	font-size: 1.1em;
+	line-height: 1.5;
+}
+
 .post-time {
 	font-style: italic;
 	color: $git-black-color;

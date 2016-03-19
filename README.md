@@ -3,6 +3,10 @@ mcomella.xyz
 
 This is the source code for my website, `http://mcomella.xyz`.
 
+To install deps:
+
+        bundle install
+
 To run:
 
         bundle exec jekyll serve

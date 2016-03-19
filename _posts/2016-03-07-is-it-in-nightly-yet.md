@@ -1,6 +1,6 @@
 ---
 title: Is it in Nightly yet?
-tags: projects
+tags: mozilla,projects
 ---
 Are you a Mozilla developer? Has your manager, itching to try out your
 latest feature, ever asked you, "Is it in the latest Nightly build yet?"

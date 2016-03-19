@@ -70,9 +70,11 @@ img {
 a:not(.anchor) {
 	text-decoration: none;
 	color: $base-highlight-color;
+	transition: color 0.2s ease;
 }
 a:not(.anchor):hover {
-	color: $base-highlight-color;
+	color: darken($base-highlight-color, 15%);
+	transition: color 0.2s ease;
 	cursor: hand;
 }
 

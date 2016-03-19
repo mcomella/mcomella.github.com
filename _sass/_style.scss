@@ -67,11 +67,11 @@ img {
 	max-height: 100%;
 }
 
-a {
+a:not(.anchor) {
 	text-decoration: none;
 	color: $base-highlight-color;
 }
-a:hover {
+a:not(.anchor):hover {
 	color: $base-highlight-color;
 	cursor: hand;
 }

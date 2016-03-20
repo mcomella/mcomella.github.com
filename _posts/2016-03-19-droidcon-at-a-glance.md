@@ -8,7 +8,7 @@ spent amongst the cutting edge Android developers at [Droidcon SF][droidcon].
 This week I had the opportunity to discover the great depths of innovation
 present in the Android developer community, who have taken it upon
 themselves to explore strange new worlds, to seek out new technologies,
-and to boldy go where no dev as gone before -- it's reminiscent of the
+and to boldly go where no dev as gone before -- it's reminiscent of the
 exciting innovations currently impacting the web. For example, Lyft is
 re-inventing the wheel (no pun intended) with [View-only
 development][view-only], startups such as [Nimbledroid][] are creating

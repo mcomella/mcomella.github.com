@@ -67,12 +67,14 @@ img {
 	max-height: 100%;
 }
 
-a {
+a:not(.anchor) {
 	text-decoration: none;
 	color: $base-highlight-color;
+	transition: color 0.2s ease;
 }
-a:hover {
-	color: $base-highlight-color;
+a:not(.anchor):hover {
+	color: darken($base-highlight-color, 15%);
+	transition: color 0.2s ease;
 	cursor: hand;
 }
 

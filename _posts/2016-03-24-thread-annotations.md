@@ -1,5 +1,5 @@
 ---
-title: Android threading annotations – a False Sense of Security
+title: The Shortcomings of Android Thread Annotations
 tag: android,mozilla
 ---
 When the [Android thread annotations][docs] such as `@UiThread` and

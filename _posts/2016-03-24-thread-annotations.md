@@ -54,7 +54,7 @@ int getCountForView() {
 // it, do we remember why it's there? Are we sure it's still not necessary?
 // What if getJSONObjectFromFile was wrapped by a less obvious method like,
 // `mergeDataSourcesToJSONObject`?  It'd be much simpler (and correct!) if
-// the annotation warnings to follow the call stack.
+// the annotation warnings were to follow the call stack.
 
 JSONObject getJSONObjectFromMemory() { /* ... */ } // no annotation
 

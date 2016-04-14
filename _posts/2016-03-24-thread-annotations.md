@@ -159,7 +159,7 @@ It's the same situation if we create a new `Handler` on a worker thread.
 
 ## When is it useful to add thread annotations?
 Thread annotations are most useful when the thread context of the method
-is unlkely to change. Some examples:
+is unlikely to change. Some examples:
 
 * Methods that directly wrap thread-specific APIs, e.g. `writeJSONObjectToDisk`
 should only run on a worker thread and `updateViewFromCursor` should

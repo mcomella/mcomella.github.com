@@ -159,7 +159,7 @@ It's the same situation if we create a new `Handler` on a worker thread.
 
 ## When is it useful to add thread annotations?
 Thread annotations are most useful when the thread context of the method
-is unlkely to change. Some examples:
+is unlikely to change. Some examples:
 
 * Methods that directly wrap thread-specific APIs, e.g. `writeJSONObjectToDisk`
 should only run on a worker thread and `updateViewFromCursor` should
@@ -198,5 +198,25 @@ the overridden method in the super class (or interface).
 
 I have examples for these and more on [Github][src].
 
+---
+
+**Edit (4/13/16):** Several notes since this was originally posted:
+
+* [Igor][] pointed out that thread annotations are simply Lint checks
+and do not affect one's build or compilation.
+* [rnewman][] mentioned that an alternative is to use assertions to
+verify which thread your code is running on.
+* I discovered that classes implementing an interface that has a thread
+annotation may display warnings if its constructor appears on thread that
+opposes the interface's thread annotation. A work-around is to annotate
+the interface methods individually.
+* [jonfor][] pointed out some grammar errors.
+
+Thanks everyone! :)
+
 [docs]: https://sites.google.com/a/android.com/tools/tech-docs/support-annotations
 [src]: https://github.com/mcomella/ThreadAnnotationsTest/tree/master/app/src/main/java/xyz/mcomella/threadannotationstest
+
+[Igor]: https://plus.google.com/+igorganapolsky/
+[rnewman]: https://twitter.com/rnewman
+[jonfor]: https://twitter.com/JForscher

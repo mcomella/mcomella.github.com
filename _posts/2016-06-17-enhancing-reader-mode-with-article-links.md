@@ -71,7 +71,7 @@ page
 * Computers & the web as a truly dynamic medium, with different capabilities
 than their print predecessors
 
-For implementation details and the source, check out
+For the source and a chance to run it for yourself, check out
 [the repository on github][githug].
 
 [githug]: https://github.com/mcomella/reader-links

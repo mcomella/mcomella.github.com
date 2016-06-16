@@ -65,7 +65,7 @@ They provide a summary and an image of the page the hyperlink will open.
 Can we use this technique, and others, to provide more context for hyperlinks
 on every page on the web?
 
-To summarize, perhaps we can empower users by considering:
+To summarize, perhaps we can solve user problems by considering:
 
 * The web as a graph -- accessing content backwards & forwards from the current
 page

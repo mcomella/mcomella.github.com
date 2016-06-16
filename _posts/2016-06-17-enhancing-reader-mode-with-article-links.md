@@ -61,8 +61,9 @@ another interesting example when mousing over a link:
 
 ![wikipedia link mouse-over shows next page pop-up](/im/posts/enhancing-reader-wiki.png)
 
-They provide a summary and an image of the page. Can we use this technique, and
-others, to empower hyperlinks for every page on the web?
+They provide a summary and an image of the page the hyperlink will open.
+Can we use this technique, and others, to provide more context for hyperlinks
+on every page on the web?
 
 To summarize, perhaps we can empower users by considering:
 

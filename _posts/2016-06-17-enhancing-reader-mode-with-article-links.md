@@ -11,8 +11,8 @@ remember the context that this article was opened from and may not remember
 why it was relevant to the original article.
 
 I prototyped a solution -- at the end of an article, I attach all of the
-links in the article to the end of the article with some
-context of where the links came from and where they lead. For example, from my [Android
+links in the article to the end of the article with some additional
+context. For example, from my [Android
 thread annotations post][thread]:
 
 ![links with context at the end of an article](/im/posts/enhancing-reader-mode.png)
@@ -24,50 +24,52 @@ To see if the page is worth reading, I access the page the link points to and
 include some of its data: the title, the host name, and a snippet.
 
 There is more information we can add here as well, e.g. a "trending" rating
-(a fake implementation pictured), a favicon, or a descriptive photo.
+(a fake implementation is pictured), a favicon, or a descriptive photo.
 
 ## And vice versa
-You can also provide context to the original article on the pages of the links
-you opened:
+You can also provide the original article's context on a new page after you
+click a link:
 
 ![context from where this page was opened](/im/posts/enhancing-reader-backwards.png)
 
-Note that you can add this context for more than just articles.
+This context can be added for more than just articles.
 
-Shout-out to [Stefan][] for providing additional context on this idea at dinner
-and a context graph brainstorming group for further fleshing this out.
+Shout-out to [Stefan][] for independently discovering this idea (and improving
+it!) and a context graph brainstorming group for further fleshing this out.
 
 Note: this is just a mock-up -- I don't have a prototype for this.
 
 ## Themes
-The web is a graph. In a graph, we can access new nodes, and their content, by
-traversing backwards
-or forwards. Can we take advantage of this relationship?
+The web is a graph. In a graph, we can access new nodes, and their
+content, by traversing backwards or forwards. Can we take advantage of
+this relationship?
 
 [Alan Kay once said][incremental], people largely use computers "as a convenient way of
 getting at old media..." This is prevelant on the web today -- many web pages
-are fill fullscreen browser windows that allow you to read the news, create a
-calendar, or take notes. How can we better take advantage of the dynamic nature of
-computers? Of the web?
+fill fullscreen browser windows that allow you to read the news, create a
+calendar, or take notes, much like we can with paper media. How can we better
+take advantage of the dynamic nature of computers? Of the web?
 
-Can we mix and match content from different pages and find clever ways to
-traverse the graph? Should we do this from a single page?
+Can we mix and match live content from different pages? Can we find clever ways
+to traverse & access the web graph?
 
-This blog & protype provide two examples: 1) showing the context of where the user is going to go
-and 2) showing where they came from. Wikipedia (with a certain login-needed
-feature enabled) has another interesting example when mousing over a link:
+This blog & protype provide two simple examples of traversing the graph
+and being (ever so slightly) more dynamic: 1) showing the context of
+where the user is going to go and 2) showing the context of where they
+came from. Wikipedia (with a certain login-needed feature enabled) has
+another interesting example when mousing over a link:
 
 ![wikipedia link mouse-over shows next page pop-up](/im/posts/enhancing-reader-wiki.png)
 
-They provide a summary and an image of the page. Is it desireable to do
-something similar for every page on the web?
+They provide a summary and an image of the page. Can we use this technique, and
+others, to empower hyperlinks for every page on the web?
 
 To summarize, perhaps we can empower users by considering:
 
 * The web as a graph -- accessing content backwards & forwards from the current
 page
-* Computers & the web as a truly dynamic medium, more powerful than their print
-predecessors
+* Computers & the web as a truly dynamic medium, with different capabilities
+than their print predecessors
 
 For implementation details and the source, check out
 [the repository on github][githug].

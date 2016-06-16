@@ -45,7 +45,7 @@ content, by traversing backwards or forwards. Can we take advantage of
 this relationship?
 
 [Alan Kay once said][incremental], people largely use computers "as a convenient way of
-getting at old media..." This is prevelant on the web today -- many web pages
+getting at old media..." This is prevalent on the web today -- many web pages
 fill fullscreen browser windows that allow you to read the news, create a
 calendar, or take notes, much like we can with paper media. How can we better
 take advantage of the dynamic nature of computers? Of the web?
@@ -53,7 +53,7 @@ take advantage of the dynamic nature of computers? Of the web?
 Can we mix and match live content from different pages? Can we find clever ways
 to traverse & access the web graph?
 
-This blog & protype provide two simple examples of traversing the graph
+This blog & prototype provide two simple examples of traversing the graph
 and being (ever so slightly) more dynamic: 1) showing the context of
 where the user is going to go and 2) showing the context of where they
 came from. Wikipedia (with a certain login-needed feature enabled) has

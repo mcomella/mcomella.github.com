@@ -34,8 +34,9 @@ click a link:
 
 This context can be added for more than just articles.
 
-Shout-out to [Stefan][] for independently discovering this idea (and improving
-it!) and a context graph brainstorming group for further fleshing this out.
+Shout-out to [Chenxia][] & [Stefan][] for independently discovering this
+idea and a context graph brainstorming group for further fleshing this
+out.
 
 Note: this is just a mock-up -- I don't have a prototype for this.
 
@@ -79,3 +80,4 @@ For the source and a chance to run it for yourself, check out
 [thread]: /blog/2016/thread-annotations.html
 [Stefan]: https://twitter.com/satefan
 [incremental]: https://www.youtube.com/watch?v=gTAghAJcO1o
+[Chenxia]: https://twitter.com/liucheia

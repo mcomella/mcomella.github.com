@@ -7,7 +7,7 @@ open but now is not a good time to open them. Why is now not a good time?
 * If I open them and read them now, I'll lose the context of the article I'm
 currently reading.
 * If I open them in the background now and come back to them later, I won't
-remember the context that this article was opened from and may not remember
+remember the context that this page was opened from and may not remember
 why it was relevant to the original article.
 
 I prototyped a solution -- at the end of an article, I attach all of the

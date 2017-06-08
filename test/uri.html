@@ -1,0 +1,81 @@
+<html>
+<head>
+  <title>Intent URIs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+</head>
+<body>
+
+  <h2>zxing</h2>
+  <p>
+    Click <a href="intent://scan/#Intent;scheme=zxing;package=com.google.zxing.client.android;end">here</a> to open zxing with an intent:// URI!
+  </p>
+
+  <p>
+    Click <a href="intent://scan/#Intent;scheme=zxing;package=com.google.zxing.client.android;S.browser_fallback_url=http%3A%2F%2Fzxing.org;end">here</a> to open zxing with an intent:// URI and fallback url!
+  </p>
+
+  <p>
+    Click <a href="intent://scan/#Intent;scheme=zxing;package=com.google.zxing.client.android;S.browser_fallback_url=%5C%21%40%23aoeu%23%5C%21%25';end">here</a> to open zxing with an intent:// URI and invalid fallback url!
+  </p>
+
+  <p>
+    Click <a href="intent://scan/#Intent;scheme=zxing;S.browser_fallback_url=http%3A%2F%2Fzxing.org;end">here</a> to open zxing with an intent:// URI, no package, and fallback url!
+  </p>
+
+  <p>
+    Click <a href="intent://scan/#Intent;scheme=zxing;S.browser_fallback_url=file%3A%2F%2Fusr;end">here</a> to open zxing with an intent:// URI, no package, and fallback url w/ file://!
+  </p>
+
+  <p>
+    Click <a href="intent://scan/#Intent;scheme=zxing;S.browser_fallback_url=apple.com;end">here</a> to open zxing with an intent:// URI, no package, and fallback url w/ no scheme!
+  </p>
+
+  <p>
+    Click <a href="intent://scan/#Intent;scheme=zxing;S.browser_fallback_url=%5C%21%40%23aoeu%23%5C%21%25';end">here</a> to open zxing with an intent:// URI, no package, and invalid fallback url!
+  </p>
+
+  <p>
+    Click <a href="intent://scan/#Intent;scheme=zxing;package=com.google.zxing.client.android;S.browser_fallback_url=http%3A%2F%2Fzxing.org;end">here</a> to open zxing with an intent:// URI and fallback url!
+  </p>
+
+  <p>
+    Click <a href="android-app://com.google.zxing.client.android/zxing/scan/">here</a> to open zxing with an android-app:// URI!
+  </p>
+
+  <h2>Browsable intents</h2>
+
+  <p>
+    Nothing specified: <a href="intent://sb/#Intent;scheme=sb;action=android.intent.action.MAIN;end">here</a>.
+  </p>
+
+  <p>
+    Package specified: <a href="intent://sb/#Intent;scheme=sb;package=me.mcomella.andysandbox;action=android.intent.action.MAIN;end">here</a>.
+  </p>
+
+  <p>
+    Component specified: <a href="intent://sb/#Intent;scheme=sb;component=me.mcomella.andysandbox/.MainActivity;action=android.intent.action.MAIN;end">here</a>.
+  </p>
+
+  <h2>Custom schemes</h2>
+
+  <p>
+    <a href="sonos://">sonos://</a>
+  </p>
+
+  <p>To work with <a href="https://github.com/mcomella/CustomURIScheme">CustomURIScheme</a></p>
+
+  <p><a href="mcomella://path/lol.lol">lol.lol</a></p>
+  <p><a href="mcomella://path/lol.meh">lol.meh</a></p>
+
+  <h3>web extensions</h3>
+  <p><a href="mcomella://path/lol.html">lol.htm</a></p>
+  <p><a href="mcomella://path/lol.html">lol.html</a></p>
+  <p><a href="mcomella://path/lol.jpg">lol.jpg</a></p>
+  <p><a href="mcomella://path/lol.gif">lol.gif</a></p>
+
+  <h2>Misc scheme</h2>
+  <p><a href="tel:+18005555555">tel:</a></p>
+  <p><a href="mailto:g@google.com">mailto:</a></p>
+
+</body>
+</html>

@@ -6,8 +6,7 @@ email:
 author: Michael Comella
 
 description: > # this means to ignore newlines until "baseurl:"
-  Stream of consciousness of a developer trying to find their way.<br>
-  Currently: Android at Mozilla. Experience is knowledge. Movement is life.
+  Stream of consciousness of a developer trying to find their way. Currently: Mobile at Mozilla.
 
 url: "http://mcomella.xyz" # the base hostname & protocol for your site
 baseurl: "" # the subpath of your site, e.g. /blog
@@ -23,7 +22,7 @@ comments: true
 heading_font: Lobster 
 about_footer: true
 short_bio: >
-    Firefox for Android front-end developer. Cyclist. Self discoverer.
+    Mobile developer at Mozilla. Currently: Firefox Focus.
 profile_picture: https://www.gravatar.com/avatar/36d05d5b8389b342fc0629461fb39377?s=150
 
 google_analytics: false

@@ -5,24 +5,35 @@ author: Michael Comella
 permalink: /about/
 ---
 
-Currently engineering [Firefox for Android][fxa] at [Mozilla][moz]. The
-mobile space engages me by putting technology in the hands of people to
-empower improvements to everyday life. The web excites me by making
-information openly accessible to learners of kinds (I'm looking at *you*,
-[Wikipedia][wiki]). It's the best of both worlds!
+Currently engineering [Firefox Focus][focus] and [Firefox TV for Fire
+TV][firetv] at [Mozilla][moz]. I'm particularly interested in how
+technology can help people solve the tough problems they face in their
+day-to-day lives and I'm delighted by the ways the web, as an open
+platform for rapid communication and information, empowers users to
+solve these problems.
 
-As a developer, my particular interest is in writing maintainable,
-well-architected, and readable code -- as [one of my coworkers][grisha]
-once said, developers are just users of code! My current research has
-taken me to the hallowed halls of functional programming. I am also
-enthusiastic about the use of tooling (e.g. static analysis and testing)
-to ensure code quality.
+As a developer, one strong passion of mine is in writing maintainable,
+well-architected, and readable code. Relatedly, to improve code
+quality, I'm enthusiastic about new programming trends like functional
+programming and the use of tooling (e.g. static analysis and testing).
 
-When I'm not pushing my brain to the limits of abstraction, I enjoy
-discovering the eccentricities of humanity (especially my own!) and
-keeping healthy.
+My primary experience is in Android mobile development with Java and
+Kotlin.  I have a few months of professional experience on iOS
+development with Swift, decent JavaScript skills (from browser
+development), and workable HTML/CSS knowledge. I also have strong, albeit
+infrequent, experience with Python for scripting and prototype web
+servers. As a hobby, I've dabbled in clojure.
 
+---
+
+Previous projects include:
+- [Firefox for Android][fxa]
+- [Prox (unreleased)][prox]
+- [Firefox Data download library for Android][fda]
+
+[fda]: https://github.com/mozilla-mobile/FirefoxData-android
+[prox]: https://medium.com/firefox-ux/project-prox-4e4c4e155592
 [fxa]: https://www.mozilla.org/firefox/android/
 [moz]: https://www.mozilla.org
-[wiki]: https://www.wikipedia.org/
-[grisha]: http://www.grigory.ca/
+[focus]: https://www.mozilla.org/en-US/firefox/mobile/
+[firetv]: https://blog.mozilla.org/blog/2017/12/20/firefox-is-now-on-amazon-fire-tv-happy-holiday-watching/

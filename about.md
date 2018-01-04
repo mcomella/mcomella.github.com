@@ -30,7 +30,11 @@ Previous projects include:
 - [Firefox for Android][fxa]
 - [Prox (unreleased)][prox]
 - [Firefox Data download library for Android][fda]
+- [ScrollingCardView widget for iOS][cardview]
+- ["Is it in Nightly?" web site][iiin]
 
+[iiin]: http://mcomella.xyz/blog/2016/is-it-in-nightly-yet.html
+[cardview]: http://mcomella.xyz/blog/2017/introducing-scrolling-card-view-for-ios.html
 [fda]: https://github.com/mozilla-mobile/FirefoxData-android
 [prox]: https://medium.com/firefox-ux/project-prox-4e4c4e155592
 [fxa]: https://www.mozilla.org/firefox/android/

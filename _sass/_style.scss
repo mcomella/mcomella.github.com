@@ -73,7 +73,7 @@ a:not(.anchor) {
 	transition: color 0.2s ease;
 }
 a:not(.anchor):hover {
-	color: darken($base-highlight-color, 15%);
+	color: darken($base-highlight-color, 25%);
 	transition: color 0.2s ease;
 	cursor: hand;
 }

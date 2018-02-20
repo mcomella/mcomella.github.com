@@ -1,0 +1,59 @@
+header {
+    display: flex;
+    height: 90px;
+    margin: 20px auto;
+
+    background: #960909;
+
+    align-items: center;
+}
+
+#banner {
+    display: flex;
+    height: 72px;
+    width: 67%;
+    margin: 0 auto;
+    padding: 0 84px 3px 24px;
+
+    background: white;
+    border-width: 6px 8px;
+    border-style: solid;
+    border-color: #E5E5E5;
+    border-radius: 4px;
+    transform: skew(-45deg); /* parallelogram */
+
+    align-items: flex-end;
+    justify-content: space-between;
+
+    color: #D44646;
+    font-family: Helvetica, sans-serif;
+    font-weight: lighter;
+    font-size: 28px;
+    line-height: 1;
+}
+
+#banner > * {
+    /* TODO:
+    - creates 1px opening in headshot. Maybe put in parent?
+    - Perfect padding.
+    - Rest of document.
+    - Licenses (should I copyright my design?)
+    */
+    transform: skew(45deg); /* Undo container skew. */
+}
+
+nav > span {
+    margin-left: 16px;
+    margin-right: 4px;
+}
+
+#banner .headshot {
+    position: relative;
+    height: 108px;
+    top: 34px;
+
+    border-radius: 50%;
+    border: solid 2px black;
+
+    align-self: center;
+}

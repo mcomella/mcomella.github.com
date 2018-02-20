@@ -3,46 +3,30 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 	<title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
 	<link rel="shortcut icon" href="/favicon.ico" />
 	<link rel="icon" href="/favicon.ico" />
 
-	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,300i,400i,600">
-	<link href='https://fonts.googleapis.com/css?family=Roboto+Mono:400,100italic,300italic,300' rel='stylesheet' type='text/css'>
-
-	{% if site.heading_font %}
-		<link href='https://fonts.googleapis.com/css?family={{ site.heading_font }}:400,600' rel='stylesheet' type='text/css'>
-		{% assign header_font = site.heading_font %}
-	{% else %}
-		<link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
-		{% assign header_font = 'Lobster' %}
-	{% endif %}
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/main.css">
-	<link rel="stylesheet" href="{{ site.baseurl }}/css/fontello-embedded.css">	
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/redesign.css">
 </head>
 <body>
-	<div id="wrapper">
-		<div id="main">
-			<nav class="nav">
-				<div class="container">
-		  			<a href="/">
-						<h1 style="font-family: {{ header_font }}" class="logo"> 
-						{% if page.title == "About" %}
-							About
-						{% else %}
-							{{ site.nickname_title }}
-						{% endif %}
-						</h1>
-					</a>
-		  			<ul class="navlist">
-		  			</ul>
-		  		</div>
+	<header>
+		<div id="banner">
+			<div>mcomella.xyz</div>
+			<nav>
+				<span>About</span>
+				<span>Posts</span>
+                <img class="headshot" alt="Photo of Michael Comella" src="https://www.gravatar.com/avatar/36d05d5b8389b342fc0629461fb39377?s=150">
 			</nav>
-			{{ content }}
 		</div>
-		<div id="footer">
-			{% include footer.html %}
-		</div>
+	</header>
+
+	{{ content }}
+
+	<div id="footer">
+		{% include footer.html %}
 	</div>
 </body>
 </html>

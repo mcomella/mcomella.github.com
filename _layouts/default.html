@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
-	<link rel="shortcut icon" href="/favicon.ico" />
-	<link rel="icon" href="/favicon.ico" />
+    <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" />
 
-	<link rel="stylesheet" href="{{ site.baseurl }}/css/main.css">
-	<link rel="stylesheet" href="{{ site.baseurl }}/css/redesign.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/main.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/redesign.css">
 </head>
 <body>
-	<header>
-		<div id="banner">
-			<div>mcomella.xyz</div>
-			<nav>
-				<span>About</span>
-				<span>Posts</span>
+    <header>
+        <div id="banner">
+            <div>mcomella.xyz</div>
+            <nav>
+                <span>About</span>
+                <span>Posts</span>
                 <img class="headshot" alt="Photo of Michael Comella" src="https://www.gravatar.com/avatar/36d05d5b8389b342fc0629461fb39377?s=150">
-			</nav>
-		</div>
-	</header>
+            </nav>
+        </div>
+    </header>
 
-	{{ content }}
+    {{ content }}
 
-	<div id="footer">
-		{% include footer.html %}
-	</div>
+    <div id="footer">
+        {% include footer.html %}
+    </div>
 </body>
 </html>

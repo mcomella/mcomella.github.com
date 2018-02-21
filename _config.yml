@@ -5,6 +5,7 @@ nickname_title: mcomella
 email: 
 author: Michael Comella
 
+# Used for feed.xml.
 description: > # this means to ignore newlines until "baseurl:"
   Stream of consciousness of a developer trying to find their way. Currently: Mobile at Mozilla.
 

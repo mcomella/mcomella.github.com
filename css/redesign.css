@@ -94,6 +94,18 @@ a {
     /* #D61E1E */
 }
 
+a {
+    transition: 0.2s;
+}
+
+a:hover {
+    color: #a03535;
+}
+
+a:active {
+    color: #6d2424;
+}
+
 .post-date {
     color: #888888;
     font-style: italic;

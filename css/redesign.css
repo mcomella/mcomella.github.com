@@ -12,15 +12,21 @@ a {
     text-decoration: none;
 }
 
-.banner, a, a:visited {
+.banner, a, a:visited, .post-title {
     color: #D44646;
     /* #D61E1E */
+}
+
+.post-date {
+    color: #888888;
+    font-style: italic;
+    font-weight: lighter;
 }
 
 header {
     display: flex;
     height: 122px;
-    margin: 28px 0;
+    margin: 28px 0 56px 0;
 
     background: #960909;
 
@@ -31,7 +37,7 @@ header {
 .banner {
     display: flex;
     box-sizing: border-box;
-    height: 94px;
+    height: 94px; /* margins are 1/2 header margins. */
     padding: 0 0 3px 0;
 
     background: white;
@@ -113,7 +119,21 @@ header .headshot {
 
 }
 
-.post-time {
-    color: #999999;
-    font-style: italic;
+.content {
+    margin: 0 auto;
+    font-family: sans-serif;
+}
+
+.post {
+    max-width: 1050px;
+    font-size: 21px;
+}
+
+.post-title, .post-date {
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.post-title {
+    font-size: 38px;
 }

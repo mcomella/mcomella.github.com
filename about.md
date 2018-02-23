@@ -29,6 +29,15 @@ Previous projects include:
 - [ScrollingCardView widget for iOS][cardview]
 - ["Is it in Nightly?" web site][iiin]
 
+---
+
+### Website credits and licensing
+- All post content, unless otherwise specified, is licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License][cc].
+- Twitter and GitHub [bytesize icons by Dan Klammer][icons].
+- This website source is adapted from the [Chaplin jekyll theme](https://github.com/bk2dcradle/Chaplin).
+- My modifications to [the website source][source] are available under [the MIT license][license].
+- All other content is specified by the copyright below.
+
 [iiin]: http://mcomella.xyz/blog/2016/is-it-in-nightly-yet.html
 [cardview]: http://mcomella.xyz/blog/2017/introducing-scrolling-card-view-for-ios.html
 [fda]: https://github.com/mozilla-mobile/FirefoxData-android
@@ -37,3 +46,7 @@ Previous projects include:
 [moz]: https://www.mozilla.org
 [focus]: https://www.mozilla.org/en-US/firefox/mobile/
 [firetv]: https://blog.mozilla.org/blog/2017/12/20/firefox-is-now-on-amazon-fire-tv-happy-holiday-watching/
+[cc]: https://creativecommons.org/licenses/by-sa/4.0/
+[icons]: https://github.com/danklammer/bytesize-icons
+[source]: https://github.com/mcomella/mcomella.github.com
+[license]: https://github.com/mcomella/mcomella.github.com/blob/master/LICENSE

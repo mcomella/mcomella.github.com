@@ -81,6 +81,10 @@ pre code {
 .highlight pre code { display: block; white-space: pre; overflow-x: auto; word-wrap: normal; }
 
 /* --- RESET / SHARED --- */
+.clearfix {
+    clear: both;
+}
+
 body, h1, h2, h3, h4, h5, h6 {
     margin: 0;
 }
@@ -116,7 +120,7 @@ a:active {
     color: #6d2424;
 }
 
-.post-date {
+.post-date, .signature {
     color: #888888;
     font-style: italic;
     font-weight: lighter;
@@ -296,8 +300,22 @@ p {
     margin-right: auto;
 }
 
+.signature, .license {
+    text-align: center;
+}
+
+.license {
+    width: 45%;
+    float: left;
+}
+
+.signature {
+    width: 45%;
+    float: right;
+}
+
 .post .creative-commons {
-    display: inline; /* undo img ^ */
+    margin-top: 8px;
 }
 
 .post hr {

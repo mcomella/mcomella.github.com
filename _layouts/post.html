@@ -8,18 +8,19 @@ layout: default
 	</div>
 	{{ content }}
 
-	<br>
+	<hr>
 
-	<!-- Styles inline for lazy. -->
-	<div style="width: 60%; margin: 0 auto; text-align: center">
+	<div class="signature">This post is written by Michael Comella, a {{ site.short_bio }} </div>
+
+	<div class="license">
+		This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
 		<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
 			<img class="creative-commons" alt="Creative Commons License" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
-		</a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+		</a>
 	</div>
-</article>
-{% include share.html %}
+	<div class="clearfix"></div>
 
-{% include about_footer.html %}
+</article>
 
 {% if jekyll.environment == "production" %}
 	{% include disqus.html %}

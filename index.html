@@ -3,26 +3,15 @@ layout: default
 ---
 
 <section class="post-list">
-  <div class="container">
-    <h1 class="page-heading">Posts</h1>
-    <ul>
-      {% for post in site.posts %}
-        <article class="post-item">
-
-          <span class="post-name">
-              <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-          </span>
-          <strong>-</strong>
-          <span class="post-time">
-            <time>{{ post.date | date: '%B %d, %Y' }}</time>
-          </span>
-        </article>
-        
-        <!-- hr -->
-      {% endfor %}
-    </ul>
-    <!-- p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p -->
-  </div>
+  <h1 class="posts-heading">Posts</h1>
+  <ul>
+    {% for post in site.posts %} <li>
+      <span class="post-name">
+          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+      </span>
+      <span class="post-time">
+        <time>{{ post.date | date: '%B %d, %Y' }}</time>
+      </span>
+  </li> {% endfor %}
+  </ul>
 </section>
-
-{% include pagination.html %}

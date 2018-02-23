@@ -12,14 +12,17 @@
 </head>
 <body>
     <header>
-        <div id="banner">
+        <!-- *-left and *-right used to create parallelogram. -->
+        <div id="banner-left" class="banner"></div>
+        <div id="banner-center" class="banner">
             <div>mcomella.xyz</div>
             <nav>
                 <span>About</span>
                 <span>Posts</span>
-                <img class="headshot" alt="Photo of Michael Comella" src="https://www.gravatar.com/avatar/36d05d5b8389b342fc0629461fb39377?s=150">
+                <img class="headshot" src="https://www.gravatar.com/avatar/36d05d5b8389b342fc0629461fb39377?s=150">
             </nav>
         </div>
+        <div id="banner-right" class="banner"></div>
     </header>
 
     {{ content }}

@@ -1,3 +1,9 @@
+/* TODO:
+    - Rest of document.
+    - Licenses (should I copyright my design?)
+    - github, twitter, rss.
+*/
+
 body {
     margin: 0;
 }
@@ -6,70 +12,87 @@ a {
     text-decoration: none;
 }
 
-#banner, a, a:visited {
+.banner, a, a:visited {
     color: #D44646;
     /* #D61E1E */
 }
 
 header {
     display: flex;
-    height: 90px;
-    margin: 20px 0;
+    height: 122px;
+    margin: 28px 0;
 
     background: #960909;
 
     align-items: center;
+    justify-content: center;
 }
 
-#banner {
+.banner {
     display: flex;
     box-sizing: border-box;
-    height: 72px;
-    width: 67%;
-    margin: 0 auto;
-    padding: 0 84px 3px 24px;
+    height: 94px;
+    padding: 0 0 3px 0;
 
     background: white;
-    border-width: 6px 8px;
+    border-width: 8px;
     border-style: solid;
     border-color: #E5E5E5;
     border-radius: 4px;
-    transform: skew(-45deg); /* parallelogram */
+
+    font-family: Helvetica, sans-serif;
+    font-size: 36px;
+    line-height: 1;
 
     align-items: flex-end;
     justify-content: space-between;
-
-    font-family: Helvetica, sans-serif;
-    font-weight: lighter;
-    font-size: 28px;
-    line-height: 1;
 }
 
-#banner > * {
-    /* TODO:
-    - creates 1px opening in headshot. Maybe put in parent?
-    - Perfect padding.
-    - Rest of document.
-    - Licenses (should I copyright my design?)
-    - github, twitter, rss.
-    - loading image, or missing.
-    - fix border box thing.
-    */
-    transform: skew(45deg); /* Undo container skew. */
+#banner-left, #banner-right {
+    position: relative;
+    width: 100px;
+    transform: skew(-45deg);
+    border-left-width: 10px;
+    border-right-width: 10px;
+}
+
+#banner-left {
+    left: 50px;
+}
+
+#banner-right {
+    right: 50px;
+}
+
+#banner-center {
+    width: 64%;
+
+    z-index: 1;
+    border-left: 0;
+    border-right: 0;
+}
+
+#banner-center > *:first-child {
+    position: relative;
+    left: -28px;
+}
+
+#banner-center > *:last-child {
+    margin-right: 24px;
 }
 
 nav > span {
-    margin-left: 16px;
-    margin-right: 4px;
+    margin-left: 22px;
+    margin-right: 8px;
 }
 
-#banner .headshot {
+header .headshot {
     position: relative;
-    height: 108px;
-    top: 34px;
+    height: 144px;
+    top: 48px;
 
     border-radius: 50%;
-    border: solid 2px black;
+    border: solid 3px black;
 
     align-self: center;
 }

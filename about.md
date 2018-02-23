@@ -1,7 +1,5 @@
 ---
 layout: about
-title: About
-author: Michael Comella
 permalink: /about/
 ---
 
@@ -23,8 +21,6 @@ development with Swift, decent JavaScript skills (from browser
 development), and workable HTML/CSS knowledge. I also have strong, albeit
 infrequent, experience with Python for scripting and prototype web
 servers. As a hobby, I've dabbled in clojure.
-
----
 
 Previous projects include:
 - [Firefox for Android][fxa]

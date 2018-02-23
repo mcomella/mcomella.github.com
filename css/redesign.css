@@ -85,17 +85,27 @@ body, h1, h2, h3, h4, h5, h6 {
     margin: 0;
 }
 
+body {
+    color: #444444;
+    font-family: Helvetica, sans-serif;
+    font-weight: lighter;
+    line-height: 1.4;
+    letter-spacing: 0.3px;
+}
+
+h1 + *, h2 + *,  h3 + *,  h4 + *,  h5 + *,  h6 + * {
+    margin-top: 0;
+}
+
 a {
+    font-weight: normal;
     text-decoration: none;
+    transition: 0.2s;
 }
 
 .banner, a, a:visited, .post-title {
     color: #D44646;
     /* #D61E1E */
-}
-
-a {
-    transition: 0.2s;
 }
 
 a:hover {
@@ -211,10 +221,9 @@ footer svg {
     margin: 0 8px;
 }
 
+/* --- INDEX / POST-LIST --- */
 .post-list {
-    max-width: 1000px;
-    margin: 0 auto;
-
+    width: 65%;
     font-size: 24px;
 }
 
@@ -222,17 +231,16 @@ footer svg {
     font-size: 36px;
 }
 
-.post-name {
+.post-list ul {
+    margin-left: 16px;
+}
 
+.post-list .post-date {
+    margin-left: 16px;
 }
 
 .content {
     margin: 0 auto;
-    color: #444444;
-    font-family: Helvetica, sans-serif;
-    font-weight: lighter;
-    line-height: 1.4;
-    letter-spacing: 0.3px;
 }
 
 strong {
@@ -265,16 +273,8 @@ strong {
     color: #555555;
 }
 
-.post h2 + *, .post h3 + *, .post h4 + *, .post h5 + *, .post h6 + * {
-    margin-top: 0;
-}
-
 p {
     margin: 21px 0;
-}
-
-.post a {
-    font-weight: normal;
 }
 
 .post li {

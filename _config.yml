@@ -1,8 +1,4 @@
-# User Settings | Edit these according to your site
-
 title: Michael Comella
-nickname_title: mcomella
-email: 
 author: Michael Comella
 
 # Used for feed.xml.
@@ -18,8 +14,6 @@ permalink:          /blog/:year/:title.html
 
 comments: true
 
-heading_font: Lobster 
-about_footer: true
 short_bio: >
     Mobile developer at Mozilla currently working on Firefox for Fire TV.
 profile_picture: https://www.gravatar.com/avatar/36d05d5b8389b342fc0629461fb39377?s=150

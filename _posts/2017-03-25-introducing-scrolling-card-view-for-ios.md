@@ -23,51 +23,45 @@ ScrollingCardView is used much like any other view.
 
 First, create your view, enable autolayout, and add it to the view hierarchy:
 ```swift
-
-    let cardView = ScrollingCardView()
-    cardView.translatesAutoresizingMaskIntoConstraints = false
-    parentView.addSubview(cardView) // e.g. parent could be the ViewController's
-
+let cardView = ScrollingCardView()
+cardView.translatesAutoresizingMaskIntoConstraints = false
+parentView.addSubview(cardView) // e.g. parent could be the ViewController's
 ```
 
 Then constrain the card view as you would any other view:
 ```swift
+NSLayoutConstraint.activate([
+    cardView.topAnchor.constraint(
+        equalTo: topLayoutGuide.bottomAnchor, constant: 16),
+    cardView.leadingAnchor.constraint(
+        equalTo: view.leadingAnchor, constant: 16),
+    cardView.trailingAnchor.constraint(
+        equalTo: view.trailingAnchor, constant: -16),
 
-    NSLayoutConstraint.activate([
-        cardView.topAnchor.constraint(
-            equalTo: topLayoutGuide.bottomAnchor, constant: 16),
-        cardView.leadingAnchor.constraint(
-            equalTo: view.leadingAnchor, constant: 16),
-        cardView.trailingAnchor.constraint(
-            equalTo: view.trailingAnchor, constant: -16),
+    // If you don't constrain the height, the card
+    // will grow to match its intrinsic content size.
 
-        // If you don't constrain the height, the card
-        // will grow to match its intrinsic content size.
+    // Or use lessThanOrEqualTo to allow your card
+    // view to grow only until a certain size, e.g.
+    // the size of the screen.
+    cardView.bottomAnchor.constraint(
+        lessThanOrEqualTo: bottomLayoutGuide.topAnchor, constant: -16),
 
-        // Or use lessThanOrEqualTo to allow your card
-        // view to grow only until a certain size, e.g.
-        // the size of the screen.
-        cardView.bottomAnchor.constraint(
-            lessThanOrEqualTo: bottomLayoutGuide.topAnchor, constant: -16),
-
-        // Or you can constrain it to a particular height:
-        // cardView.bottomAnchor.constraint(
-        //     equalTo: bottomLayoutGuide.topAnchor, constant: -16),
-        // cardView.heightAnchor.constraint(equalToConstant: 300),
-    ])
-
+    // Or you can constrain it to a particular height:
+    // cardView.bottomAnchor.constraint(
+    //     equalTo: bottomLayoutGuide.topAnchor, constant: -16),
+    // cardView.heightAnchor.constraint(equalToConstant: 300),
+])
 ```
 
 Finally, specify the card view's content:
 ```swift
+// 3. Set your card view's content.
+let content = UILabel()
+content.text = "Hello world!"
+content.numberOfLines = 0
 
-    // 3. Set your card view's content.
-    let content = UILabel()
-    content.text = "Hello world!"
-    content.numberOfLines = 0
-
-    cardView.contentView = content
-
+cardView.contentView = content
 ```
 
 ---
@@ -75,15 +69,13 @@ Finally, specify the card view's content:
 The card view comes with smart visual defaults (including a shadow), but you
 can also customize them:
 ```swift
+cardView.backgroundColor = .white
 
-    cardView.backgroundColor = .white
+cardView.cornerRadius = 2
 
-    cardView.cornerRadius = 2
-
-    cardView.layer.shadowOffset = CGSize(width: 0, height: 2)
-    cardView.layer.shadowRadius = 2
-    cardView.layer.shadowOpacity = 0.4
-
+cardView.layer.shadowOffset = CGSize(width: 0, height: 2)
+cardView.layer.shadowRadius = 2
+cardView.layer.shadowOpacity = 0.4
 ```
 
 Want it? ScrollingCardView is available on CocoaPods: you can find installation

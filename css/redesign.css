@@ -101,7 +101,7 @@ h1 + *, h2 + *,  h3 + *,  h4 + *,  h5 + *,  h6 + * {
     margin-top: 0;
 }
 
-a {
+a, footer img:hover {
     font-weight: normal;
     text-decoration: none;
     transition: 0.2s;
@@ -226,6 +226,10 @@ footer svg, footer img {
     margin: 0 8px;
 }
 
+footer img:hover {
+    filter: brightness(85%);
+}
+
 .content {
     width: 55%;
     margin: 0 auto;
@@ -327,6 +331,7 @@ p {
     background: #E5E5E5;
 }
 
+/* --- 404 --- */
 .four-oh-four {
     text-align: center;
 }

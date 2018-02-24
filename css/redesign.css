@@ -199,6 +199,7 @@ nav > span {
 header .headshot {
     position: relative;
     height: 144px;
+    width: 144px;
     top: 48px;
 
     border-radius: 50%;

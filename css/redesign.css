@@ -208,6 +208,37 @@ header .headshot {
     align-self: center;
 }
 
+@media screen and (max-width: 1060px) {
+    header .headshot {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    #banner-left, #banner-right {
+        display: none;
+    }
+
+    #banner-center {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    #banner-center > *:first-child {
+        position: static;
+        align-self: flex-start;
+        margin: 0px 8px;
+    }
+
+    #banner-center > *:last-child {
+        margin: 8px 8px;
+    }
+
+    nav > span {
+        margin-left: 4px;
+    }
+}
+
 /* --- FOOTER START --- */
 footer {
     display: flex;
@@ -233,6 +264,7 @@ footer img:hover {
 
 .content {
     width: 55%;
+    min-width: 300px;
     margin: 0 auto;
     font-size: 21px;
 }

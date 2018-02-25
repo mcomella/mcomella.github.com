@@ -160,14 +160,14 @@ header {
 
 #banner-left, #banner-right {
     position: relative;
-    width: 100px;
+    width: 108px;
     transform: skew(-45deg);
     border-left-width: 10px;
     border-right-width: 10px;
 }
 
 #banner-left {
-    left: 50px;
+    left: 55px;
 }
 
 #banner-right {
@@ -184,7 +184,7 @@ header {
 
 #banner-center > *:first-child {
     position: relative;
-    left: -28px;
+    left: -25px;
 }
 
 #banner-center > *:last-child {

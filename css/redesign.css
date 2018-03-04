@@ -263,8 +263,8 @@ footer img:hover {
 }
 
 .content {
-    width: 55%;
-    min-width: 300px;
+    max-width: 1040px;
+    width: 95%;
     margin: 0 auto;
     font-size: 21px;
 }

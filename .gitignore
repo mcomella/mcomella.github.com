@@ -1,4 +1,6 @@
+# Build output
 .sass-cache
-
-_posts/*.draft.md
 _site/
+
+# Editors
+.vscode

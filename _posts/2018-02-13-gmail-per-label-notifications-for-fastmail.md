@@ -2,6 +2,10 @@
 title: Gmail Per-label Notifications for FastMail
 tags: FastMail
 ---
+***EDIT (March 8, 2018):*** *I noticed that I don't receive notifications from the FastMail app when my phone is not connected to the internet and I confirmed with*
+
+---
+
 As someone who tries not to check their email often, I've relied on the Gmail Android app to notify me when urgent emails arrive. To do this, I:
 1. Use [Gmail filters][] (through the web interface) to add a label to important messages: `notify me`
 1. Enable notifications in the Gmail app (Settings -> me@gmail.com -> Notifications)

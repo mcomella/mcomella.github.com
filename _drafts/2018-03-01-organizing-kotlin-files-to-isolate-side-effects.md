@@ -13,13 +13,9 @@ If I understand these points, I can understand the internals of the class. If a 
 There are a few principles I use when organizing a single source file:
 - **Put the key ideas near the top**: humans generally read from top to bottom.
 - Get 1) trivial to understand and 2) irrelevant-to-the-key-idea code out of the way, towards the bottom: there are [only so many ideas a human can hold in their working memory][memory] so save that space for the complex concepts and key ideas.
-- Barring ^, keep related ideas together
-- Single class file?
+- Keep related ideas together, after addressing the earlier points.
 
-A benefit that Kotlin gives us is that **we can have multiple top-level declarations**: those irrelevant and trivial ideas that we wanted to hide at the bottom *can be declared outside of the primary class*, centralizing our key ideas and complex concepts inside the class block. Let's have a look:
-
-TODO: describe the summary more clearly here? And repeat it below.
-TODO: define top-level declaration (functions defined outside the class?)
+An improvement Kotlin makes over Java is that **we can define functions outside of the primary class**: let's move those irrelevant and trivial ideas outside the primary class block, centralizing our key ideas and complex concepts inside the block. Let's have a look:
 
 ```kotlin
 // By convention, for easy access, constants are at the top.
@@ -60,88 +56,33 @@ private fun bindModelToViewIsConventionalAndGenerallyEasyToUnderstand(
 ) { /* ... */ }
 ```
 
-## A Real Example
-Let's look at a real source file from Firefox TV:
-
-```kotlin
-/* A license header. */
-
-package xyz.mcomella.kotlinfilestructure
-
-import android.graphics.Point
-import android.graphics.PointF
-import java.util.UUID
-
-// 1) Private constants. Public constants should generally
-// be placed in a companion object to namespace them.
-private const val VELOCITY_MODIFIER = 4.5f
-
-// 2) Short enums, classes, or interfaces:
-// longer ones should appear near the bottom.
-enum class PlayerColors { RED, YELLOW, BLUE, GREEN }
-
-/** 3) Primary class in this file. */
-class PlayerModel(val name: String, val boardSize: Point) {
-
-    // 4) Properties: generally sorted public
-    // (the class' contract) to private [1].
-    var onUpdateListener: ((PointF) -> Unit)? = null
-    var isVisible = true
-
-    val id = generateID()
-    private val position = PointF(0f, 0f)
-
-    // 5) Methods: generally sorted public
-    // (the class' contract) to private [1].
-    fun updatePosition(velocity: PointF) {
-        updateX(velocity.x)
-        updateY(velocity.y)
-        onUpdateListener?.invoke(position)
-    }
-
-    // 6) Helper functions with side effects.
-    private fun updateX(velocityX: Float) {
-        position.x = position.x +
-                velocityX * VELOCITY_MODIFIER
-    }
-
-    private fun updateY(velocityY: Float) {
-        position.y = position.y +
-                velocityY * VELOCITY_MODIFIER
-    }
-
-    // 7) A companion object. if needed.
-    companion object { /* ... */ }
-}
-
-// 8) Helper functions without side effects,
-// in contrast to 6) above.
-private fun generateID() = UUID.randomUUID()
-
-// 9) Long enums, classes, or interfaces:
-// shorter ones should appear near the top.
-class PlayerEventDispatcher /* ... */
-```
+If you want to see a real example, check out TODO.
 
 ## Caveats and Related Ideas
-- Only small source files so far
-- Haven't seen how others perceive it, or how changes over time.
-- bytecode?
+I've only been using this pattern for a few months now so I'm unsure how this will hold up long term, especially as files grow in size and other developers contribute to these files. I also don't know what it's like to be another developer reading the code (beyond revisitng my own code after several weeks).
 
-Of course, how you organize a source file isn't the only factor to take into account when making your code easy to understand:
+To make code easy to understand, we can't just focus on file organization. We should also at least consider:
 - Naming
-- Functionality design: single responsibility principle
-- Good comments
-- High level ideas together
+- Commenting
+- Design of functionality (e.g. simplicity, decoupled, [the single responsibility principle][single])
 
 ## Second opinions
-Looking at the official style guides for Kotlin:
+There are two official style guides for Kotlin -- from JetBrains and from Android -- which provide less opinionated suggestions for file organization. They generally give the advice that we should group related ideas and maintain a consistent logical ordering.
 
-Other guides say don't sort public to private: I think it's helpful but they're right that related code should be put together.
+Specifically, [JetBrains suggests][kstyle], *"Do not sort the method declarations alphabetically or by visibility, and do not separate regular methods from extension methods. Instead, put related stuff together, so that someone reading the class from top to bottom would be able to follow the logic of what's happening. Choose an order (either higher-level stuff first, or vice versa) and stick to it."*
+
+I find that sorting by visibility can improve readability but with many developers it's harder to maintain than grouping related ideas.
+
+[From Android][astyle]: *"Source files are usually read from top-to-bottom meaning that the order, in general, should reflect that the declarations higher up will inform understanding of those farther down. Different files may choose to order their contents differently. Similarly, one file may contain 100 properties, another 10 functions, and yet another a single class."*
+
+*"What is important is that each class uses some logical order, which its maintainer could explain if asked. For example, new functions are not just habitually added to the end of the class, as that would yield “chronological by date added” ordering, which is not a logical ordering."*
+
+Which doesn't conflict with my suggestions here.
 
 ## Summary
-There are many articles and style guides written on how to organize source code files. The key idea that I want to add is **Kotlin lets you group key ideas towards the top in the primary class by moving irrelevant ideas towards down as top-level declarations below the primary class.**
+There are many articles written on how to organize source code files. The key idea that I want to add is that **we can declare functions for trivial code outside of the primary class block, grouping key and complex ideas inside the class block**: this will guide programmers to focus on what's key/challening rather than the trivial details.
 
 [memory]: https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two
 [astyle]: https://web.archive.org/web/20180103180641/https://android.github.io/kotlin-guides/style.html#top-level-declarations
 [kstyle]: https://web.archive.org/web/20180202195826/https://kotlinlang.org/docs/reference/coding-conventions.html#class-layout
+[single]: https://en.wikipedia.org/wiki/Single_responsibility_principle

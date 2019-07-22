@@ -1,15 +1,29 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
     <title>FFTV #2541 minimal video test case</title>
 <body>
     <p>A page to reproduce <a href="https://github.com/mozilla-mobile/firefox-tv/issues/2541">#2541</a> in a minimal test case.</a>
     <p>Test video source from <a href="https://www.w3.org/2010/05/video/mediaevents.html">w3.org</a></p>
+
+    <p>mp4 video</p>
     <video controls="">
-        <source id="mp4" src="https://www.w3.org/2010/05/video/mediaevents.html" type="video/mp4">
-        <source id="webm" src="https://media.w3.org/2010/05/sintel/trailer.webm" type="video/webm">
-        <source id="ogv" src="https://media.w3.org/2010/05/sintel/trailer.ogv" type="video/ogg">
+        <source id="mp4" src="https://media.w3.org/2010/05/sintel/trailer.mp4" type="video/mp4">
+        <p>Your device does not support mp4</p>
     </video>
+
+    <p>webm video</p>
+    <video controls="">
+        <source id="webm" src="https://media.w3.org/2010/05/sintel/trailer.webm" type="video/webm">
+        <p>Your device does not support webm</p>
+    </video>
+
+    <p>ogv video</p>
+    <video controls="">
+        <source id="ogv" src="https://media.w3.org/2010/05/sintel/trailer.ogv" type="video/ogg">
+        <p>Your device does not support ogv</p>
+    </video>
+
     <p>Test content!</p>
     <p>Test content!</p>
     <p>Test content!</p>

@@ -1,0 +1,11 @@
+:root {
+    --content-width: 560px;
+
+    --color-red: #AF5454;
+    --color-light-grey: #C0BFBF;
+    --color-grey: #7A7A7A;
+    --color-text: #404040;
+
+    --font-header: 'Voltaire', sans-serif;
+    --font-content: 'Open Sans', sans-serif;
+}

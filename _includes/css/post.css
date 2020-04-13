@@ -1,0 +1,44 @@
+.post-date {
+    font-size: 18px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--color-grey);
+}
+
+/* Set post date's spacing. */
+.post h1 {
+    margin-bottom: 6px;
+}
+
+.post-date + p {
+    margin-top: 14px;
+}
+
+/* TODO: below here */
+.signature {
+    color: #888888;
+    font-style: italic;
+    font-weight: lighter;
+}
+
+.signature, .license {
+    text-align: center;
+}
+
+.license {
+    width: 45%;
+    float: left;
+}
+
+.signature {
+    width: 45%;
+    float: right;
+}
+
+.disqus {
+    margin-top: 28px;
+}
+
+.content .creative-commons {
+    margin-top: 8px;
+}

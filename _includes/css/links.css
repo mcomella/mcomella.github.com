@@ -1,0 +1,17 @@
+a {
+    font-weight: normal;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+a, a:visited {
+    color: var(--color-red);
+}
+
+a:hover {
+    filter: brightness(70%);
+}
+
+a:active {
+    filter: brightness(130%);
+}

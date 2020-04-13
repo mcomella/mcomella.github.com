@@ -1,0 +1,18 @@
+---
+layout:
+---
+
+/* TODO: can hide? */
+/* TODO: license: https://www.youtube.com/watch?v=H4Fc2xL79nU  */
+
+{% include css/reset.css %}
+{% include css/syntax-highlighting.css %}
+
+{% include css/constants.css %}
+{% include css/links.css %}
+{% include css/header-footer.css %}
+{% include css/common.css %}
+
+/* specific pages */
+{% include css/post.css %}
+{% include css/post-list.css %}

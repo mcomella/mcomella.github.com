@@ -1,0 +1,73 @@
+.clearfix {
+    clear: both; /* TODO: needed? */
+}
+
+body {
+    color: var(--color-text);
+    font-family: var(--font-content);
+    font-size: 20px; /* TODO: smaller? */
+}
+
+.content {
+    /* TODO: width or max-width? */
+    max-width: var(--content-width);
+    margin: 0 auto;
+}
+
+h1 {
+    color: var(--color-red);
+    font-size: 40px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-header);
+    font-weight: normal;
+
+    margin: 36px 0 6px 0;
+}
+
+p {
+    margin: 24px 0;
+}
+
+.content li {
+    line-height: 1.2;
+}
+
+.content li + li {
+    margin-top: 8px;
+}
+
+.content ul, .content ol {
+    padding-left: 46px;
+}
+
+.content img {
+    max-width: 100%; /* max-width in case image is smaller than content width. */
+}
+
+.content hr {
+    width: 50%;
+    margin: 42px auto;
+    height: 1px;
+
+    border: 0; /* To set the color, we must remove the border. */
+    background-color: var(--color-light-grey);
+}
+
+/* elements after headers: must be placed after all elements to override. */
+h1 + *, h2 + *, h3 + *, h4 + *, h5 + *, h6 + * {
+    margin: 0; /* reset margins to let headers define the margins. */
+}
+
+/* TODO BELOW */
+/* --- 404 --- */
+.four-oh-four {
+    text-align: center;
+}
+
+footer img:hover {
+    font-weight: normal;
+    text-decoration: none;
+    transition: 0.2s;
+}

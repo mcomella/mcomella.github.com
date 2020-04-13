@@ -1,0 +1,11 @@
+.post-list ul {
+    padding-left: 20px; /* align bullet to left margin. */
+
+    /* ideally we'd set all bullets to this color but it'd change the text;
+     * this works because there are spans that override the colors. */
+    color: var(--color-grey);
+}
+
+.post-list .post-date {
+    margin-left: 16px;
+}

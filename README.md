@@ -13,4 +13,4 @@ To run:
 
         bundle exec jekyll serve
 
-Template from: `https://github.com/bk2dcradle/Chaplin`
+Template from:  `https://github.com/bk2dcradle/Chaplin`

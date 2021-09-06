@@ -1,6 +1,5 @@
 ---
 title: Gmail Per-label Notifications for FastMail
-tags: FastMail
 ---
 As someone who tries not to check their email often, I've relied on the Gmail Android app to notify me when urgent emails arrive. To do this, I:
 1. Use [Gmail filters][] (through the web interface) to add a label to important messages: `notify me`

@@ -1,7 +1,7 @@
 mcomella.xyz
 ============
 
-This is the source code for my website, `http://mcomella.xyz`.
+This is the source code for my website, `https://mcomella.xyz`.
 
 ## Configuration
 - Install ruby with homebrew & configure your path. See [this page for details](https://www.moncefbelyamani.com/the-definitive-guide-to-installing-ruby-gems-on-a-mac/#install-ruby-with-homebrew)

@@ -14,4 +14,5 @@ With ruby configured correctly, run:
 jekyll serve
 ```
 
-Template from:  `https://github.com/bk2dcradle/Chaplin`
+## LICENSE
+See `about.md` or https://mcomella.xyz/about/ for full licensing details. The source code for this website was adapted from the [Chaplin template](https://github.com/bk2dcradle/Chaplin). The source has several licenses, all contained in `./LICENSE`.

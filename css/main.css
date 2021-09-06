@@ -80,7 +80,7 @@ header a:active {
 footer {
     display: flex;
     height: 100px;
-    margin-top: 48px;
+    margin-top: 14px;
     align-items: center;
     justify-content: center;
 }
@@ -190,33 +190,15 @@ footer img:hover {
     margin-top: 14px;
 }
 
-/* TODO: below here */
-.signature {
-    color: #888888;
-    font-style: italic;
-    font-weight: lighter;
-}
-
 .signature, .license {
-    text-align: center;
-}
+    margin: 16px 0 0 0;
 
-.license {
-    width: 45%;
-    float: left;
-}
-
-.signature {
-    width: 45%;
-    float: right;
-}
-
-.disqus {
-    margin-top: 28px;
+    color: var(--color-grey);
+    font-style: italic;
 }
 
 .content .creative-commons {
-    margin-top: 8px;
+    margin-top: 8px; /* visually match line spacing. */
 }
 
 .post-list ul {

@@ -58,6 +58,13 @@ header {
     font-size: 32px;
 }
 
+@media (max-width: 410px) {
+    header {
+        display: block; /* good enough way to fix issues with header on mobile devices */
+        margin-bottom: 0;
+    }
+}
+
 header, header a, header a:visited {
     color: var(--color-light-grey);
 }

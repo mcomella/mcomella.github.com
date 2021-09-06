@@ -9,24 +9,19 @@
     <meta name="author" content="Michael Comella">
 
     <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %} | mcomella.xyz</title>
-    <link rel="icon" type="image/png" href="/im/ico/favicon-32.png" sizes="32x32">    
-    <link rel="icon" type="image/png" href="/im/ico/favicon-128.png" sizes="128x128">    
+    <link rel="icon" type="image/png" href="/im/ico/favicon-32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/im/ico/favicon-128.png" sizes="128x128">
 
-    <link rel="stylesheet" href="{{ site.baseurl }}/css/redesign.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/main.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,300&family=Voltaire&display=swap');
+    </style>
 </head>
 <body>
     <header>
-        <!-- *-left and *-right used to create parallelogram. -->
-        <div id="banner-left" class="banner"></div>
-        <div id="banner-center" class="banner">
-            <div><a href="/">mcomella.xyz</a></div>
-            <nav>
-                <span><a href="/about">About</a></span>
-                <span><a href="/">Posts</a></span>
-                <img class="headshot" src="https://www.gravatar.com/avatar/36d05d5b8389b342fc0629461fb39377?s=200">
-            </nav>
-        </div>
-        <div id="banner-right" class="banner"></div>
+        <div id="header-left"><a href="/">mcomella.xyz</a></div>
+        <div id="header-spacer"></div>
+        <div id="header-right"><a href="/">Posts</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="/about">About</a></div>
     </header>
 
     {{ content }}

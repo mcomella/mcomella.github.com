@@ -1,8 +1,8 @@
 ---
 layout: default
 ---
-<article class="content post container">
-    <h1 class="post-title">{{ page.title }}</h1>
+<article class="content post">
+    <h1>{{ page.title }}</h1>
     <div class="post-date">
         <time>{{ page.date | date: '%B %d, %Y' }}</time>
     </div>
@@ -14,6 +14,7 @@ layout: default
 
     <div class="license">
         This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+        <br>
         <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
             <img class="creative-commons" alt="Creative Commons License" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
         </a>
@@ -21,7 +22,3 @@ layout: default
     <div class="clearfix"></div>
 
 </article>
-
-{% if jekyll.environment == "production" %}
-    {% include disqus.html %}
-{% endif %}

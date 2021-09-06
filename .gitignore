@@ -1,5 +1,6 @@
 # Build output
-.sass-cache
+.jekyll-cache/
+.sass-cache/
 _site/
 
 # Editors

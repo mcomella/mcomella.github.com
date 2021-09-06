@@ -3,14 +3,15 @@ mcomella.xyz
 
 This is the source code for my website, `http://mcomella.xyz`.
 
-To install deps:
+## Configuration
+- Install ruby with homebrew & configure your path. See [this page for details](https://www.moncefbelyamani.com/the-definitive-guide-to-installing-ruby-gems-on-a-mac/#install-ruby-with-homebrew)
+- `gem install jekyll`: for simplicity, we don't use bundle or the github-pages
+gem
 
-        brew install ruby
-        gem install bundle # may need a new shell to update PATH.
-        bundle install
-
-To run:
-
-        bundle exec jekyll serve
+## Running
+With ruby configured correctly, run:
+```sh
+jekyll serve
+```
 
 Template from:  `https://github.com/bk2dcradle/Chaplin`

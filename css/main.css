@@ -9,6 +9,14 @@ body {
 
 {% include css/syntax-highlighting.css %}
 
+pre code {
+    font-size: 14px; /* override too large font */
+}
+
+.highlight pre code {
+    padding: 5px; /* override too large padding */
+}
+
 :root {
     --content-width: 690px;
 
@@ -132,10 +140,6 @@ p {
 
 .highlighter-rouge { /* override */
     background: #F0F0F0;
-}
-
-.content li {
-    line-height: 1.2;
 }
 
 .content li + li {

@@ -1,0 +1,229 @@
+---
+layout:
+---
+
+/* Reset */
+body {
+    margin: 0;
+}
+
+{% include css/syntax-highlighting.css %}
+
+:root {
+    --content-width: 560px;
+
+    --color-red: #AF5454;
+    --color-light-grey: #C0BFBF;
+    --color-grey: #7A7A7A;
+    --color-text: #404040;
+
+    --font-header: 'Voltaire', sans-serif;
+    --font-content: 'Open Sans', sans-serif;
+}
+
+a {
+    font-weight: normal;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+a, a:visited {
+    color: var(--color-red);
+}
+
+a:hover {
+    filter: brightness(60%);
+}
+
+a:active {
+    filter: brightness(130%);
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    padding-top: 56px;
+    margin-bottom: 56px;
+
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 0.01%, #FFFFFF 100%), #F0F0F0;
+
+    font-family: var(--font-header);
+    font-size: 32px;
+}
+
+header, header a, header a:visited {
+    color: var(--color-light-grey);
+}
+
+header a:hover {
+    color: var(--color-red);
+    filter: brightness(100%); /* reset top-level rule. */
+}
+
+header a:active {
+    filter: brightness(70%);
+}
+
+#header-left {
+    letter-spacing: 0.08em;
+}
+
+#header-right {
+    letter-spacing: 0.04em;
+}
+
+#header-spacer {
+    /* todo: max-width? */
+    width: var(--content-width);
+}
+
+footer {
+    display: flex;
+    height: 100px;
+    margin-top: 48px;
+    align-items: center;
+    justify-content: center;
+}
+
+footer > * {
+    margin: 0 60px;
+    font-size: 18px;
+}
+
+footer svg, footer img {
+    height: 32px;
+    margin: 0 8px;
+}
+
+footer img:hover {
+    filter: brightness(85%);
+}
+
+.clearfix {
+    clear: both; /* TODO: needed? */
+}
+
+body {
+    color: var(--color-text);
+    font-family: var(--font-content);
+    font-size: 20px; /* TODO: smaller? */
+}
+
+.content {
+    /* TODO: width or max-width? */
+    max-width: var(--content-width);
+    margin: 0 auto;
+}
+
+h1 {
+    color: var(--color-red);
+    font-size: 40px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-header);
+    font-weight: normal;
+
+    margin: 36px 0 6px 0;
+}
+
+p {
+    margin: 24px 0;
+}
+
+.content li {
+    line-height: 1.2;
+}
+
+.content li + li {
+    margin-top: 8px;
+}
+
+.content ul, .content ol {
+    padding-left: 46px;
+}
+
+.content img {
+    max-width: 100%; /* max-width in case image is smaller than content width. */
+}
+
+.content hr {
+    width: 50%;
+    margin: 42px auto;
+    height: 1px;
+
+    border: 0; /* To set the color, we must remove the border. */
+    background-color: var(--color-light-grey);
+}
+
+/* elements after headers: must be placed after all elements to override. */
+h1 + *, h2 + *, h3 + *, h4 + *, h5 + *, h6 + * {
+    margin: 0; /* reset margins to let headers define the margins. */
+}
+
+.four-oh-four {
+    text-align: center;
+}
+
+footer img:hover {
+    font-weight: normal;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.post-date {
+    font-size: 18px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--color-grey);
+}
+
+/* Set post date's spacing. */
+.post h1 {
+    margin-bottom: 6px;
+}
+
+.post-date + p {
+    margin-top: 14px;
+}
+
+/* TODO: below here */
+.signature {
+    color: #888888;
+    font-style: italic;
+    font-weight: lighter;
+}
+
+.signature, .license {
+    text-align: center;
+}
+
+.license {
+    width: 45%;
+    float: left;
+}
+
+.signature {
+    width: 45%;
+    float: right;
+}
+
+.disqus {
+    margin-top: 28px;
+}
+
+.content .creative-commons {
+    margin-top: 8px;
+}
+
+.post-list ul {
+    padding-left: 20px; /* align bullet to left margin. */
+
+    /* ideally we'd set all bullets to this color but it'd change the text;
+     * this works because there are spans that override the colors. */
+    color: var(--color-grey);
+}
+
+.post-list .post-date {
+    margin-left: 16px;
+}

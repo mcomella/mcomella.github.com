@@ -10,12 +10,12 @@ body {
 {% include css/syntax-highlighting.css %}
 
 :root {
-    --content-width: 560px;
+    --content-width: 690px;
 
     --color-red: #AF5454;
     --color-light-grey: #C0BFBF;
     --color-grey: #7A7A7A;
-    --color-text: #404040;
+    --color-text: #5E5E5E;
 
     --font-header: 'Voltaire', sans-serif;
     --font-content: 'Open Sans', sans-serif;
@@ -117,18 +117,21 @@ body {
 
 h1 {
     color: var(--color-red);
-    font-size: 40px;
+    font-size: 34px;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-header);
     font-weight: normal;
-
     margin: 36px 0 6px 0;
 }
 
 p {
     margin: 24px 0;
+    line-height: 155%;
+}
+
+.highlighter-rouge { /* override */
+    background: #F0F0F0;
 }
 
 .content li {

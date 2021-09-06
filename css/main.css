@@ -2,10 +2,9 @@
 layout:
 ---
 
-/* Reset */
-body {
-    margin: 0;
-}
+/* Replace default margin with padding so gradient hits the edges of the screen. */
+body { margin: 0px; }
+body > * { padding: 8px; }
 
 {% include css/syntax-highlighting.css %}
 

@@ -13,11 +13,9 @@ Outside of Mozilla, I work on the occassional side project. I'm most proud of:
 
 ---
 
-### Website credits and licensing
+### Website acknowledgements
 - All post content, unless otherwise specified, is licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License][cc].
 - Twitter and GitHub [bytesize icons by Dan Klammer][icons].
-- This website source is adapted from the [Chaplin jekyll theme](https://github.com/bk2dcradle/Chaplin).
-- My modifications to [the website source][source] are available under [the MIT license][license].
 - All other content is specified by the copyright below.
 
 [perfblog]: https://blog.mozilla.org/performance/
@@ -31,5 +29,3 @@ Outside of Mozilla, I work on the occassional side project. I'm most proud of:
 
 [cc]: https://creativecommons.org/licenses/by-sa/4.0/
 [icons]: https://github.com/danklammer/bytesize-icons
-[source]: https://github.com/mcomella/mcomella.github.com
-[license]: https://github.com/mcomella/mcomella.github.com/blob/master/LICENSE

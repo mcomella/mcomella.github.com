@@ -2,10 +2,6 @@
 layout: default
 ---
 <div class="content post about-container">
-	<!-- h1 class="about-title">{{ page.title }}</h1 -->
 	<h1 class="post-title">{{ site.author }}</h1>
-	{% if site.short_bio %}
-		<div class="post-date">{{ site.short_bio }}</div>
-	{% endif %}
 	{{ content }}
 </div>

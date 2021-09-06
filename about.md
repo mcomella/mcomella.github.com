@@ -3,31 +3,13 @@ layout: about
 permalink: /about/
 ---
 
-Currently engineering [Firefox Focus][focus] and [Firefox TV for Fire
-TV][firetv] at [Mozilla][moz]. I'm particularly interested in how
-technology can help people solve the tough problems they face in their
-day-to-day lives and I'm delighted by the ways the web, as an open
-platform for rapid communication and information, empowers users to
-solve these problems.
+I'm currently working on [performance for Firefox][perfblog] at [Mozilla]. As an individual in the tech industry, I'm interested in how technology can empower society to solve the problems individuals face in their day-to-day lives while simultaneously avoiding the disempowerment unthoughtful use of technology seems to generate.
 
-As a developer, one strong passion of mine is in writing maintainable,
-well-architected, and readable code. Relatedly, to improve code
-quality, I'm enthusiastic about new programming trends like functional
-programming and the use of tooling (e.g. static analysis and testing).
+As a software developer, I'm passionate about writing maintainable, readable code and the techniques that enable it: simplicity, programming paradigms, tooling, etc. My primary experience is working on the Firefox browsers for Android including [Firefox][fxa], [Focus], and [Firefox for Fire TV][fftv] in Kotlin and Java. I also use Python for scripting and have workable HTML/CSS/JS knowledge through browser development.
 
-My primary experience is in Android mobile development with Java and
-Kotlin.  I have a few months of professional experience on iOS
-development with Swift, decent JavaScript skills (from browser
-development), and workable HTML/CSS knowledge. I also have strong, albeit
-infrequent, experience with Python for scripting and prototype web
-servers. As a hobby, I've dabbled in clojure.
-
-Previous projects include:
-- [Firefox for Android][fxa]
-- [Prox (unreleased)][prox]
-- [Firefox Data download library for Android][fda]
-- [ScrollingCardView widget for iOS][cardview]
-- ["Is it in Nightly?" web site][iiin]
+Outside of Mozilla, I work on the occassional side project. I'm most proud of:
+- [APT GitHub Improvements][apt]: a browser add-on to improve my team's workflow on GitHub
+- [w3d-renderer][w3d]: a partial reimplentation of the Wolfenstein 3D renderer
 
 ---
 
@@ -38,14 +20,15 @@ Previous projects include:
 - My modifications to [the website source][source] are available under [the MIT license][license].
 - All other content is specified by the copyright below.
 
-[iiin]: http://mcomella.xyz/blog/2016/is-it-in-nightly-yet.html
-[cardview]: http://mcomella.xyz/blog/2017/introducing-scrolling-card-view-for-ios.html
-[fda]: https://github.com/mozilla-mobile/FirefoxData-android
-[prox]: https://medium.com/firefox-ux/project-prox-4e4c4e155592
+[perfblog]: https://blog.mozilla.org/performance/
+[Mozilla]: https://www.mozilla.org
 [fxa]: https://www.mozilla.org/firefox/android/
-[moz]: https://www.mozilla.org
-[focus]: https://www.mozilla.org/en-US/firefox/mobile/
-[firetv]: https://blog.mozilla.org/blog/2017/12/20/firefox-is-now-on-amazon-fire-tv-happy-holiday-watching/
+[Focus]: https://github.com/mozilla-mobile/focus-android/
+[fftv]: https://github.com/mozilla-mobile/firefox-tv
+
+[apt]: https://github.com/mcomella/apt_github_improvements
+[w3d]: https://github.com/mcomella/w3d-renderer
+
 [cc]: https://creativecommons.org/licenses/by-sa/4.0/
 [icons]: https://github.com/danklammer/bytesize-icons
 [source]: https://github.com/mcomella/mcomella.github.com

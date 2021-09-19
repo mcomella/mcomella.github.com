@@ -26,10 +26,6 @@ markdown: kramdown
 gems:
   - jekyll-paginate
 
-sass:
-  style:            compressed
-  sass_dir:         _sass
-
 # Scopes
 defaults:
   -

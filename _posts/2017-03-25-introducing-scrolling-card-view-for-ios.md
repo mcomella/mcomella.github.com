@@ -1,6 +1,6 @@
 ---
 title: Introducing ScrollingCardView for iOS
-tags: mozilla,ios
+tags: [mozilla,ios]
 ---
 For [Project Prox][Prox], we were asked to implement a
 design<sup><a href="#notes">1</a></sup> like this:

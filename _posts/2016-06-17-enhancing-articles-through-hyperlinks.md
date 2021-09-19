@@ -1,5 +1,5 @@
 ---
-tags: mozilla
+tags: [mozilla]
 ---
 When reading an article, I often run into a problem: there are links I want to
 open but now is not a good time to open them. Why is now not a good time?

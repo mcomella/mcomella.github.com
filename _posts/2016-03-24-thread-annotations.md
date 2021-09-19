@@ -1,6 +1,6 @@
 ---
 title: The Shortcomings of Android Thread Annotations
-tag: android,mozilla
+tags: [android,mozilla]
 disqus-id-override: /blog/2016/thread-annotations-.html
 ---
 When the [Android thread annotations][docs] such as `@UiThread` and

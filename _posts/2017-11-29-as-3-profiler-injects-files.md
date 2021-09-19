@@ -1,6 +1,6 @@
 ---
 title: Android Studio 3.0 Profiler Injects Files Into Data Directory
-tags: mozilla,android
+tags: [mozilla,android]
 ---
 After upgrading to Android Studio 3.0, I discovered a few mysterious new files
 in my app's data directory (`/data/data/org.mozilla.focus.debug/`, in this

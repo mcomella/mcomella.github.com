@@ -1,6 +1,6 @@
 ---
 title: Droidcon at a Glance
-tags: android,mozilla
+tags: [android,mozilla]
 disqus-id-override: /blog/2016/droidcon-at-a-glance-.html
 ---
 So much to do -- *so little time!* That's my main take-away from the two days I

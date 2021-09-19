@@ -1,6 +1,6 @@
 ---
 title: "Addressing GitHub Problems: \"What PRs are open for this issue?\""
-tags: sideprojects,github,mozilla
+tags: [sideprojects,github,mozilla]
 ---
 When looking at a GitHub issue, I often need to know, "What PRs are open for this issue?" I wrote [the GitHub Issue Hoister add-on][addon] to address my problem.
 

@@ -1,6 +1,6 @@
 ---
 title: "Fixing Content Scripts on GitHub.com"
-tags: [sideprojects, github, mozilla]
+tags: [side projects, github, mozilla]
 ---
 When writing a WebExtension using content scripts on GitHub.com, you'll quickly
 find they don't work as expected: the content scripts won't run when clicking links,

@@ -1,6 +1,6 @@
 ---
 title: "\"Will we complete this sprint in time?\": Modifying GitHub To Work For Us"
-tags: [sideprojects,github,mozilla]
+tags: [side projects,github,mozilla]
 ---
 My team estimates the time to complete an issue using "T-shirt sizing": we assign size labels "S" (<= 1 day), "M" (2-3 days), and "L" (4-5 days). One quick, albeit rough, way to estimate the amount of time it'd take to complete a sprint is to sum together the number of days these size labels represent (we use the upper bounds to be safe) to find out the number of "engineering days" it'll take to complete the sprint. To find out if you'll complete the sprint on time, this number can be subtracted by the number of engineering days until the deadline: the number of days until the deadline multiplied by the number of engineers you have. To make a formula:
 ```

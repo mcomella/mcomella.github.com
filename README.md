@@ -15,4 +15,8 @@ jekyll serve
 ```
 
 ## LICENSE
-See `about.md` or https://mcomella.xyz/about/ for full licensing details. The source code for this website was adapted from the [Chaplin template](https://github.com/bk2dcradle/Chaplin). The source has several licenses, all contained in `./LICENSE`.
+The website's contents are specified under several licenses:
+- Post content (`_posts/` & `im/posts/`) is licensed on a case-by-case basis: see the rendered version of each post for licensing details
+- The [bytesize icons](https://github.com/danklammer/bytesize-icons) are by Dan Klammer and available under the MIT license.
+- The website source code is available under the MIT license: see `LICENSE` for specifics. The source was adapted from the [Chaplin template](https://github.com/bk2dcradle/Chaplin).
+- All other website content is copyright Michael Comella

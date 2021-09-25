@@ -13,11 +13,15 @@ layout: default
     <div class="signature">This post is written by Michael Comella, a {{ site.short_bio }} </div>
 
     <div class="license">
+        {% if page.license %}
+        {{page.license}}
+        {% else %}
         This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
         <br>
         <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
             <img class="creative-commons" alt="Creative Commons License" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
         </a>
+        {% endif %}
     </div>
     <div class="clearfix"></div>
 

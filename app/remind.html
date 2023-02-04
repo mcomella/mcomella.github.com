@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Remind me</title>
+</head>
+<body>
+    <form>
+        <label for="utterance">Say</label>
+        <input type="input" id="utterance">
+        <label>every</label>
+        <input type="number" id="min">
+        <label>minutes to</label>
+        <input type="number" id="max">
+        <label>minutes</label>
+        <button id="set">Set</button>
+    </form>
+
+    <!-- Will be dynamically set with application status. -->
+    <div id="status"></div>
+
+    <script>
+        const KEY_TEXT = 'text';
+        const KEY_MIN = 'min';
+        const KEY_MAX = 'max';
+
+        const setButton = document.querySelector('#set');
+        const textElement = document.querySelector('#utterance');
+        const minElement = document.querySelector('#min');
+        const maxElement = document.querySelector('#max');
+
+        setButton.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            const text = textElement.value.trim();
+            const minRange = parseInt(minElement.value);
+            const maxRange = parseInt(maxElement.value);
+            if (!text || !minRange || !maxRange) {
+                alert('ERROR: all fields not filled in')
+                return;
+            }
+
+            if (minRange > maxRange) {
+                alert('Min range must be less than max range');
+                return;
+            }
+
+            // Store configuration: see note in DOMContentLoaded.
+            localStorage.setItem(KEY_TEXT, text);
+            localStorage.setItem(KEY_MIN, minRange);
+            localStorage.setItem(KEY_MAX, maxRange);
+
+            function loop() {
+                const delayMinutes = Math.floor(Math.random() * (maxRange - minRange) + minRange);
+                console.debug(`Next utterance in ${delayMinutes} minutes`);
+                setTimeout(() => {
+                    const utterance = new SpeechSynthesisUtterance(text);
+                    speechSynthesis.speak(utterance);
+                    loop();
+                }, delayMinutes * 60 * 1000);
+            }
+
+            document.querySelector('#status').textContent = 'Running';
+            console.debug(`Speaking "${text}" every ${minRange} to ${maxRange} minutes`);
+            loop();
+        });
+
+        addEventListener('DOMContentLoaded', (e) => {
+            // Restore configuration to make it less effort to use the app if the user always uses the same reminder.
+            const storedText = localStorage.getItem(KEY_TEXT);
+            const storedMin = localStorage.getItem(KEY_MIN);
+            const storedMax = localStorage.getItem(KEY_MAX);
+
+            if (storedText) {
+                textElement.value = storedText;
+            }
+
+            if (storedMin) {
+                minElement.value = storedMin;
+            }
+
+            if (storedMax) {
+                maxElement.value = storedMax;
+            }
+        });
+    </script>
+</body>
+</html>

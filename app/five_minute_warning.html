@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Five Minute Warning</title>
+</head>
+<body>
+    <form>
+        <label for="duration">Duration (minutes):</label>
+        <input type="text" id="duration" name="duration">
+        <button id="start-timer">Start timer</button>
+    </form>
+
+    <div>
+
+    </div>
+
+    <script>
+        function minToMillis(min) {
+            return min * 60 * 1000;
+        }
+
+        function speak(msg) {
+            const utterance = new SpeechSynthesisUtterance(msg);
+            speechSynthesis.speak(utterance);
+        }
+
+        const STATE_STOPPED = 'STOPPED';
+        const STATE_RUNNING = 'RUNNING';
+        const STATE_COMPLETE = 'COMPLETE';
+
+        const startTimerButton = document.querySelector('#start-timer');
+
+        let state = STATE_STOPPED;
+        let intervalId;
+        let wasWarningSpoken = false;
+
+        startTimerButton.addEventListener('click', (e) => {
+            function start() {
+                const durationMinutes = parseInt(document.querySelector('#duration').value);
+                if (!durationMinutes) {
+                    console.debug('Text field is not an int');
+                    return;
+                }
+
+                if (durationMinutes <= 5) {
+                    alert('ERROR: duration must be greater than five minutes to have a five minute warning.');
+                    return;
+                }
+
+                state = STATE_RUNNING;
+                startTimerButton.textContent = 'RUNNING';
+
+                const warningMinutes = durationMinutes - 5;
+                const startDate = new Date();
+                const endDate = new Date(startDate.getTime() + minToMillis(durationMinutes));
+                const warningDate = new Date(startDate.getTime() + minToMillis(warningMinutes));
+
+                // We check the time via an interval to handle the computer going to sleep.
+                console.debug(`timer start: ${durationMinutes} minutes with warning after ${warningMinutes} minutes`);
+                intervalId = setInterval(() => {
+                    console.debug('tick');
+                    const now = new Date();
+                    if (now > endDate) {
+                        speak('Timer complete');
+
+                        if (state === STATE_RUNNING) {
+                            state = STATE_COMPLETE;
+                            startTimerButton.textContent = 'STOP';
+                            console.debug('timer complete');
+                        }
+
+                    } else if (!wasWarningSpoken && now > warningDate) {
+                        wasWarningSpoken = true;
+                        speak('Five minutes remaining');
+                        console.debug('timer: five minutes remaining');
+                    }
+                }, 30 * 1000);
+            }
+
+            function turnOffAlarm() {
+                state = STATE_STOPPED;
+                startTimerButton.textContent = 'Start timer';
+                console.debug('timer: turning off alarm');
+
+                clearInterval(intervalId);
+                intervalId = null;
+            }
+
+            e.preventDefault();
+
+            if (state === STATE_STOPPED) {
+                start();
+            } else if (state == STATE_RUNNING) {
+                console.debug('Button pressed in RUNNING state: nothing to do');
+            } else if (state === STATE_COMPLETE) { 
+                turnOffAlarm();
+            } else {
+                console.error(`Unknown state ${state}`);
+            }
+        });
+    </script>
+</body>
+</html>

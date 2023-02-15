@@ -9,7 +9,7 @@ I asked myself a little too often so I built a thing:
 ![Screenshot](/im/posts/is-it-in-nightly.png)
 
 It's quite simple - pass in a changeset id and get an answer! Try it out
-at [http://mcomella.xyz/is-it-in-nightly](http://mcomella.xyz/is-it-in-nightly)!
+at [http://mcomella.com/is-it-in-nightly](http://mcomella.com/is-it-in-nightly)!
 
 ## Lessons learned
 

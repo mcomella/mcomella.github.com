@@ -4,21 +4,46 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Five Minute Warning</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 97vh; /* doing below 100 seems to hide scroll bar */
+            align-items: center;
+            justify-content: center;
+        }
+
+        form {
+            padding: 16px;
+        }
+
+        form * {
+            display: block;
+            margin: 8px auto;
+            text-align: center;
+            font-size: 24pt;
+        }
+
+        #duration-running {
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <form>
         <label for="duration">Duration (minutes):</label>
-        <input type="text" id="duration" name="duration">
-        <button id="start-timer">Start timer</button>
+        <input type="text" id="duration-input" name="duration" autofocus>
+        <p id="duration-running"></p>
+        <button id="toggle-timer">START</button>
     </form>
-
-    <div>
-
-    </div>
 
     <script>
         function minToMillis(min) {
             return min * 60 * 1000;
+        }
+
+        function millisToMin(millis) {
+            return millis / 1000 / 60;
         }
 
         function speak(msg) {
@@ -30,17 +55,21 @@
         const STATE_RUNNING = 'RUNNING';
         const STATE_COMPLETE = 'COMPLETE';
 
-        const startTimerButton = document.querySelector('#start-timer');
+        const form = document.querySelector('form');
+        const durationInput = document.querySelector('#duration-input');
+        const durationRunningElement = document.querySelector('#duration-running');
+        const toggleTimerButton = document.querySelector('#toggle-timer');
+        const toggleTimerButtonInitialtext = toggleTimerButton.textContent;
 
         let state = STATE_STOPPED;
-        let intervalId;
+        let timerId;
         let wasWarningSpoken = false;
 
-        startTimerButton.addEventListener('click', (e) => {
+        toggleTimerButton.addEventListener('click', (e) => {
             function start() {
-                const durationMinutes = parseInt(document.querySelector('#duration').value);
+                const durationMinutes = parseInt(durationInput.value);
                 if (!durationMinutes) {
-                    console.debug('Text field is not an int');
+                    alert('ERROR: duration must be an int');
                     return;
                 }
 
@@ -50,7 +79,9 @@
                 }
 
                 state = STATE_RUNNING;
-                startTimerButton.textContent = 'RUNNING';
+                toggleTimerButton.textContent = 'STOP';
+                setDurationInputVisible(false);
+                durationRunningElement.textContent = durationMinutes - 1;
 
                 const warningMinutes = durationMinutes - 5;
                 const startDate = new Date();
@@ -59,43 +90,57 @@
 
                 // We check the time via an interval to handle the computer going to sleep.
                 console.debug(`timer start: ${durationMinutes} minutes with warning after ${warningMinutes} minutes`);
-                intervalId = setInterval(() => {
+                timerId = setInterval(() => {
                     console.debug('tick');
+
                     const now = new Date();
+
+                    const remainingMinutes = Math.floor(millisToMin(endDate - now));
+                    durationRunningElement.textContent = remainingMinutes;
                     if (now > endDate) {
                         speak('Timer complete');
 
                         if (state === STATE_RUNNING) {
                             state = STATE_COMPLETE;
-                            startTimerButton.textContent = 'STOP';
                             console.debug('timer complete');
                         }
 
                     } else if (!wasWarningSpoken && now > warningDate) {
                         wasWarningSpoken = true;
-                        speak('Five minutes remaining');
+                        form.style.background = '#fc8';
+                        speak('Five five five five five minutes remaining');
                         console.debug('timer: five minutes remaining');
                     }
                 }, 30 * 1000);
             }
 
-            function turnOffAlarm() {
+            function stop() {
                 state = STATE_STOPPED;
-                startTimerButton.textContent = 'Start timer';
-                console.debug('timer: turning off alarm');
+                form.style.background = '';
+                setDurationInputVisible(true);
+                toggleTimerButton.textContent = toggleTimerButtonInitialtext;
 
-                clearInterval(intervalId);
-                intervalId = null;
+                clearInterval(timerId);
+                timerId = null;
+            }
+
+            function setDurationInputVisible(enabled) {
+                const inputDisplay = enabled ? 'block' : 'none';
+                const runningDisplay = enabled ? 'none' : 'block';
+                durationInput.style.display = inputDisplay;
+                durationRunningElement.style.display = runningDisplay;
             }
 
             e.preventDefault();
 
             if (state === STATE_STOPPED) {
                 start();
-            } else if (state == STATE_RUNNING) {
-                console.debug('Button pressed in RUNNING state: nothing to do');
-            } else if (state === STATE_COMPLETE) { 
-                turnOffAlarm();
+            } else if (state === STATE_RUNNING) {
+                console.debug('timer: stop() while running');
+                stop();
+            } else if (state === STATE_COMPLETE) {
+                console.debug('timer: stop() while complete');
+                stop();
             } else {
                 console.error(`Unknown state ${state}`);
             }

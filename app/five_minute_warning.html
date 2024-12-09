@@ -59,7 +59,9 @@
         const durationInput = document.querySelector('#duration-input');
         const durationRunningElement = document.querySelector('#duration-running');
         const toggleTimerButton = document.querySelector('#toggle-timer');
-        const toggleTimerButtonInitialtext = toggleTimerButton.textContent;
+
+        const documentInitialTitle = document.title;
+        const toggleTimerButtonInitialText = toggleTimerButton.textContent;
 
         let state = STATE_STOPPED;
         let timerId;
@@ -81,7 +83,9 @@
                 state = STATE_RUNNING;
                 toggleTimerButton.textContent = 'STOP';
                 setDurationInputVisible(false);
+                toggleTimerButton.focus();
                 durationRunningElement.textContent = durationMinutes - 1;
+                document.title = `${durationMinutes - 1} min | ${documentInitialTitle}`
 
                 const warningMinutes = durationMinutes - 5;
                 const startDate = new Date();
@@ -94,9 +98,10 @@
                     console.debug('tick');
 
                     const now = new Date();
-
                     const remainingMinutes = Math.floor(millisToMin(endDate - now));
                     durationRunningElement.textContent = remainingMinutes;
+                    document.title = `${remainingMinutes} min | ${documentInitialTitle}`;
+
                     if (now > endDate) {
                         speak('Timer complete');
 
@@ -116,9 +121,11 @@
 
             function stop() {
                 state = STATE_STOPPED;
+                document.title = documentInitialTitle;
                 form.style.background = '';
                 setDurationInputVisible(true);
-                toggleTimerButton.textContent = toggleTimerButtonInitialtext;
+                durationInput.focus();
+                toggleTimerButton.textContent = toggleTimerButtonInitialText;
 
                 clearInterval(timerId);
                 timerId = null;

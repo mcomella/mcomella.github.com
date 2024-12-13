@@ -63,9 +63,10 @@
         const documentInitialTitle = document.title;
         const toggleTimerButtonInitialText = toggleTimerButton.textContent;
 
-        let state = STATE_STOPPED;
-        let timerId;
-        let wasWarningSpoken = false;
+        // Definition duplicated in stop().
+        let state = {
+            type: STATE_STOPPED,
+        };
 
         toggleTimerButton.addEventListener('click', (e) => {
             function start() {
@@ -80,7 +81,6 @@
                     return;
                 }
 
-                state = STATE_RUNNING;
                 toggleTimerButton.textContent = 'STOP';
                 setDurationInputVisible(false);
                 toggleTimerButton.focus();
@@ -94,7 +94,7 @@
 
                 // We check the time via an interval to handle the computer going to sleep.
                 console.debug(`timer start: ${durationMinutes} minutes with warning after ${warningMinutes} minutes`);
-                timerId = setInterval(() => {
+                const timerId = setInterval(() => {
                     console.debug('tick');
 
                     const now = new Date();
@@ -106,29 +106,43 @@
                         speak('Timer complete');
 
                         if (state === STATE_RUNNING) {
-                            state = STATE_COMPLETE;
+                            state = {
+                                type: STATE_COMPLETE,
+                                timerId: state.timerId,
+                            };
                             console.debug('timer complete');
                         }
 
-                    } else if (!wasWarningSpoken && now > warningDate) {
-                        wasWarningSpoken = true;
+                    } else if (!state.wasWarningSpoken && now > warningDate) {
+                        state.wasWarningSpoken = true;
                         form.style.background = '#fc8';
                         speak('Five five five five five minutes remaining');
                         console.debug('timer: five minutes remaining');
                     }
                 }, 30 * 1000);
+
+                state = {
+                    type: STATE_RUNNING,
+                    timerId,
+                    wasWarningSpoken: false,
+                };
             }
 
             function stop() {
-                state = STATE_STOPPED;
                 document.title = documentInitialTitle;
                 form.style.background = '';
                 setDurationInputVisible(true);
                 durationInput.focus();
                 toggleTimerButton.textContent = toggleTimerButtonInitialText;
+                // TODO: test me.
+                speechSynthesis.cancel(); // stop in-progress announcements.
 
-                clearInterval(timerId);
-                timerId = null;
+                clearInterval(state.timerId);
+
+                // Definition duplicated with initial setting.
+                state = {
+                    type: STATE_STOPPED,
+                };
             }
 
             function setDurationInputVisible(enabled) {
@@ -140,16 +154,16 @@
 
             e.preventDefault();
 
-            if (state === STATE_STOPPED) {
+            if (state.type === STATE_STOPPED) {
                 start();
-            } else if (state === STATE_RUNNING) {
+            } else if (state.type === STATE_RUNNING) {
                 console.debug('timer: stop() while running');
                 stop();
-            } else if (state === STATE_COMPLETE) {
+            } else if (state.type === STATE_COMPLETE) {
                 console.debug('timer: stop() while complete');
                 stop();
             } else {
-                console.error(`Unknown state ${state}`);
+                console.error(`Unknown state ${state.type}`);
             }
         });
     </script>

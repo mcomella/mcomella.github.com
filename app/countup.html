@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Countup Timer</title>
+    <style>
+        #elapsed-duration, #toggle-timer {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <p id="elapsed-duration"></p>
+    <button id="toggle-timer" autofocus>START</button>
+
+    <script>
+        const elapsedDurationElement = document.getElementById('elapsed-duration');
+        const toggleTimerButton = document.getElementById('toggle-timer');
+
+        function speak(msg) {
+            const utterance = new SpeechSynthesisUtterance(msg);
+            speechSynthesis.speak(utterance);
+        }
+
+        function newStateStopped() {
+            return {type: 'STOPPED'};
+        }
+
+        function onTick() {
+            state.minutesElapsed += 1;
+            elapsedDurationElement.innerText = `${state.minutesElapsed} minutes elapsed`;
+            speak(`${state.minutesElapsed} minutes elapsed`);
+        }
+
+        let state = newStateStopped();
+
+        toggleTimerButton.addEventListener('click', (e) => {
+            if (state.type === 'STOPPED') {
+                const timerId = setInterval(onTick, 60 * 1000);
+                state = {
+                    type: 'RUNNING',
+                    minutesElapsed: 0,
+                    timerId,
+                };
+                elapsedDurationElement.innerText = '0 minutes elapsed';
+                toggleTimerButton.innerText = 'STOP';
+            } else if (state.type === 'RUNNING') {
+                speechSynthesis.cancel();
+                clearInterval(state.timerId);
+                state = newStateStopped();
+                elapsedDurationElement.innerText = '';
+                toggleTimerButton.innerText = 'START';
+            } else {
+                console.error(`toggle button clicked: unknown state.type, ${state.type}`);
+            }
+        });
+    </script>
+</body>
+</html>

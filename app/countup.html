@@ -67,16 +67,36 @@
         let state = newStateStopped();
         toggleTimerButton.addEventListener('click', (e) => {
             if (state.type === TYPE_STOPPED) {
+                // TODO: we may lose the wakelock if a user navigates away from the active window/tab.
+                // Request a wakeLock. Safari iOS excludes this API if we're not in a secure context.
+                if ('wakeLock' in navigator) {
+                    try {
+                        navigator.wakeLock.request('screen').then(wakeLock => {
+                            if (state.type === TYPE_RUNNING) {
+                                state.wakeLock = wakeLock;
+                            } else {
+                                wakeLock.release();
+                            }
+                        });
+                    } catch (e) {
+                        console.error(`unable to acquire wakelock: ${e}`);
+                    }
+                }
+
                 state = {
                     type: TYPE_RUNNING,
                     startDate: new Date(),
                     timerId: setInterval(onTick, 60 * 1000), // TODO: since this is called on intervals, it may not run exactly every minute from startDate.
+                    wakeLock: null,
                 };
                 render(state);
                 speak('Count up begin'); // note: iOS Safari requires us to speak on a user interaction before timer-based speech works.
             } else if (state.type === TYPE_RUNNING) {
                 clearInterval(state.timerId);
                 speechSynthesis.cancel();
+                if ('wakeLock' in state) {
+                    state.wakeLock.release();
+                }
                 state = newStateStopped();
                 render(state);
             } else {

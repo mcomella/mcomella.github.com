@@ -10,12 +10,13 @@
             margin-left: auto;
             margin-right: auto;
             text-align: center;
+            font-size: 300%;
         }
     </style>
 </head>
 <body>
-    <p id="elapsed-duration"></p>
     <button id="toggle-timer" autofocus>START</button>
+    <p id="elapsed-duration"></p>
 
     <script>
         const TYPE_STOPPED = 'STOPPED';
@@ -67,6 +68,7 @@
                     timerId: setInterval(onTick, 60 * 1000),
                 };
                 render(state);
+                speak('Count up begin'); // note: iOS Safari requires us to speak on a user interaction before timer-based speech works.
             } else if (state.type === TYPE_RUNNING) {
                 clearInterval(state.timerId);
                 speechSynthesis.cancel();

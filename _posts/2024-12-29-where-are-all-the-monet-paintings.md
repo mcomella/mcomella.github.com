@@ -16,12 +16,18 @@ I discovered the information I need is on [Wikidata][], accessible with a [SPARQ
 ## Query #1: collections with the most paintings by Monet
 This is the query I created ([link to edit/execute query directly in WQS](https://query.wikidata.org/#SELECT%20%28COUNT%28DISTINCT%20%3Fpainting%29%20AS%20%3FpaintingCount%29%20%3FcollectionLabel%20%3FcollectionCountryLabel%20WHERE%20%7B%0A%20%20%3Fpainting%20wdt%3AP170%20wd%3AQ296%3B%20%20%20%20%20%20%20%20%20%20%20%23%20creator%20%3D%20Monet%0A%20%20%20%20wdt%3AP31%20wd%3AQ3305213%3B%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20instanceOf%20%3D%20painting%0A%20%20%20%20%28wdt%3AP195%2F%28wdt%3AP361%2a%29%29%20%3Fcollection.%20%23%20partOf%20a%20collection%0A%20%20OPTIONAL%20%7B%20%3Fcollection%20wdt%3AP17%20%3FcollectionCountry.%20%7D%20%23%20fetch%20the%20collection%20country%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cmul%2Cen%22.%20%7D%0A%7D%0AGROUP%20BY%20%3Fcollection%20%3FcollectionLabel%20%3FcollectionCountryLabel%0AORDER%20BY%20DESC%20%28%3FpaintingCount%29)):
 ```sparql
-SELECT (COUNT(DISTINCT ?painting) AS ?paintingCount) ?collectionLabel ?collectionCountryLabel WHERE {
+SELECT
+  (COUNT(DISTINCT ?painting) AS ?paintingCount)
+  ?collectionLabel
+  ?collectionCountryLabel
+WHERE {
   ?painting wdt:P170 wd:Q296;           # creator = Monet
     wdt:P31 wd:Q3305213;                # instanceOf = painting
     (wdt:P195/(wdt:P361*)) ?collection. # partOf a collection
-  OPTIONAL { ?collection wdt:P17 ?collectionCountry. } # fetch the collection country
-  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],mul,en". }
+  OPTIONAL { ?collection wdt:P17 ?collectionCountry. } # get collection country
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "[AUTO_LANGUAGE],mul,en".
+  }
 }
 GROUP BY ?collection ?collectionLabel ?collectionCountryLabel
 ORDER BY DESC (?paintingCount)
@@ -42,12 +48,17 @@ If you use this as a guide of which museums to visit, remember that not all of t
 ## Query #2: countries with the most paintings by Monet
 ([Link to edit/execute query directly in WQS](https://query.wikidata.org/#SELECT%20%28COUNT%28DISTINCT%20%3Fpainting%29%20AS%20%3FpaintingCount%29%20%3FcollectionCountryLabel%20WHERE%20%7B%0A%20%20%3Fpainting%20wdt%3AP170%20wd%3AQ296%3B%20%20%20%20%20%20%20%20%20%20%20%23%20creator%20%3D%20Monet%0A%20%20%20%20wdt%3AP31%20wd%3AQ3305213%3B%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20instanceOf%20%3D%20painting%0A%20%20%20%20%28wdt%3AP195%2F%28wdt%3AP361%2a%29%29%20%3Fcollection.%20%23%20partOf%20a%20collection%0A%20%20OPTIONAL%20%7B%20%3Fcollection%20wdt%3AP17%20%3FcollectionCountry.%20%7D%20%23%20fetch%20collection%20country%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cmul%2Cen%22.%20%7D%0A%7D%0AGROUP%20BY%20%3FcollectionCountryLabel%0AORDER%20BY%20DESC%20%28%3FpaintingCount%29))
 ```sparql
-SELECT (COUNT(DISTINCT ?painting) AS ?paintingCount) ?collectionCountryLabel WHERE {
+SELECT
+  (COUNT(DISTINCT ?painting) AS ?paintingCount)
+  ?collectionCountryLabel
+WHERE {
   ?painting wdt:P170 wd:Q296;           # creator = Monet
     wdt:P31 wd:Q3305213;                # instanceOf = painting
     (wdt:P195/(wdt:P361*)) ?collection. # partOf a collection
-  OPTIONAL { ?collection wdt:P17 ?collectionCountry. } # fetch collection country
-  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],mul,en". }
+  OPTIONAL { ?collection wdt:P17 ?collectionCountry. } # get collection country
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "[AUTO_LANGUAGE],mul,en".
+  }
 }
 GROUP BY ?collectionCountryLabel
 ORDER BY DESC (?paintingCount)

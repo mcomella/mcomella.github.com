@@ -1,5 +1,5 @@
 ---
-title: "Debug Jasmine tests in TypeScript on Node.js with VS Code"
+title: "Debug Jasmine Tests in TypeScript on Node.js With VS Code"
 tags: [typescript]
 ---
 This post shows you how to configure the Visual Studio Code debugger to run on Jasmine unit tests written in TypeScript using Node.js as the test runner with minimal dependencies. I wrote this post because many other sources suggest installing additional packages such as `ts-node` and `jasmine-ts` but this doesn't seem to be necessary and it's good to remove unneeded dependencies to minimize the security risk.

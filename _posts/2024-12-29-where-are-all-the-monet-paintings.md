@@ -1,5 +1,5 @@
 ---
-title: "Where are all the Monet Paintings?"
+title: "Where Are All the Monet Paintings?"
 tags: [wikimedia,art]
 license: "The data provided by Wikidata, in tables, is licensed under CC0: see <a href=\"https://www.wikidata.org/wiki/Wikidata:Copyright\">Wikidata:Copyright</a> for more information. The remainder of <span xmlns:cc=\"http://creativecommons.org/ns#\">
     Where are all the Monet Paintings?

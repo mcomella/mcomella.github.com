@@ -75,7 +75,7 @@ Different fields have varying quality too: there are [997 Monet paintings withou
 The Wikimedia resources also have many images of Monet paintings. If you want to see them, you have a few options:
 - Add images to your Wikidata query, e.g. [Monet paintings in the Metropolitan Museum of Art][example images]
 - Find a list on Wikipedia, e.g. [List of Paintings by Claude Monet](https://en.wikipedia.org/wiki/List_of_paintings_by_Claude_Monet)
-- Find a Category on Wikimedia Commons, e.g. [Paintings by Claude Monet](https://commons.wikimedia.org/wiki/Category:Paintings_by_Claude_Monet) & [Paintings by Claude Monet in the Metropolitan Museum of Art](https://commons.wikimedia.org/wiki/Category:Paintings_by_Claude_Monet_in_the_Metropolitan_Museum_of_Art)
+- Search Wikimedia Commons ([example](https://commons.wikimedia.org/w/index.php?search=claude+monet&title=Special:MediaSearch&go=Go&type=image)), find an associated Gallery page there (e.g. [Paintings by Claude Monet](https://commons.wikimedia.org/wiki/Paintings_by_Claude_Monet)), or find a Category (e.g. [Paintings by Claude Monet in the Metropolitan Museum of Art](https://commons.wikimedia.org/wiki/Category:Paintings_by_Claude_Monet_in_the_Metropolitan_Museum_of_Art)). Note that you won't easily find all of his paintings in a single category because images can only be in one category and categories can have subcategories.
 
 Much of Wikidata's data is licensed under CC0 which, as I understand it and I am not a lawyer, means it is dedicated to the public domain: see [Wikidata:Copyright](https://www.wikidata.org/wiki/Wikidata:Copyright) for more information.
 

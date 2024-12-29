@@ -1,11 +1,11 @@
 ---
 title: "Reimplenting the Wolfenstein 3D renderer"
 tags: [side projects]
-license: "The second screenshot, top-to-bottom, I suspect is licensed by id Software because it contains screenshots featuring textures from the Wolfenstein 3D shareware release. The remainder of this work is licensed under <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-sa/4.0/\">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-   <br>
-   <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-sa/4.0/\">
-     <img class=\"creative-commons\" alt=\"Creative Commons License\" src=\"https://i.creativecommons.org/l/by-sa/4.0/88x31.png\" />
-   </a>"
+license: "The second screenshot, top-to-bottom, I suspect is licensed by id Software because it contains screenshots featuring textures from the Wolfenstein 3D shareware release. The remainder of <span xmlns:cc=\"http://creativecommons.org/ns#\">
+    Reimplementing the Wolfenstein 3D renderer
+    by <a rel=\"cc:attributionURL dct:creator\" property=\"cc:attributionName\" href=\"https://mcomella.com\">Michael Comella</a>
+    is licensed under <a href=\"https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1\" target=\"_blank\" rel=\"license noopener noreferrer\" style=\"display:inline-block;\">Creative Commons Attribution-ShareAlike 4.0 International<img style=\"height:22px!important;margin-left:3px;vertical-align:text-bottom;\" src=\"https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1\" alt=\"\"><img style=\"height:22px!important;margin-left:3px;vertical-align:text-bottom;\" src=\"https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1\" alt=\"\"><img style=\"height:22px!important;margin-left:3px;vertical-align:text-bottom;\" src=\"https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1\" alt=\"\"></a>
+</span>"
 ---
 When I was young, I was told that games like [Wolfenstein 3D][wiki] use "fake 3D" and ever since I've been wondering what they meant by that. I recently satisfied my curiosity by reading through Fabien Sanglard's very enjoyable book, [**Game Engine Black Book: Wolfenstein 3D**][gebb], which explains how Wolfenstein 3D was built. While reading, I realized, "Hey -- I can do that!" and set about reimplenting the renderer: specifically, the algorithm that generates and textures the walls in a 3D perspective. Here's the result with a texture and a map I generated myself:
 

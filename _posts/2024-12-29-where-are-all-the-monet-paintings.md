@@ -1,11 +1,11 @@
 ---
 title: "Where are all the Monet Paintings?"
 tags: [wikimedia,art]
-license: "The data provided by Wikidata, in tables, is licensed under CC0: see <a href=\"https://www.wikidata.org/wiki/Wikidata:Copyright\">Wikidata:Copyright</a> for more information. The remainder of this work is licensed under <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-sa/4.0/\">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-   <br>
-   <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-sa/4.0/\">
-     <img class=\"creative-commons\" alt=\"Creative Commons License\" src=\"https://i.creativecommons.org/l/by-sa/4.0/88x31.png\" />
-   </a>"
+license: "The data provided by Wikidata, in tables, is licensed under CC0: see <a href=\"https://www.wikidata.org/wiki/Wikidata:Copyright\">Wikidata:Copyright</a> for more information. The remainder of <span xmlns:cc=\"http://creativecommons.org/ns#\">
+    Where are all the Monet Paintings?
+    by <a rel=\"cc:attributionURL dct:creator\" property=\"cc:attributionName\" href=\"https://mcomella.com\">Michael Comella</a>
+    is licensed under <a href=\"https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1\" target=\"_blank\" rel=\"license noopener noreferrer\" style=\"display:inline-block;\">Creative Commons Attribution-ShareAlike 4.0 International<img style=\"height:22px!important;margin-left:3px;vertical-align:text-bottom;\" src=\"https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1\" alt=\"\"><img style=\"height:22px!important;margin-left:3px;vertical-align:text-bottom;\" src=\"https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1\" alt=\"\"><img style=\"height:22px!important;margin-left:3px;vertical-align:text-bottom;\" src=\"https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1\" alt=\"\"></a>
+</span>"
 ---
 I've been curious to know, which museums have the most paintings by [Claude Monet][] (or my other favorite artists)? For instance, when I travel, which museums should I go to? Which cities or countries should I include in my trip if I want to see the most art I'll enjoy? Or, if I'm already in a city/country, are there any museums I should go to based on my tastes?
 

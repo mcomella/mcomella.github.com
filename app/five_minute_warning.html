@@ -111,14 +111,14 @@
                                 type: STATE_COMPLETE,
                                 timerId: state.timerId,
                             };
-                            console.debug('timer complete');
+                            console.info(`timer complete at ${new Date().toLocaleTimeString()}`);
                         }
 
                     } else if (!state.wasWarningSpoken && now > warningDate) {
                         state.wasWarningSpoken = true;
                         form.style.background = '#fc8';
                         speak('Time to wrap it up! Five minutes remaining.');
-                        console.debug('timer: five minutes remaining');
+                        console.info(`timer five minute warning at ${new Date().toLocaleTimeString()}`);
                     }
                 }, 20 * 1000);
 

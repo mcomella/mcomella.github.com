@@ -91,9 +91,10 @@
                 const startDate = new Date();
                 const endDate = new Date(startDate.getTime() + minToMillis(durationMinutes));
                 const warningDate = new Date(startDate.getTime() + minToMillis(warningMinutes));
+                startDate.to
 
                 // We check the time via an interval to handle the computer going to sleep.
-                console.debug(`timer start: ${durationMinutes} minutes with warning after ${warningMinutes} minutes`);
+                console.info(`START: ${startDate.toLocaleTimeString()} until ${endDate.toLocaleTimeString()} (${durationMinutes} minutes)`);
                 const timerId = setInterval(() => {
                     console.debug('tick');
 
@@ -157,10 +158,10 @@
             if (state.type === STATE_STOPPED) {
                 start();
             } else if (state.type === STATE_RUNNING) {
-                console.debug('timer: stop() while running');
+                console.info(`STOP: at ${new Date().toLocaleTimeString()} while running`);
                 stop();
             } else if (state.type === STATE_COMPLETE) {
-                console.debug('timer: stop() while complete');
+                console.info(`STOP: at ${new Date().toLocaleTimeString()} while complete`);
                 stop();
             } else {
                 console.error(`Unknown state ${state.type}`);

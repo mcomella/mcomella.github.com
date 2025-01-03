@@ -91,7 +91,6 @@
                 const startDate = new Date();
                 const endDate = new Date(startDate.getTime() + minToMillis(durationMinutes));
                 const warningDate = new Date(startDate.getTime() + minToMillis(warningMinutes));
-                startDate.to
 
                 // We check the time via an interval to handle the computer going to sleep.
                 console.info(`START: ${startDate.toLocaleTimeString()} until ${endDate.toLocaleTimeString()} (${durationMinutes} minutes)`);

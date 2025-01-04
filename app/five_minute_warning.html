@@ -31,6 +31,8 @@
 </head>
 <body>
     <form>
+        <label for="half-alarm">Announce 50% elapsed</label>
+        <input type="checkbox" id="half-alarm-input" name="half-alarm">
         <label for="duration">Duration (minutes):</label>
         <input type="text" id="duration-input" name="duration" autofocus>
         <p id="duration-running"></p>
@@ -56,6 +58,7 @@
         const STATE_COMPLETE = 'COMPLETE';
 
         const form = document.querySelector('form');
+        const halfAlarmInput = document.getElementById('half-alarm-input');
         const durationInput = document.querySelector('#duration-input');
         const durationRunningElement = document.querySelector('#duration-running');
         const toggleTimerButton = document.querySelector('#toggle-timer');
@@ -82,8 +85,7 @@
                 }
 
                 toggleTimerButton.textContent = 'STOP';
-                setDurationInputVisible(false);
-                toggleTimerButton.focus();
+                setFormEnableStateForStopped(false);
                 durationRunningElement.textContent = durationMinutes - 1;
                 document.title = `${durationMinutes - 1} min | ${documentInitialTitle}`
 
@@ -91,7 +93,6 @@
                 const endDate = new Date(startDate.getTime() + minToMillis(durationMinutes));
 
                 // We check the time via an interval to handle the computer going to sleep.
-                console.info(`START: ${startDate.toLocaleTimeString()} until ${endDate.toLocaleTimeString()} (${durationMinutes} minutes)`);
                 const timerId = setInterval(() => {
                     console.debug('tick');
 
@@ -103,7 +104,7 @@
                     if (now >= endDate) {
                         speak('Timer complete');
 
-                        if (state === STATE_RUNNING) {
+                        if (state.type === STATE_RUNNING) {
                             state = {
                                 type: STATE_COMPLETE,
                                 timerId: state.timerId,
@@ -143,15 +144,26 @@
                         styleBackground: '#fc8',
                     }],
                 };
+
+                if (halfAlarmInput.checked && (durationMinutes / 2) > 5) {
+                    state.sortedAlarms.push({
+                        consoleDescription: 'halftime',
+                        date: new Date(startDate.getTime() + minToMillis(durationMinutes / 2)),
+                        spokenText: `Halftime! Roughly ${Math.ceil(durationMinutes / 2)} minutes remaining.`,
+                    });
+                }
+
+                console.info(`START: ${startDate.toLocaleTimeString()} until ${endDate.toLocaleTimeString()} (${durationMinutes} minutes)`);
+                for (const alarm of state.sortedAlarms.toReversed()) {
+                    console.debug(`  ${alarm.consoleDescription} announcement at ${alarm.date.toLocaleTimeString()}.`)
+                }
             }
 
             function stop() {
                 document.title = documentInitialTitle;
                 form.style.background = '';
-                setDurationInputVisible(true);
-                durationInput.focus();
+                setFormEnableStateForStopped(true);
                 toggleTimerButton.textContent = toggleTimerButtonInitialText;
-                // TODO: test me.
                 speechSynthesis.cancel(); // stop in-progress announcements.
 
                 clearInterval(state.timerId);
@@ -162,11 +174,28 @@
                 };
             }
 
-            function setDurationInputVisible(enabled) {
-                const inputDisplay = enabled ? 'block' : 'none';
-                const runningDisplay = enabled ? 'none' : 'block';
-                durationInput.style.display = inputDisplay;
-                durationRunningElement.style.display = runningDisplay;
+            function setFormEnableStateForStopped(isStopped) {
+                let updatedState;
+                if (isStopped) {
+                    updatedState = {
+                        inputDisplay: 'block',
+                        durationDisplay: 'none',
+                        halfAlarmDisabled: false,
+                        focusedElement: durationInput,
+                    };
+                } else {
+                    updatedState = {
+                        inputDisplay: 'none',
+                        durationDisplay: 'block',
+                        halfAlarmDisabled: true,
+                        focusedElement: toggleTimerButton,
+                    };
+                }
+
+                durationInput.style.display = updatedState.inputDisplay;
+                durationRunningElement.style.display = updatedState.durationDisplay;
+                halfAlarmInput.disabled = updatedState.halfAlarmDisabled;
+                updatedState.focusedElement.focus();
             }
 
             e.preventDefault();

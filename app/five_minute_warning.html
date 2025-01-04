@@ -87,10 +87,8 @@
                 durationRunningElement.textContent = durationMinutes - 1;
                 document.title = `${durationMinutes - 1} min | ${documentInitialTitle}`
 
-                const warningMinutes = durationMinutes - 5;
                 const startDate = new Date();
                 const endDate = new Date(startDate.getTime() + minToMillis(durationMinutes));
-                const warningDate = new Date(startDate.getTime() + minToMillis(warningMinutes));
 
                 // We check the time via an interval to handle the computer going to sleep.
                 console.info(`START: ${startDate.toLocaleTimeString()} until ${endDate.toLocaleTimeString()} (${durationMinutes} minutes)`);
@@ -102,7 +100,7 @@
                     durationRunningElement.textContent = remainingMinutes;
                     document.title = `${remainingMinutes} min | ${documentInitialTitle}`;
 
-                    if (now > endDate) {
+                    if (now >= endDate) {
                         speak('Timer complete');
 
                         if (state === STATE_RUNNING) {
@@ -110,21 +108,40 @@
                                 type: STATE_COMPLETE,
                                 timerId: state.timerId,
                             };
-                            console.info(`timer complete at ${new Date().toLocaleTimeString()}`);
+                            console.info(`COMPLETE: at ${new Date().toLocaleTimeString()}`);
                         }
 
-                    } else if (!state.wasWarningSpoken && now > warningDate) {
-                        state.wasWarningSpoken = true;
-                        form.style.background = '#fc8';
-                        speak('Time to wrap it up! Five minutes remaining.');
-                        console.info(`timer five minute warning at ${new Date().toLocaleTimeString()}`);
+                        return;
+                    }
+
+                    // Activate the most recently passed alarm, removing it and prior alarms from the list, skipping
+                    // activation of them even if they have never been activated (eg device slept through them).
+                    // Assumes list is sorted in order of activation.
+                    let mostRecentAlarm;
+                    const alarms = state.sortedAlarms;
+                    while (alarms.at(-1) !== undefined && now >= alarms.at(-1).date) {
+                        mostRecentAlarm = alarms.pop();
+                    }
+
+                    if (mostRecentAlarm !== undefined) {
+                        if (mostRecentAlarm.styleBackground) {
+                            form.style.background = mostRecentAlarm.styleBackground;
+                        }
+
+                        speak(mostRecentAlarm.spokenText);
+                        console.info(`ALARM: ${mostRecentAlarm.consoleDescription} at ${new Date().toLocaleTimeString()}`);
                     }
                 }, 20 * 1000);
 
                 state = {
                     type: STATE_RUNNING,
                     timerId,
-                    wasWarningSpoken: false,
+                    sortedAlarms: [{
+                        consoleDescription: 'five minute warning',
+                        date: new Date(startDate.getTime() + minToMillis(durationMinutes - 5)),
+                        spokenText: 'Wrap it up! Five minutes remaining.',
+                        styleBackground: '#fc8',
+                    }],
                 };
             }
 
@@ -156,11 +173,8 @@
 
             if (state.type === STATE_STOPPED) {
                 start();
-            } else if (state.type === STATE_RUNNING) {
-                console.info(`STOP: at ${new Date().toLocaleTimeString()} while running`);
-                stop();
-            } else if (state.type === STATE_COMPLETE) {
-                console.info(`STOP: at ${new Date().toLocaleTimeString()} while complete`);
+            } else if (state.type === STATE_RUNNING || state.type === STATE_COMPLETE) {
+                console.info(`STOP: at ${new Date().toLocaleTimeString()} while ${state.type}`);
                 stop();
             } else {
                 console.error(`Unknown state ${state.type}`);

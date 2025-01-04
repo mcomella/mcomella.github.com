@@ -33,6 +33,8 @@
     <form>
         <label for="halftime-warning">Warn at 50% elapsed (> 10 min only)</label>
         <input type="checkbox" id="halftime-warning-checkbox" name="halftime-warning">
+        <label for="quarters-warning">Warn at 3/4 & 1/4 elapsed (> 20 min only)</label>
+        <input type="checkbox" id="quarters-warning-checkbox" name="quarters-warning">
         <label for="countdown-warning">Announce all minutes below 5 minute warning</label>
         <input type="checkbox" id="countdown-warning-checkbox" name="countdown-warning">
         <label for="duration">Duration (minutes):</label>
@@ -61,6 +63,7 @@
 
         const form = document.querySelector('form');
         const halftimeWarningCheckbox = document.getElementById('halftime-warning-checkbox');
+        const quartersWarningCheckbox = document.getElementById('quarters-warning-checkbox');
         const countdownWarningCheckbox = document.getElementById('countdown-warning-checkbox');
         const durationInput = document.querySelector('#duration-input');
         const durationRunningElement = document.querySelector('#duration-running');
@@ -160,11 +163,29 @@
                     }
                 }
 
+                // This is repeated after halftimeWarning.
+                if (quartersWarningCheckbox.checked && (durationMinutes / 4) > 5) {
+                    state.sortedWarnings.push({
+                        consoleDescription: '1/4 warning',
+                        date: new Date(startDate.getTime() + minToMillis(durationMinutes * 0.75)),
+                        spokenText: `One quarter left! Roughly ${Math.ceil(durationMinutes * 0.25)} minutes remaining.`,
+                    });
+                }
+
                 if (halftimeWarningCheckbox.checked && (durationMinutes / 2) > 5) {
                     state.sortedWarnings.push({
                         consoleDescription: 'halftime warning',
                         date: new Date(startDate.getTime() + minToMillis(durationMinutes / 2)),
                         spokenText: `Halftime! Roughly ${Math.ceil(durationMinutes / 2)} minutes remaining.`,
+                    });
+                }
+
+                // This is repeated before halftimeWarning.
+                if (quartersWarningCheckbox.checked && (durationMinutes / 4) > 5) {
+                    state.sortedWarnings.push({
+                        consoleDescription: '3/4 warning',
+                        date: new Date(startDate.getTime() + minToMillis(durationMinutes * 0.25)),
+                        spokenText: `Three quarters left! Roughly ${Math.ceil(durationMinutes * 0.75)} minutes remaining.`,
                     });
                 }
 
@@ -209,7 +230,7 @@
 
                 durationInput.style.display = updatedState.inputDisplay;
                 durationRunningElement.style.display = updatedState.durationDisplay;
-                for (const checkbox of [countdownWarningCheckbox, halftimeWarningCheckbox]) {
+                for (const checkbox of [countdownWarningCheckbox, halftimeWarningCheckbox, quartersWarningCheckbox]) {
                     checkbox.disabled = updatedState.checkboxDisabled;
                 }
                 updatedState.focusedElement.focus();

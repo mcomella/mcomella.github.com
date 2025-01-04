@@ -31,8 +31,8 @@
 </head>
 <body>
     <form>
-        <label for="half-alarm">Announce 50% elapsed</label>
-        <input type="checkbox" id="half-alarm-input" name="half-alarm">
+        <label for="halftime-warning">Warn at 50% elapsed (> 10 min only)</label>
+        <input type="checkbox" id="halftime-warning-checkbox" name="halftime-warning">
         <label for="duration">Duration (minutes):</label>
         <input type="text" id="duration-input" name="duration" autofocus>
         <p id="duration-running"></p>
@@ -58,7 +58,7 @@
         const STATE_COMPLETE = 'COMPLETE';
 
         const form = document.querySelector('form');
-        const halfAlarmInput = document.getElementById('half-alarm-input');
+        const halftimeWarningCheckbox = document.getElementById('halftime-warning-checkbox');
         const durationInput = document.querySelector('#duration-input');
         const durationRunningElement = document.querySelector('#duration-running');
         const toggleTimerButton = document.querySelector('#toggle-timer');
@@ -115,29 +115,29 @@
                         return;
                     }
 
-                    // Activate the most recently passed alarm, removing it and prior alarms from the list, skipping
+                    // Activate the most recently passed warning, removing it and prior warnings from the list, skipping
                     // activation of them even if they have never been activated (eg device slept through them).
                     // Assumes list is sorted in order of activation.
-                    let mostRecentAlarm;
-                    const alarms = state.sortedAlarms;
-                    while (alarms.at(-1) !== undefined && now >= alarms.at(-1).date) {
-                        mostRecentAlarm = alarms.pop();
+                    let mostRecentWarning;
+                    const warnings = state.sortedWarnings;
+                    while (warnings.at(-1) !== undefined && now >= warnings.at(-1).date) {
+                        mostRecentWarning = warnings.pop();
                     }
 
-                    if (mostRecentAlarm !== undefined) {
-                        if (mostRecentAlarm.styleBackground) {
-                            form.style.background = mostRecentAlarm.styleBackground;
+                    if (mostRecentWarning !== undefined) {
+                        if (mostRecentWarning.styleBackground) {
+                            form.style.background = mostRecentWarning.styleBackground;
                         }
 
-                        speak(mostRecentAlarm.spokenText);
-                        console.info(`ALARM: ${mostRecentAlarm.consoleDescription} at ${new Date().toLocaleTimeString()}`);
+                        speak(mostRecentWarning.spokenText);
+                        console.info(`WARNING: ${mostRecentWarning.consoleDescription} at ${new Date().toLocaleTimeString()}`);
                     }
                 }, 20 * 1000);
 
                 state = {
                     type: STATE_RUNNING,
                     timerId,
-                    sortedAlarms: [{
+                    sortedWarnings: [{
                         consoleDescription: 'five minute warning',
                         date: new Date(startDate.getTime() + minToMillis(durationMinutes - 5)),
                         spokenText: 'Wrap it up! Five minutes remaining.',
@@ -145,17 +145,17 @@
                     }],
                 };
 
-                if (halfAlarmInput.checked && (durationMinutes / 2) > 5) {
-                    state.sortedAlarms.push({
-                        consoleDescription: 'halftime',
+                if (halftimeWarningCheckbox.checked && (durationMinutes / 2) > 5) {
+                    state.sortedWarnings.push({
+                        consoleDescription: 'halftime warning',
                         date: new Date(startDate.getTime() + minToMillis(durationMinutes / 2)),
                         spokenText: `Halftime! Roughly ${Math.ceil(durationMinutes / 2)} minutes remaining.`,
                     });
                 }
 
                 console.info(`START: ${startDate.toLocaleTimeString()} until ${endDate.toLocaleTimeString()} (${durationMinutes} minutes)`);
-                for (const alarm of state.sortedAlarms.toReversed()) {
-                    console.debug(`  ${alarm.consoleDescription} announcement at ${alarm.date.toLocaleTimeString()}.`)
+                for (const warning of state.sortedWarnings.toReversed()) {
+                    console.debug(`  ${warning.consoleDescription} announcement at ${warning.date.toLocaleTimeString()}.`)
                 }
             }
 
@@ -180,21 +180,21 @@
                     updatedState = {
                         inputDisplay: 'block',
                         durationDisplay: 'none',
-                        halfAlarmDisabled: false,
+                        halftimeCheckboxDisabled: false,
                         focusedElement: durationInput,
                     };
                 } else {
                     updatedState = {
                         inputDisplay: 'none',
                         durationDisplay: 'block',
-                        halfAlarmDisabled: true,
+                        halftimeCheckboxDisabled: true,
                         focusedElement: toggleTimerButton,
                     };
                 }
 
                 durationInput.style.display = updatedState.inputDisplay;
                 durationRunningElement.style.display = updatedState.durationDisplay;
-                halfAlarmInput.disabled = updatedState.halfAlarmDisabled;
+                halftimeWarningCheckbox.disabled = updatedState.halftimeCheckboxDisabled;
                 updatedState.focusedElement.focus();
             }
 

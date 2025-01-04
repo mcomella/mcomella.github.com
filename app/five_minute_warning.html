@@ -33,6 +33,8 @@
     <form>
         <label for="halftime-warning">Warn at 50% elapsed (> 10 min only)</label>
         <input type="checkbox" id="halftime-warning-checkbox" name="halftime-warning">
+        <label for="countdown-warning">Announce all minutes below 5 minute warning</label>
+        <input type="checkbox" id="countdown-warning-checkbox" name="countdown-warning">
         <label for="duration">Duration (minutes):</label>
         <input type="text" id="duration-input" name="duration" autofocus>
         <p id="duration-running"></p>
@@ -59,6 +61,7 @@
 
         const form = document.querySelector('form');
         const halftimeWarningCheckbox = document.getElementById('halftime-warning-checkbox');
+        const countdownWarningCheckbox = document.getElementById('countdown-warning-checkbox');
         const durationInput = document.querySelector('#duration-input');
         const durationRunningElement = document.querySelector('#duration-running');
         const toggleTimerButton = document.querySelector('#toggle-timer');
@@ -137,6 +140,7 @@
                 state = {
                     type: STATE_RUNNING,
                     timerId,
+                    // Sorted with the warning that should occur next at the end of the array.
                     sortedWarnings: [{
                         consoleDescription: 'five minute warning',
                         date: new Date(startDate.getTime() + minToMillis(durationMinutes - 5)),
@@ -144,6 +148,17 @@
                         styleBackground: '#fc8',
                     }],
                 };
+
+                if (countdownWarningCheckbox.checked) {
+                    for (let i = 4; i >= 1; i--) {
+                        const countdownDurationMinutes = durationMinutes - i;
+                        state.sortedWarnings.unshift({
+                            consoleDescription: `countdown ${i} warning`,
+                            date: new Date(startDate.getTime() + minToMillis(countdownDurationMinutes)),
+                            spokenText: `${i} minutes remaining.`,
+                        });
+                    }
+                }
 
                 if (halftimeWarningCheckbox.checked && (durationMinutes / 2) > 5) {
                     state.sortedWarnings.push({
@@ -155,7 +170,7 @@
 
                 console.info(`START: ${startDate.toLocaleTimeString()} until ${endDate.toLocaleTimeString()} (${durationMinutes} minutes)`);
                 for (const warning of state.sortedWarnings.toReversed()) {
-                    console.debug(`  ${warning.consoleDescription} announcement at ${warning.date.toLocaleTimeString()}.`)
+                    console.debug(`  ${warning.consoleDescription} at ${warning.date.toLocaleTimeString()}.`)
                 }
             }
 
@@ -180,21 +195,23 @@
                     updatedState = {
                         inputDisplay: 'block',
                         durationDisplay: 'none',
-                        halftimeCheckboxDisabled: false,
+                        checkboxDisabled: false,
                         focusedElement: durationInput,
                     };
                 } else {
                     updatedState = {
                         inputDisplay: 'none',
                         durationDisplay: 'block',
-                        halftimeCheckboxDisabled: true,
+                        checkboxDisabled: true,
                         focusedElement: toggleTimerButton,
                     };
                 }
 
                 durationInput.style.display = updatedState.inputDisplay;
                 durationRunningElement.style.display = updatedState.durationDisplay;
-                halftimeWarningCheckbox.disabled = updatedState.halftimeCheckboxDisabled;
+                for (const checkbox of [countdownWarningCheckbox, halftimeWarningCheckbox]) {
+                    checkbox.disabled = updatedState.checkboxDisabled;
+                }
                 updatedState.focusedElement.focus();
             }
 

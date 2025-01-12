@@ -160,6 +160,7 @@
 
             if (storedText) {
                 textElement.value = storedText;
+                textElement.setSelectionRange(-1, -1); // is autofocused in HTML; move the cursor to the end of the input.
             }
 
             if (storedMin) {

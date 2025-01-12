@@ -63,24 +63,30 @@
             </div>
             <button id="set">START</button>
         </form>
-
-        <!-- Will be dynamically set with application status. -->
-        <div id="status"></div>
     </div>
 
     <script>
+        const STATE_STOPPED = 'STOPPED';
+        const STATE_RUNNING = 'RUNNING';
+
         const KEY_TEXT = 'text';
         const KEY_MIN = 'min';
         const KEY_MAX = 'max';
 
-        const setButton = document.querySelector('#set');
-        const textElement = document.querySelector('#utterance');
-        const minElement = document.querySelector('#min');
-        const maxElement = document.querySelector('#max');
+        const body = document.getElementsByTagName('body')[0];
+        const setButton = document.getElementById('set');
+        const textElement = document.getElementById('utterance');
+        const minElement = document.getElementById('min');
+        const maxElement = document.getElementById('max');
 
-        setButton.addEventListener('click', (e) => {
-            e.preventDefault();
+        const bodyInitialBackground = body.style.background;
+        const setButtonStoppedText = setButton.innerText;
 
+        let state = {
+            type: STATE_STOPPED,
+        };
+
+        function start() {
             const text = textElement.value.trim();
             const minRange = parseInt(minElement.value);
             const maxRange = parseInt(maxElement.value);
@@ -102,16 +108,48 @@
             function loop() {
                 const delayMinutes = Math.floor(Math.random() * (maxRange - minRange) + minRange);
                 console.debug(`Next utterance in ${delayMinutes} minutes`);
-                setTimeout(() => {
+                state.timeoutId = setTimeout(() => {
                     const utterance = new SpeechSynthesisUtterance(text);
                     speechSynthesis.speak(utterance);
                     loop();
                 }, delayMinutes * 60 * 1000);
             }
 
-            document.querySelector('#status').textContent = 'Running';
             console.debug(`Speaking "${text}" every ${minRange} to ${maxRange} minutes`);
+
+            state = {
+                type: STATE_RUNNING,
+                timeoutId: undefined,
+            };
+            setButton.innerText = 'STOP';
+            body.style.background = '#beeaca';
             loop();
+        }
+
+        function stop() {
+            console.debug('STOP called');
+            if (state.timeoutId) {
+                clearTimeout(state.timeoutId);
+                console.debug('cleared timeout');
+            }
+
+            state = {
+                type: STATE_STOPPED,
+            };
+            setButton.innerText = setButtonStoppedText;
+            body.style.background = bodyInitialBackground;
+        }
+
+        setButton.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            if (state.type === STATE_STOPPED) {
+                start();
+            } else if (state.type === STATE_RUNNING) {
+                stop();
+            } else {
+                throw new Error('unknown state type: ' + state.type);
+            }
         });
 
         addEventListener('DOMContentLoaded', (e) => {

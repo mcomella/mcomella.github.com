@@ -81,6 +81,10 @@
         #duration label {
             margin: 0 16px;
         }
+
+        .active {
+            background: #beeaca;
+        }
     </style>
 </head>
 <body>
@@ -115,7 +119,6 @@
         const maxElement = document.getElementById('max');
 
         const initialDocumentTitle = document.title;
-        const bodyInitialBackground = body.style.background;
         const setButtonStoppedText = setButton.innerText;
 
         let state = {
@@ -159,7 +162,7 @@
             };
             document.title = '\u25B6 ' + initialDocumentTitle;
             setButton.innerText = 'STOP';
-            body.style.background = '#beeaca';
+            body.classList.add('active');
             loop();
         }
 
@@ -175,7 +178,7 @@
             };
             document.title = initialDocumentTitle;
             setButton.innerText = setButtonStoppedText;
-            body.style.background = bodyInitialBackground;
+            body.classList.remove('active');
         }
 
         setButton.addEventListener('click', (e) => {

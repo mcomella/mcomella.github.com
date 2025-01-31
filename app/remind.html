@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Remind me</title>
+    <title>Remind me | mcomella.com</title>
     <style>
         html {
             color: #333333;
@@ -114,6 +114,7 @@
         const minElement = document.getElementById('min');
         const maxElement = document.getElementById('max');
 
+        const initialDocumentTitle = document.title;
         const bodyInitialBackground = body.style.background;
         const setButtonStoppedText = setButton.innerText;
 
@@ -156,6 +157,7 @@
                 type: STATE_RUNNING,
                 timeoutId: undefined,
             };
+            document.title = '\u25B6 ' + initialDocumentTitle;
             setButton.innerText = 'STOP';
             body.style.background = '#beeaca';
             loop();
@@ -171,6 +173,7 @@
             state = {
                 type: STATE_STOPPED,
             };
+            document.title = initialDocumentTitle;
             setButton.innerText = setButtonStoppedText;
             body.style.background = bodyInitialBackground;
         }

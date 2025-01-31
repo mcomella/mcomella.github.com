@@ -15,11 +15,22 @@
         }
 
         #container {
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 5px #000000aa;
+        }
+
+        #inner-container {
             padding: 16px;
             background: white;
+            border: 2px solid #aaa;
             color: #333333;
             font-family: sans-serif;
             border-radius: 8px;
+        }
+
+        .active {
+            background: #7eea84;
         }
 
         h1 {
@@ -46,23 +57,25 @@
 </head>
 <body>
     <div id="container">
-        <h1>Remind me</h1>
-        <form>
-            <div>
-                <label for="utterance">Say</label>
-                <input type="input" id="utterance" autofocus>
-            </div>
-            <div>
-                <label>every</label>
-                <input type="number" id="min">
-            </div>
-            <div>
-                <label> to</label>
-                <input type="number" id="max">
-                <label>minutes</label>
-            </div>
-            <button id="set">START</button>
-        </form>
+        <div id="inner-container">
+            <h1>Remind me</h1>
+            <form>
+                <div>
+                    <label for="utterance">Say</label>
+                    <input type="input" id="utterance" autofocus>
+                </div>
+                <div>
+                    <label>every</label>
+                    <input type="number" id="min">
+                </div>
+                <div>
+                    <label> to</label>
+                    <input type="number" id="max">
+                    <label>minutes</label>
+                </div>
+                <button id="set">START</button>
+            </form>
+        </div>
     </div>
 
     <script>
@@ -73,13 +86,15 @@
         const KEY_MIN = 'min';
         const KEY_MAX = 'max';
 
+        const CLASS_ACTIVE = 'active';
+
         const body = document.getElementsByTagName('body')[0];
         const setButton = document.getElementById('set');
         const textElement = document.getElementById('utterance');
         const minElement = document.getElementById('min');
         const maxElement = document.getElementById('max');
+        const containerElement = document.getElementById('container');
 
-        const bodyInitialBackground = body.style.background;
         const setButtonStoppedText = setButton.innerText;
 
         let state = {
@@ -122,7 +137,7 @@
                 timeoutId: undefined,
             };
             setButton.innerText = 'STOP';
-            body.style.background = '#beeaca';
+            containerElement.classList.add(CLASS_ACTIVE);
             loop();
         }
 
@@ -137,7 +152,7 @@
                 type: STATE_STOPPED,
             };
             setButton.innerText = setButtonStoppedText;
-            body.style.background = bodyInitialBackground;
+            containerElement.classList.remove(CLASS_ACTIVE);
         }
 
         setButton.addEventListener('click', (e) => {

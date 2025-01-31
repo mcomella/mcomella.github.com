@@ -5,42 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Remind me</title>
     <style>
+        html {
+            color: #333333;
+            font-family: Helvetica, sans-serif;
+            font-size: 20px;
+            font-weight: 300;
+        }
+
+        input {
+            font-family: inherit;
+            font-size: inherit;
+            font-weight: inherit;
+        }
+
         body {
             display: flex;
             height: 100vh;
             margin: 0;
             justify-content: center;
             align-items: center;
-            background: #bee1ea;
+            background: #e8f2f4;
         }
 
         #container {
-            padding: 16px;
-            background: white;
-            color: #333333;
-            font-family: sans-serif;
-            border-radius: 8px;
+            width: 320px;
         }
 
         h1 {
-            margin-top: 0;
-            margin-bottom: 8px;
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: inherit;
+            letter-spacing: 0.111em;
+            text-shadow: 0 0 2px white;
+        }
+
+        form {
+            background: white;
+            padding: 12px 24px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        form * {
             text-align: center;
-            text-decoration: underline;
         }
 
         form > * {
-            margin-top: 8px;
-            margin-bottom: 8px;
+            display: block;
+            margin: 6px auto;
+        }
+
+        form > *:first-child {
+            margin-top: 0;
         }
 
         form > *:last-child {
             margin-bottom: 0;
         }
 
-        form > button {
-            display: block;
-            margin: 0 auto;
+        form > input {
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        #duration {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #duration input {
+            width: 3.5em;
+        }
+
+        #duration label {
+            margin: 0 16px;
         }
     </style>
 </head>
@@ -48,19 +87,15 @@
     <div id="container">
         <h1>Remind me</h1>
         <form>
-            <div>
-                <label for="utterance">Say</label>
-                <input type="input" id="utterance" autofocus>
-            </div>
-            <div>
-                <label>every</label>
+            <label for="utterance">Say</label>
+            <input type="input" id="utterance" autofocus>
+            <label>every</label>
+            <div id="duration">
                 <input type="number" id="min">
-            </div>
-            <div>
-                <label> to</label>
+                <label>to</label>
                 <input type="number" id="max">
-                <label>minutes</label>
             </div>
+            <label>minutes</label>
             <button id="set">START</button>
         </form>
     </div>

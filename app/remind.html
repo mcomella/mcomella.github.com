@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Remind me | mcomella.com</title>
     <style>
+        :root {
+            --enable-duration: .4s;
+        }
+
         html {
             color: #333333;
             font-family: Helvetica, sans-serif;
@@ -26,6 +30,7 @@
             justify-content: center;
             align-items: center;
             background: #e8f2f4;
+            transition: background-color var(--enable-duration);
         }
 
         #container {
@@ -84,7 +89,66 @@
         }
 
         .active {
-            background: #beeaca;
+            background: #d3ead9;
+        }
+
+        /* --- Toggle switch definition --- */
+        /*     via https://www.w3schools.com/howto/howto_css_switch.asp */
+        .switch {
+            --switch-height: 32px;
+            --switch-width: 78px;
+
+            position: relative;
+            width: var(--switch-width);
+            height: var(--switch-height);
+        }
+
+        .switch input {
+            /* hide default checkbox */
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            border-radius: 4px;
+        }
+
+        .slider:before {
+            --switch-inner-width: 26px;
+            --switch-inner-padding: 4px;
+
+            position: absolute;
+            content: "";
+            /* I don't know why adding 0.5px is necessary to make it look even. */
+            height: calc(var(--switch-height) - var(--switch-inner-padding) * 2 + 0.5px);
+            width: var(--switch-inner-width);
+            left: var(--switch-inner-padding);
+            bottom: var(--switch-inner-padding);
+            background-color: white;
+            border-radius: 4px;
+            transition: transform var(--enable-duration);
+        }
+
+        input:checked + .slider {
+            background-color: #89e599;
+        }
+
+        input:focus + .slider {
+            /* TODO: this incompletely replicates Firefox's default outline */
+            outline: 5px auto Highlight;
+            outline: 5px auto -webkit-focus-ring-color;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(calc(var(--switch-width) - var(--switch-inner-padding) * 2 - var(--switch-inner-width)));
         }
     </style>
 </head>
@@ -101,7 +165,10 @@
                 <input type="number" id="max">
             </div>
             <label>minutes</label>
-            <button id="set">START</button>
+            <label class="switch">
+                <input id="enable-toggle" type="checkbox"></input>
+                <span class="slider"></span>
+            </label>
         </form>
     </div>
 
@@ -114,13 +181,15 @@
         const KEY_MAX = 'max';
 
         const body = document.getElementsByTagName('body')[0];
-        const setButton = document.getElementById('set');
+        const enableSwitch = document.getElementById('enable-toggle');
         const textElement = document.getElementById('utterance');
         const minElement = document.getElementById('min');
         const maxElement = document.getElementById('max');
 
         const initialDocumentTitle = document.title;
-        const setButtonStoppedText = setButton.innerText;
+
+        // Override behavior where the browser restores the user's previous checkbox state.
+        enableSwitch.checked = enableSwitch.defaultChecked;
 
         let state = {
             type: STATE_STOPPED,
@@ -155,42 +224,46 @@
                 }, delayMinutes * 60 * 1000);
             }
 
-            console.debug(`Speaking "${text}" every ${minRange} to ${maxRange} minutes`);
+            console.debug(`START: speaking "${text}" every ${minRange} to ${maxRange} minutes`);
 
             state = {
                 type: STATE_RUNNING,
                 timeoutId: undefined,
             };
             document.title = '\u25B6 ' + initialDocumentTitle;
-            setButton.innerText = 'STOP';
             body.classList.add('active');
             loop();
         }
 
         function stop() {
-            console.debug('STOP called');
+            console.debug('STOP: called');
             if (state.timeoutId) {
                 clearTimeout(state.timeoutId);
-                console.debug('cleared timeout');
+                console.debug('STOP: cleared timeout');
             }
 
             state = {
                 type: STATE_STOPPED,
             };
             document.title = initialDocumentTitle;
-            setButton.innerText = setButtonStoppedText;
             body.classList.remove('active');
         }
 
-        setButton.addEventListener('click', (e) => {
-            e.preventDefault();
-
+        enableSwitch.addEventListener('change', (e) => {
             if (state.type === STATE_STOPPED) {
                 start();
             } else if (state.type === STATE_RUNNING) {
                 stop();
             } else {
                 throw new Error('unknown state type: ' + state.type);
+            }
+        });
+
+        document.getElementsByTagName('body')[0].addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.repeat) {
+                // TODO: it's inaccurate to trigger a click when we didn't click but dispatching a 'change' event
+                // doesn't change the checkbox state automatically so I'm suspicious of using it without understading why.
+                enableSwitch.click();
             }
         });
 

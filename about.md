@@ -14,7 +14,7 @@ Outside of Mozilla, I work on the occassional side project. I'm most proud of:
 ---
 
 ### Website acknowledgements
-- Twitter and GitHub [bytesize icons by Dan Klammer][icons].
+- GitHub [bytesize icon by Dan Klammer][icons].
 
 [Mozilla]: https://www.mozilla.org
 [Firefox]: https://www.mozilla.org/en-US/firefox/

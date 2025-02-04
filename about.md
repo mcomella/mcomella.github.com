@@ -3,9 +3,9 @@ layout: about
 permalink: /about/
 ---
 
-As an individual in the tech industry, I'm interested in how technology can empower society to solve the problems individuals face in their day-to-day lives while simultaneously avoiding the disempowerment unthoughtful use of technology seems to generate.
+Hey there! I'm Michael Comella, a software developer. I believe in putting the user first – that software should be fast, easy-to-use, reliable, and safe. As developers, our greatest asset to that end is simplicity. My core expertise is in Android development and performance optimization which have been honed through my most recent employment by [Mozilla][].
 
-As a programmer, I'm passionate about fast, reliable, and elegant software and the techniques that enable it: programming paradigms, tooling, etc. I previously worked at [Mozilla] on the Firefox browsers including desktop [Firefox], [Firefox for Android][fxa], [Focus], and [Firefox for Fire TV][fftv] in both the application developer and performance engineer roles. I also worked as the performance tech lead for the Firefox for Android rewrite codenamed Fenix.
+I've previously worked on the Firefox browsers including desktop [Firefox], [Firefox for Android][fxa], [Focus], and [Firefox for Fire TV][fftv] in both the application developer and performance engineer roles. I also worked as the performance tech lead for the Firefox for Android rewrite codenamed Fenix.
 
 Outside of Mozilla, I work on the occassional side project. I'm most proud of:
 - [APT GitHub Improvements][apt]: a browser add-on to improve my team's workflow on GitHub

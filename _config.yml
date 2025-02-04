@@ -3,7 +3,7 @@ author: Michael Comella
 
 # Used for feed.xml.
 description: > # this means to ignore newlines until "baseurl:"
-  The blog of Michael Comella, a software developer at Mozilla working on Firefox performance.
+  The blog of Michael Comella, a software developer most recently at Mozilla working on Firefox performance.
 
 url: "http://mcomella.com" # the base hostname & protocol for your site
 baseurl: "" # the subpath of your site, e.g. /blog

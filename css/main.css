@@ -228,3 +228,25 @@ footer img:hover {
 .post-list .post-date {
     margin-left: 16px;
 }
+
+.book-title {
+    text-decoration: underline;
+}
+
+/* --- ABOUT PAGE --- */
+.projects li {
+    margin-bottom: 24px;
+    line-height: 140%;
+}
+
+.projects li:last-child {
+    margin-bottom: 0;
+}
+
+.projects .project-title, .projects .project-title a {
+    font-weight: bold;
+}
+
+.projects .project-date {
+    filter: brightness(120%);
+}

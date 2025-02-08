@@ -118,22 +118,21 @@
             right: 0;
             bottom: 0;
             background-color: #ccc;
-            border-radius: 4px;
+            border-radius: 16px;
         }
 
         .slider:before {
-            --switch-inner-width: 26px;
-            --switch-inner-padding: 4px;
+            --switch-inner-width: 32px;
 
             position: absolute;
             content: "";
-            /* I don't know why adding 0.5px is necessary to make it look even. */
-            height: calc(var(--switch-height) - var(--switch-inner-padding) * 2 + 0.5px);
+            height: 100%;
             width: var(--switch-inner-width);
-            left: var(--switch-inner-padding);
-            bottom: var(--switch-inner-padding);
+            left: 0;
+            bottom: 0;
             background-color: white;
-            border-radius: 4px;
+            box-shadow: 0 0 4px #ababab;
+            border-radius: 16px;
             transition: transform var(--enable-duration);
         }
 
@@ -148,7 +147,8 @@
         }
 
         input:checked + .slider:before {
-            transform: translateX(calc(var(--switch-width) - var(--switch-inner-padding) * 2 - var(--switch-inner-width)));
+            /* I don't know why but 1px is necessary to ensure the control is not exposed after the activation. */
+            transform: translateX(calc(var(--switch-width) - var(--switch-inner-width) + 1px));
         }
     </style>
 </head>

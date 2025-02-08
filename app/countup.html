@@ -125,6 +125,13 @@
                 throw new Error(`toggle button clicked: unknown state.type, ${state.type}`);
             }
         });
+
+        document.body.addEventListener('keydown', (e) => {
+            if (e.key == 'Enter' && !e.repeat) {
+                e.preventDefault();
+                toggleTimerButton.click(); // TODO: this is inaccurate and not a great way to change state.
+            }
+        });
     </script>
 </body>
 </html>

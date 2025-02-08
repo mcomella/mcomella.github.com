@@ -185,6 +185,7 @@
         const textElement = document.getElementById('utterance');
         const minElement = document.getElementById('min');
         const maxElement = document.getElementById('max');
+        const canDisableElements = [textElement, minElement, maxElement];
 
         const initialDocumentTitle = document.title;
 
@@ -232,6 +233,9 @@
             };
             document.title = '\u25B6 ' + initialDocumentTitle;
             body.classList.add('active');
+            for (let e of canDisableElements) {
+                e.disabled = true;
+            }
             loop();
         }
 
@@ -247,6 +251,9 @@
             };
             document.title = initialDocumentTitle;
             body.classList.remove('active');
+            for (let e of canDisableElements) {
+                e.disabled = false;
+            }
         }
 
         enableSwitch.addEventListener('change', (e) => {

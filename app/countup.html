@@ -45,6 +45,8 @@
         const TYPE_STOPPED = 'STOPPED';
         const TYPE_RUNNING = 'RUNNING';
 
+        const initialDocumentTitle = document.title;
+
         const elapsedDurationElement = document.getElementById('elapsed-duration');
         const toggleTimerButton = document.getElementById('toggle-timer');
         const initialStoppedText = toggleTimerButton.innerText;
@@ -74,9 +76,11 @@
             let durationText;
             let toggleTimerButtonText;
             if (state.type === TYPE_STOPPED) {
+                document.title = initialDocumentTitle;
                 durationText = '0';
                 toggleTimerButtonText = initialStoppedText;
             } else if (state.type === TYPE_RUNNING) {
+                document.title = '\u25B6 ' + initialDocumentTitle;
                 durationText = `${optMinutesElapsed || getMinutesElapsed(state)}`;
                 toggleTimerButtonText = 'STOP';
             } else {

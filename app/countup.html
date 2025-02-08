@@ -79,8 +79,11 @@
             speechSynthesis.speak(utterance);
         }
 
-        function newStateStopped() {
-            return {type: TYPE_STOPPED};
+        function newStateStopped(prevMinutesElapsed) {
+            return {
+                type: TYPE_STOPPED,
+                prevMinutesElapsed,
+            };
         }
 
         function getMinutesElapsed(state) {
@@ -100,7 +103,7 @@
             let toggleTimerButtonText;
             if (state.type === TYPE_STOPPED) {
                 document.title = initialDocumentTitle;
-                durationText = '0';
+                durationText = state.prevMinutesElapsed;
                 toggleTimerButtonText = initialStoppedText;
             } else if (state.type === TYPE_RUNNING) {
                 document.title = '\u25B6 ' + initialDocumentTitle;
@@ -114,7 +117,7 @@
             toggleTimerButton.innerText = toggleTimerButtonText;
         }
 
-        let state = newStateStopped();
+        let state = newStateStopped(0);
         toggleTimerButton.addEventListener('click', (e) => {
             if (state.type === TYPE_STOPPED) {
                 // TODO: we may lose the wakelock if a user navigates away from the active window/tab.
@@ -147,7 +150,7 @@
                 if ('wakeLock' in state) {
                     state.wakeLock.release();
                 }
-                state = newStateStopped();
+                state = newStateStopped(getMinutesElapsed(state));
                 render(state);
             } else {
                 throw new Error(`toggle button clicked: unknown state.type, ${state.type}`);

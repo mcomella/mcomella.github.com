@@ -5,18 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Countup Timer</title>
     <style>
-        #elapsed-duration, #toggle-timer {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
-            font-size: 300%;
+        :root {
+            font-size: 18pt;
+            font-family: system-ui, Helvetica, sans-serif;
+        }
+
+        body {
+            height: 100svh;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        #elapsed-duration {
+            line-height: 1;
+            font-size: 4rem;
+        }
+
+        button {
+            width: 5.8rem;
+            margin: 32px 0;
+            font-size: 1.2rem;
         }
     </style>
 </head>
 <body>
+    <p id="elapsed-duration">0</p>
+    <p>minutes elapsed</p>
     <button id="toggle-timer" autofocus>START</button>
-    <p id="elapsed-duration"></p>
 
     <script>
         const TYPE_STOPPED = 'STOPPED';
@@ -51,10 +73,10 @@
             let durationText;
             let toggleTimerButtonText;
             if (state.type === TYPE_STOPPED) {
-                durationText = '';
+                durationText = '0';
                 toggleTimerButtonText = initialStoppedText;
             } else if (state.type === TYPE_RUNNING) {
-                durationText = `${optMinutesElapsed || getMinutesElapsed(state)} minutes elapsed`;
+                durationText = `${optMinutesElapsed || getMinutesElapsed(state)}`;
                 toggleTimerButtonText = 'STOP';
             } else {
                 throw new Error(`unknown state.type: ${state.type}.`);

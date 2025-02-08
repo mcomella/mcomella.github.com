@@ -143,14 +143,15 @@
                     wakeLock: null,
                 };
                 render(state);
-                speak('Count up begin'); // note: iOS Safari requires us to speak on a user interaction before timer-based speech works.
+                speak('Count up begin'); // note: iOS Safari requires us to speak on a user interaction before timer-based speech works (even if it's blank).
             } else if (state.type === TYPE_RUNNING) {
                 clearInterval(state.timerId);
                 speechSynthesis.cancel();
                 if ('wakeLock' in state) {
                     state.wakeLock.release();
                 }
-                state = newStateStopped(getMinutesElapsed(state));
+                // TODO: this value should ideally come from the model, not the UI.
+                state = newStateStopped(Number(elapsedDurationElement.textContent));
                 render(state);
             } else {
                 throw new Error(`toggle button clicked: unknown state.type, ${state.type}`);

@@ -202,11 +202,13 @@
             const maxRange = parseInt(maxElement.value);
             if (!text || !minRange || !maxRange) {
                 alert('ERROR: all fields not filled in')
+                enableSwitch.checked = false;
                 return;
             }
 
             if (minRange > maxRange) {
                 alert('Min range must be less than max range');
+                enableSwitch.checked = false;
                 return;
             }
 

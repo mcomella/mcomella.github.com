@@ -9,6 +9,8 @@ layout:
     --color-red: #AF5454;
     --color-light-grey: #C0BFBF;
     --color-grey: #7A7A7A;
+    --color-code-bg: #E5E5E5;
+    --color-code-text: #404040;
 
     --font-header: 'Voltaire', sans-serif;
 
@@ -27,12 +29,27 @@ body > * {
     padding: 0 8px;
 }
 
+p {
+    margin: 28px 0;
+}
+
+/* Group lists & code closer to the paragraphs that proceed them (rather than typical paragraph spacing). */
+p:has(+ ul), p:has(+ ol), p:has(+ .highlighter-rouge) { margin-bottom: 0; }
+p + ul, p + ol, p + .highlighter-rouge { margin-top: 12px; }
+
 p, li {
     line-height: 1.618rem;
 }
 
 ul li::marker {
     color: var(--color-grey);
+}
+
+p code, li code {
+    font-size: 0.825rem; /* macOS' default mono font is larger than the other font. */
+    padding: 1px 4px;
+    background-color: var(--color-code-bg);
+    color: var(--color-code-text);
 }
 
 a {
@@ -51,6 +68,10 @@ a:hover {
 
 a:active {
     filter: brightness(130%);
+}
+
+sup, sub {
+    line-height: 1; /* don't add additional line-height to include a super/subscript. */
 }
 
 header {

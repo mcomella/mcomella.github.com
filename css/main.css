@@ -215,6 +215,12 @@ footer img:hover {
     margin-top: 14px;
 }
 
+/* Center images in post contents. Be careful not to change the style of the Creative Commons images in the license. */
+.post p > img {
+    display: block;
+    margin: 0 auto;
+}
+
 .signature, .license {
     margin: 16px 0 0 0;
 

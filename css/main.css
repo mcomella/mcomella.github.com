@@ -115,7 +115,8 @@ header a:active {
     min-width: 32px;
 }
 
-@media (max-width: 410px) {
+/* size addresses larger phones https://stackoverflow.com/a/10027160/ */
+@media (max-width: 600px) {
     :root {
         font-size: 14pt;
     }

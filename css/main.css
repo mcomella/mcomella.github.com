@@ -115,6 +115,26 @@ header a:active {
     min-width: 32px;
 }
 
+footer {
+    display: flex;
+    margin: 24px 0;
+    align-items: center;
+    justify-content: center;
+    gap: 120px;
+
+    font-size: 0.95rem;
+    font-weight: lighter;
+}
+
+footer svg, footer img {
+    height: 32px;
+    margin: 0 8px;
+}
+
+footer img:hover {
+    filter: brightness(85%);
+}
+
 /* size addresses larger phones https://stackoverflow.com/a/10027160/ */
 @media (max-width: 600px) {
     :root {
@@ -132,28 +152,12 @@ header a:active {
     #header-right {
         font-size: 85%;
     }
-}
 
-footer {
-    display: flex;
-    height: 100px;
-    margin-top: 14px;
-    align-items: center;
-    justify-content: center;
-}
-
-footer > * {
-    margin: 0 60px;
-    font-size: 18px;
-}
-
-footer svg, footer img {
-    height: 32px;
-    margin: 0 8px;
-}
-
-footer img:hover {
-    filter: brightness(85%);
+    footer {
+        flex-direction: column;
+        margin: 24px 0 18px 0;
+        gap: 12px;
+    }
 }
 
 .clearfix {

@@ -25,7 +25,7 @@ body {
 
 body > * {
     /* when the browser window shrinks to hug the content, retain some padding. */
-    padding: 0 8px;
+    padding: 0 16px;
 }
 
 p {
@@ -88,13 +88,6 @@ header {
     line-height: 1.3; /* TODO: it'd be better to do this with margin? */
 }
 
-@media (max-width: 410px) {
-    header {
-        display: block; /* good enough way to fix issues with header on mobile devices */
-        margin-bottom: 0;
-    }
-}
-
 header, header a, header a:visited {
     color: #aaa;
 }
@@ -120,6 +113,20 @@ header a:active {
     flex-grow: 1;
     max-width: var(--content-width);
     min-width: 32px;
+}
+
+@media (max-width: 410px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 0;
+        padding-top: 12px;
+        padding-bottom: 2px;
+    }
+
+    #header-right {
+        font-size: 85%;
+    }
 }
 
 footer {

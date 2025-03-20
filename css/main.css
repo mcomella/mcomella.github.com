@@ -29,7 +29,7 @@ body > * {
 }
 
 p {
-    margin: 28px 0;
+    margin: 1.31em 0;
 }
 
 /* Group lists & code closer to the paragraphs that proceed them (rather than typical paragraph spacing). */
@@ -37,7 +37,7 @@ p:has(+ ul), p:has(+ ol), p:has(+ .highlighter-rouge) { margin-bottom: 0; }
 p + ul, p + ol, p + .highlighter-rouge { margin-top: 12px; }
 
 p, li {
-    line-height: 1.618rem;
+    line-height: 1.618;
 }
 
 ul li::marker {
@@ -116,6 +116,10 @@ header a:active {
 }
 
 @media (max-width: 410px) {
+    :root {
+        font-size: 14pt;
+    }
+
     header {
         flex-direction: column;
         align-items: center;

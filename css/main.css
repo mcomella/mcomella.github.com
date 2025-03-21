@@ -6,7 +6,7 @@ layout:
     --content-width: 720px;
 
     --color-text: #606060;
-    --color-red: #AF5454;
+    --color-accent: #AF5454;
     --color-light-grey: #C0BFBF;
     --color-grey: #7A7A7A;
     --color-code-bg: #E5E5E5;
@@ -29,7 +29,7 @@ body > * {
 }
 
 h1 {
-    color: var(--color-red);
+    color: var(--color-accent);
     font-size: 2rem;
 }
 
@@ -71,7 +71,7 @@ a {
 }
 
 a, a:visited {
-    color: var(--color-red);
+    color: var(--color-accent);
 }
 
 a:hover {
@@ -131,7 +131,7 @@ header, header a, header a:visited {
 }
 
 header a:hover {
-    color: var(--color-red);
+    color: var(--color-accent);
     filter: brightness(100%); /* reset top-level rule. */
 }
 
@@ -275,7 +275,7 @@ pre code {
 
 /* --- ABOUT PAGE --- */
 .projects h2 {
-    color: var(--color-red);
+    color: var(--color-accent);
 }
 
 .projects li {

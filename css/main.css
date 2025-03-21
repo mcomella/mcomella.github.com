@@ -67,7 +67,7 @@ p code, li code {
 a {
     font-weight: normal;
     text-decoration: none;
-    transition: 0.2s;
+    transition: filter 0.2s;
 }
 
 a, a:visited {
@@ -170,13 +170,10 @@ footer svg, footer img {
 }
 
 footer img:hover {
-    filter: brightness(85%);
-}
-
-footer img:hover {
     font-weight: normal;
     text-decoration: none;
-    transition: 0.2s;
+    filter: brightness(85%);
+    transition: filter 0.2s;
 }
 
 /* --- RESPONSIVE DESIGN ---

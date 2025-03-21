@@ -28,6 +28,15 @@ body > * {
     padding: 0 16px;
 }
 
+h1 {
+    color: var(--color-red);
+    font-size: 2rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 2rem 0 0 0;
+}
+
 p {
     margin: 1.31em 0;
 }
@@ -38,6 +47,10 @@ p + ul, p + ol, p + .highlighter-rouge { margin-top: 12px; }
 
 p, li {
     line-height: 1.618;
+}
+
+sup, sub {
+    line-height: 1; /* don't add additional line-height to include a super/subscript. */
 }
 
 ul li::marker {
@@ -69,10 +82,35 @@ a:active {
     filter: brightness(130%);
 }
 
-sup, sub {
-    line-height: 1; /* don't add additional line-height to include a super/subscript. */
+.content {
+    max-width: var(--content-width);
+    margin: 0 auto;
 }
 
+.content li + li {
+    /* It's intuitive to set spacing between elements here and outer margins in ul/ol. */
+    margin-top: 0.4rem;
+}
+
+.content ul, .content ol {
+    padding-left: 46px;
+}
+
+.content hr {
+    width: 50%;
+    margin: 42px auto;
+    height: 1px;
+
+    border: 0; /* To set the color, we must remove the border. */
+    background-color: var(--color-light-grey);
+}
+
+/* elements after headers: must be placed after all elements to override. */
+h1 + *, h2 + *, h3 + *, h4 + *, h5 + *, h6 + * {
+    margin: 0; /* reset margins to let headers define the margins. */
+}
+
+/* --- HEADER & FOOTER --- */
 header {
     display: flex;
     justify-content: center;
@@ -135,7 +173,14 @@ footer img:hover {
     filter: brightness(85%);
 }
 
-/* size addresses larger phones https://stackoverflow.com/a/10027160/ */
+footer img:hover {
+    font-weight: normal;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+/* --- RESPONSIVE DESIGN ---
+    This max-width addresses larger phones https://stackoverflow.com/a/10027160/ */
 @media (max-width: 600px) {
     :root {
         font-size: 14pt;
@@ -160,54 +205,6 @@ footer img:hover {
     }
 }
 
-.content {
-    max-width: var(--content-width);
-    margin: 0 auto;
-}
-
-h1 {
-    color: var(--color-red);
-    font-size: 2rem;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    margin: 36px 0 6px 0;
-}
-
-/* TODO: would prefer to set to same as post list? */
-.content li + li {
-    margin-top: 8px;
-}
-
-/* TODO: is this really necessary? */
-.content ul, .content ol {
-    padding-left: 46px;
-}
-
-.content img {
-    max-width: 100%; /* max-width in case image is smaller than content width. */
-}
-
-.content hr {
-    width: 50%;
-    margin: 42px auto;
-    height: 1px;
-
-    border: 0; /* To set the color, we must remove the border. */
-    background-color: var(--color-light-grey);
-}
-
-/* elements after headers: must be placed after all elements to override. */
-h1 + *, h2 + *, h3 + *, h4 + *, h5 + *, h6 + * {
-    margin: 0; /* reset margins to let headers define the margins. */
-}
-
-footer img:hover {
-    font-weight: normal;
-    text-decoration: none;
-    transition: 0.2s;
-}
-
 /* --- POST PAGE --- */
 .post-date {
     font-size: 18px;
@@ -216,19 +213,19 @@ footer img:hover {
     color: var(--color-grey);
 }
 
-/* Set post date's spacing. */
 .post h1 {
-    margin-bottom: 6px;
+    margin-bottom: 2px; /* Set spacing between post title and post date. */
 }
 
 .post-date + p {
-    margin-top: 14px;
+    margin-top: 14px; /* Set first paragraph in post closer to date. */
 }
 
 /* Center images in post contents. Be careful not to change the style of the Creative Commons images in the license. */
 .post p > img {
     display: block;
     margin: 0 auto;
+    max-width: 100%;
 }
 
 .signature, .license {
@@ -265,7 +262,11 @@ pre code {
 
 .post-list li {
     line-height: 1.2;
-    margin-bottom: 16px;
+}
+
+.post-list li + li {
+    /* It's intuitive to set spacing between elements here and outer margins in ul/ol. */
+    margin-top: 16px;
 }
 
 .post-list li > * {
@@ -273,6 +274,10 @@ pre code {
 }
 
 /* --- ABOUT PAGE --- */
+.projects h2 {
+    color: var(--color-red);
+}
+
 .projects li {
     margin-bottom: 24px; /* add extra margin to projects list */
 }

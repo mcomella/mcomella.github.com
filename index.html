@@ -6,12 +6,12 @@ layout: default
 <section class="content post-list">
   <h1 class="posts-heading">Posts</h1>
   <ul>
-    {% for post in site.posts %} <li>
-      <span class="post-date">
-        <time>{{ post.date | date: '%B %d, %Y' }}</time>
-      </span>
+    {% for post in site.posts %}
+    <li>
+      <time class="post-date" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: '%B %d, %Y' }}</time>
       <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-  </li> {% endfor %}
+    </li>
+    {% endfor %}
   </ul>
 </section>
 </main>

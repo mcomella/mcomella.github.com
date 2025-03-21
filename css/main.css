@@ -160,23 +160,17 @@ footer img:hover {
     }
 }
 
-.clearfix {
-    clear: both; /* TODO: needed? */
-}
-
 .content {
-    /* TODO: width or max-width? */
     max-width: var(--content-width);
     margin: 0 auto;
 }
 
 h1 {
     color: var(--color-red);
-    font-size: 34px;
+    font-size: 2rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-weight: normal;
     margin: 36px 0 6px 0;
 }
 

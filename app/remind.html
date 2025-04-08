@@ -173,6 +173,15 @@
     </div>
 
     <script>
+        function getTimestamp(date) {
+            return date.toLocaleTimeString('en-US', {hour12: false});
+        }
+
+        function log(msg) {
+            const timestamp = getTimestamp(new Date());
+            console.debug(`[${timestamp}] ${msg}`);
+        }
+
         const STATE_STOPPED = 'STOPPED';
         const STATE_RUNNING = 'RUNNING';
 
@@ -219,7 +228,12 @@
 
             function loop() {
                 const delayMinutes = Math.floor(Math.random() * (maxRange - minRange) + minRange);
-                console.debug(`Next utterance in ${delayMinutes} minutes`);
+
+                const workingDate = new Date();
+                workingDate.setMinutes(workingDate.getMinutes() + delayMinutes);
+                const timestamp = getTimestamp(workingDate);
+                log(`Next utterance in ${delayMinutes} minutes around ${timestamp}`);
+
                 state.timeoutId = setTimeout(() => {
                     const utterance = new SpeechSynthesisUtterance(text);
                     speechSynthesis.speak(utterance);
@@ -227,7 +241,7 @@
                 }, delayMinutes * 60 * 1000);
             }
 
-            console.debug(`START: speaking "${text}" every ${minRange} to ${maxRange} minutes`);
+            log(`START: speaking "${text}" every ${minRange} to ${maxRange} minutes`);
 
             state = {
                 type: STATE_RUNNING,
@@ -242,10 +256,10 @@
         }
 
         function stop() {
-            console.debug('STOP: called');
+            log('STOP: called');
             if (state.timeoutId) {
                 clearTimeout(state.timeoutId);
-                console.debug('STOP: cleared timeout');
+                log('STOP: cleared timeout');
             }
 
             state = {

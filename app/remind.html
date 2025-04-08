@@ -210,13 +210,19 @@
             const minRange = parseInt(minElement.value);
             const maxRange = parseInt(maxElement.value);
             if (!text || !minRange || !maxRange) {
-                alert('ERROR: all fields not filled in')
+                alert('ERROR: expected all fields to be filled in')
+                enableSwitch.checked = false;
+                return;
+            }
+
+            if (minRange <= 0 || maxRange <= 0) {
+                alert('ERROR: range values must be greater than zero');
                 enableSwitch.checked = false;
                 return;
             }
 
             if (minRange > maxRange) {
-                alert('Min range must be less than max range');
+                alert('ERROR: min range must be less than max range');
                 enableSwitch.checked = false;
                 return;
             }
@@ -282,7 +288,7 @@
             }
         });
 
-        document.getElementsByTagName('body')[0].addEventListener('keydown', (e) => {
+        document.body.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' && !e.repeat) {
                 // TODO: it's inaccurate to trigger a click when we didn't click but dispatching a 'change' event
                 // doesn't change the checkbox state automatically so I'm suspicious of using it without understading why.

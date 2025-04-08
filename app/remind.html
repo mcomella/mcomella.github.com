@@ -238,7 +238,7 @@
                 const workingDate = new Date();
                 workingDate.setMinutes(workingDate.getMinutes() + delayMinutes);
                 const timestamp = getTimestamp(workingDate);
-                log(`Next utterance in ${delayMinutes} minutes around ${timestamp}`);
+                log(`Next utterance in ${delayMinutes} minute${delayMinutes === 1 ? '' : 's'} around ${timestamp}`);
 
                 state.timeoutId = setTimeout(() => {
                     const utterance = new SpeechSynthesisUtterance(text);

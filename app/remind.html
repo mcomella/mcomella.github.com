@@ -233,7 +233,7 @@
             localStorage.setItem(KEY_MAX, maxRange);
 
             function loop() {
-                const delayMinutes = Math.floor(Math.random() * (maxRange - minRange) + minRange);
+                const delayMinutes = Math.floor(Math.random() * (maxRange - minRange + 1) + minRange); // min/max are inclusive.
 
                 const workingDate = new Date();
                 workingDate.setMinutes(workingDate.getMinutes() + delayMinutes);

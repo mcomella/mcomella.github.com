@@ -37,13 +37,14 @@ h1, h2, h3, h4, h5, h6 {
     margin: 2rem 0 0 0;
 }
 
+/* Put an accent color on a header immediately before another header. */
+h1:has(+ h2), h2:has(+ h3), h3:has(+ h4), h4:has(+ h5), h5:has(+ h6) {
+    color: var(--color-accent);
+}
+
 p {
     margin: 1.31em 0;
 }
-
-/* Group lists & code closer to the paragraphs that proceed them (rather than typical paragraph spacing). */
-p:has(+ ul), p:has(+ ol), p:has(+ .highlighter-rouge) { margin-bottom: 0; }
-p + ul, p + ol, p + .highlighter-rouge { margin-top: 12px; }
 
 p, li {
     line-height: 1.618;
@@ -107,7 +108,7 @@ a:active {
 
 /* elements after headers: must be placed after all elements to override. */
 h1 + *, h2 + *, h3 + *, h4 + *, h5 + *, h6 + * {
-    margin: 0; /* reset margins to let headers define the margins. */
+    margin-top: 0; /* reset margins to let headers define the margins. */
 }
 
 /* --- HEADER & FOOTER --- */
@@ -208,10 +209,6 @@ footer img:hover {
     font-weight: 300;
     font-style: italic;
     color: var(--color-grey);
-}
-
-.post h1 {
-    margin-bottom: 2px; /* Set spacing between post title and post date. */
 }
 
 .post-date + p {

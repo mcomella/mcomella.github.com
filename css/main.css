@@ -268,10 +268,6 @@ pre code {
 }
 
 /* --- ABOUT PAGE --- */
-.projects h2 {
-    color: var(--color-accent);
-}
-
 .projects li {
     margin-bottom: 24px; /* add extra margin to projects list */
 }

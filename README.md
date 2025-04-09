@@ -12,6 +12,9 @@ gem
 With ruby configured correctly, run:
 ```sh
 jekyll serve
+
+# To include unpublished posts and `/debug/post_styles.html`:
+jekyll serve --unpublished
 ```
 
 ## LICENSE

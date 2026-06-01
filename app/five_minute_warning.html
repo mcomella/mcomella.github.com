@@ -68,6 +68,19 @@
         const documentInitialTitle = document.title;
         const toggleTimerButtonInitialText = toggleTimerButton.textContent;
 
+        const STORAGE_KEY_HALFTIME = 'halftime-warning';
+        const STORAGE_KEY_DURATION = 'duration';
+
+        halftimeWarningCheckbox.checked = localStorage.getItem(STORAGE_KEY_HALFTIME) === 'true';
+        durationInput.value = localStorage.getItem(STORAGE_KEY_DURATION) ?? '';
+
+        halftimeWarningCheckbox.addEventListener('change', () => {
+            localStorage.setItem(STORAGE_KEY_HALFTIME, halftimeWarningCheckbox.checked);
+        });
+        durationInput.addEventListener('input', () => {
+            localStorage.setItem(STORAGE_KEY_DURATION, durationInput.value);
+        });
+
         // Definition duplicated in stop().
         let state = {
             type: STATE_STOPPED,

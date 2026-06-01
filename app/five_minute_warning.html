@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Five Minute Warning</title>
     <style>
+        :root {
+            font-size: 18pt;
+            font-family: system-ui, Helvetica, sans-serif;
+        }
+
         body {
             margin: 0;
             height: 100svh;
@@ -15,31 +20,88 @@
             justify-content: center;
         }
 
-        form {
-            padding: 16px;
+        h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: lighter;
         }
 
-        form * {
-            display: block;
-            margin: 8px auto;
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 14rem;
+            padding: 18px 16px 32px 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px #ccc;
+        }
+
+        #settings {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 8px;
+        }
+
+        label {
+            font-size: 1rem;
+        }
+
+        #duration-input {
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 1.2rem;
             text-align: center;
-            font-size: 24pt;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            width: 1rem;
+            height: 1rem;
+            cursor: pointer;
+        }
+
+        p {
+            margin: 0;
         }
 
         #duration-running {
             display: none;
+            line-height: 1;
+            font-size: 4rem;
+        }
+
+        button {
+            margin-top: 32px;
+            font-size: 1.2rem;
         }
     </style>
 </head>
 <body>
-    <form>
-        <label for="halftime-warning">Warn at 50% elapsed (> 10 min only)</label>
-        <input type="checkbox" id="halftime-warning-checkbox" name="halftime-warning">
-        <label for="duration">Duration (minutes):</label>
-        <input type="text" id="duration-input" name="duration" autofocus>
-        <p id="duration-running"></p>
-        <button id="toggle-timer">START</button>
-    </form>
+    <div>
+        <h1>Five Minute Warning</h1>
+        <form id="container">
+            <div id="settings">
+                <label for="duration-input">Duration (minutes)</label>
+                <input type="text" id="duration-input" name="duration" autofocus>
+                <label class="checkbox-label" for="halftime-warning-checkbox">
+                    <input type="checkbox" id="halftime-warning-checkbox" name="halftime-warning">
+                    Warn at halftime (&gt; 10 min)
+                </label>
+            </div>
+            <p id="duration-running"></p>
+            <button id="toggle-timer">START</button>
+        </form>
+    </div>
 
     <script>
         function minToMillis(min) {
@@ -60,6 +122,7 @@
         const STATE_COMPLETE = 'COMPLETE';
 
         const form = document.querySelector('form');
+        const settingsElement = document.querySelector('#settings');
         const halftimeWarningCheckbox = document.getElementById('halftime-warning-checkbox');
         const durationInput = document.querySelector('#duration-input');
         const durationRunningElement = document.querySelector('#duration-running');
@@ -191,29 +254,10 @@
             }
 
             function setFormEnableStateForStopped(isStopped) {
-                let updatedState;
-                if (isStopped) {
-                    updatedState = {
-                        inputDisplay: 'block',
-                        durationDisplay: 'none',
-                        checkboxDisabled: false,
-                        focusedElement: durationInput,
-                    };
-                } else {
-                    updatedState = {
-                        inputDisplay: 'none',
-                        durationDisplay: 'block',
-                        checkboxDisabled: true,
-                        focusedElement: toggleTimerButton,
-                    };
-                }
-
-                durationInput.style.display = updatedState.inputDisplay;
-                durationRunningElement.style.display = updatedState.durationDisplay;
-                for (const checkbox of [halftimeWarningCheckbox]) {
-                    checkbox.disabled = updatedState.checkboxDisabled;
-                }
-                updatedState.focusedElement.focus();
+                settingsElement.style.display = isStopped ? 'flex' : 'none';
+                durationRunningElement.style.display = isStopped ? 'none' : 'block';
+                halftimeWarningCheckbox.disabled = !isStopped;
+                (isStopped ? durationInput : toggleTimerButton).focus();
             }
 
             e.preventDefault();

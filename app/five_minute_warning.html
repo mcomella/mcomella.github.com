@@ -99,7 +99,7 @@
                     <input type="checkbox" id="halftime-warning-checkbox" name="halftime-warning">
                     Warn at halftime (&gt; 10 min)
                 </label>
-                <label class="checkbox-label" for="keep-screen-on">
+                <label class="checkbox-label" for="keep-screen-on-checkbox">
                     <input type="checkbox" id="keep-screen-on-checkbox" name="keep-screen-on">
                     Keep screen on
                 </label>
@@ -144,7 +144,7 @@
 
         halftimeWarningCheckbox.checked = localStorage.getItem(STORAGE_KEY_HALFTIME) === 'true';
         durationInput.value = localStorage.getItem(STORAGE_KEY_DURATION) ?? '';
-        keepScreenOnCheckbox.checked = localStorage.getItem(STORAGE_KEY_KEEP_SCREEN_ON) ?? false;
+        keepScreenOnCheckbox.checked = localStorage.getItem(STORAGE_KEY_KEEP_SCREEN_ON) === 'true';
 
         halftimeWarningCheckbox.addEventListener('change', () => {
             localStorage.setItem(STORAGE_KEY_HALFTIME, halftimeWarningCheckbox.checked);

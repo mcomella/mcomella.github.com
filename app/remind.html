@@ -169,6 +169,10 @@
                 <input id="enable-toggle" type="checkbox"></input>
                 <span class="slider"></span>
             </label>
+            <label for="keep-screen-on-checkbox">
+                <input type="checkbox" id="keep-screen-on-checkbox">
+                Keep screen on
+            </label>
         </form>
     </div>
 
@@ -191,15 +195,23 @@
 
         const body = document.getElementsByTagName('body')[0];
         const enableSwitch = document.getElementById('enable-toggle');
+        const keepScreenOnCheckbox = document.getElementById('keep-screen-on-checkbox');
         const textElement = document.getElementById('utterance');
         const minElement = document.getElementById('min');
         const maxElement = document.getElementById('max');
-        const canDisableElements = [textElement, minElement, maxElement];
+        const canDisableElements = [textElement, minElement, maxElement, keepScreenOnCheckbox];
 
         const initialDocumentTitle = document.title;
 
+        const KEY_KEEP_SCREEN_ON = 'keepScreenOn';
+
         // Override behavior where the browser restores the user's previous checkbox state.
         enableSwitch.checked = enableSwitch.defaultChecked;
+        keepScreenOnCheckbox.checked = localStorage.getItem(KEY_KEEP_SCREEN_ON) === 'true';
+
+        keepScreenOnCheckbox.addEventListener('change', () => {
+            localStorage.setItem(KEY_KEEP_SCREEN_ON, keepScreenOnCheckbox.checked);
+        });
 
         let state = {
             type: STATE_STOPPED,
@@ -259,6 +271,11 @@
                 type: STATE_RUNNING,
                 timeoutId: undefined,
             };
+
+            if (keepScreenOnCheckbox.checked) {
+                acquireWakeLock();
+            }
+
             document.title = '\u25B6 ' + initialDocumentTitle;
             body.classList.add('active');
             for (let e of canDisableElements) {
@@ -277,12 +294,48 @@
             state = {
                 type: STATE_STOPPED,
             };
+
+            // Release wakeLock.
+            if (wakeLock) {
+                wakeLock.release();
+                wakeLock = null;
+            }
+
             document.title = initialDocumentTitle;
             body.classList.remove('active');
             for (let e of canDisableElements) {
                 e.disabled = false;
             }
         }
+
+        let wakeLock = null;
+
+        async function acquireWakeLock() {
+            if (!('wakeLock' in navigator)) {
+                console.warn('WAKELOCK: navigator.wakeLock is unavailable; cannot keep screen on');
+                return;
+            }
+
+            try {
+                wakeLock = await navigator.wakeLock.request('screen');
+                console.info('WAKELOCK: acquired');
+                wakeLock.addEventListener('release', () => {
+                    console.info('WAKELOCK: released');
+                    wakeLock = null;
+                });
+            } catch (e) {
+                console.error(`WAKELOCK: unable to acquire: ${e}`);
+            }
+        }
+
+        document.addEventListener('visibilitychange', () => {
+            console.debug(`VISIBILITY: ${document.visibilityState}`);
+
+            // The wake lock is automatically released when the tab/app is backgrounded, so reacquire it when it returns.
+            if (document.visibilityState === 'visible' && state.type === STATE_RUNNING && keepScreenOnCheckbox.checked) {
+                acquireWakeLock();
+            }
+        });
 
         enableSwitch.addEventListener('change', (e) => {
             if (state.type === STATE_STOPPED) {

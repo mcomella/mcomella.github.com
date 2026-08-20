@@ -13,6 +13,8 @@
         body {
             margin: 0;
             height: 100svh;
+            padding: 0 16px;
+            box-sizing: border-box;
 
             display: flex;
             flex-direction: column;
@@ -204,6 +206,12 @@
                 if (keepScreenOnCheckbox.checked) {
                     acquireWakeLock();
                 }
+
+                // Fix iOS Safari. It only allows TTS when initially started from a user gesture. We start it here so
+                // future utterances occur as expected.
+                const unlockUtterance = new SpeechSynthesisUtterance(' ');
+                unlockUtterance.volume = 0;
+                speechSynthesis.speak(unlockUtterance);
 
                 toggleTimerButton.textContent = 'STOP';
                 setFormEnableStateForStopped(false);

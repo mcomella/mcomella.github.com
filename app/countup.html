@@ -60,6 +60,10 @@
         <div id="container">
             <p id="elapsed-duration">0</p>
             <p>minutes elapsed</p>
+            <label for="keep-screen-on-checkbox">
+                <input type="checkbox" id="keep-screen-on-checkbox">
+                Keep screen on
+            </label>
             <button id="toggle-timer" autofocus>START</button>
         </div>
     </div>
@@ -72,7 +76,16 @@
 
         const elapsedDurationElement = document.getElementById('elapsed-duration');
         const toggleTimerButton = document.getElementById('toggle-timer');
+        const keepScreenOnCheckbox = document.getElementById('keep-screen-on-checkbox');
         const initialStoppedText = toggleTimerButton.innerText;
+
+        const KEY_KEEP_SCREEN_ON = 'keepScreenOn';
+
+        keepScreenOnCheckbox.checked = localStorage.getItem(KEY_KEEP_SCREEN_ON) === 'true';
+
+        keepScreenOnCheckbox.addEventListener('change', () => {
+            localStorage.setItem(KEY_KEEP_SCREEN_ON, keepScreenOnCheckbox.checked);
+        });
 
         function speak(msg) {
             const utterance = new SpeechSynthesisUtterance(msg);
@@ -117,39 +130,64 @@
             toggleTimerButton.innerText = toggleTimerButtonText;
         }
 
+        let wakeLock = null;
+
+        async function acquireWakeLock() {
+            // Safari iOS excludes this API if we're not in a secure context.
+            if (!('wakeLock' in navigator)) {
+                console.warn('WAKELOCK: navigator.wakeLock is unavailable; cannot keep screen on');
+                return;
+            }
+
+            try {
+                wakeLock = await navigator.wakeLock.request('screen');
+                console.info('WAKELOCK: acquired');
+                wakeLock.addEventListener('release', () => {
+                    console.info('WAKELOCK: released');
+                    wakeLock = null;
+                });
+            } catch (e) {
+                console.error(`WAKELOCK: unable to acquire: ${e}`);
+            }
+        }
+
+        document.addEventListener('visibilitychange', () => {
+            console.debug(`VISIBILITY: ${document.visibilityState}`);
+
+            // The wake lock is automatically released when the tab/app is backgrounded, so reacquire it when it returns.
+            if (document.visibilityState === 'visible' && state.type === TYPE_RUNNING && keepScreenOnCheckbox.checked) {
+                acquireWakeLock();
+            }
+        });
+
         let state = newStateStopped(0);
         toggleTimerButton.addEventListener('click', (e) => {
             if (state.type === TYPE_STOPPED) {
-                // TODO: we may lose the wakelock if a user navigates away from the active window/tab.
-                // Request a wakeLock. Safari iOS excludes this API if we're not in a secure context.
-                if ('wakeLock' in navigator) {
-                    try {
-                        navigator.wakeLock.request('screen').then(wakeLock => {
-                            if (state.type === TYPE_RUNNING) {
-                                state.wakeLock = wakeLock;
-                            } else {
-                                wakeLock.release();
-                            }
-                        });
-                    } catch (e) {
-                        console.error(`unable to acquire wakelock: ${e}`);
-                    }
-                }
-
                 state = {
                     type: TYPE_RUNNING,
                     startDate: new Date(),
                     timerId: setInterval(onTick, 60 * 1000), // TODO: since this is called on intervals, it may not run exactly every minute from startDate.
-                    wakeLock: null,
                 };
+
+                if (keepScreenOnCheckbox.checked) {
+                    acquireWakeLock();
+                }
+
+                keepScreenOnCheckbox.disabled = true;
                 render(state);
                 speak('Count up begin'); // note: iOS Safari requires us to speak on a user interaction before timer-based speech works (even if it's blank).
             } else if (state.type === TYPE_RUNNING) {
                 clearInterval(state.timerId);
                 speechSynthesis.cancel();
-                if ('wakeLock' in state) {
-                    state.wakeLock.release();
+
+                // Release wakeLock.
+                if (wakeLock) {
+                    wakeLock.release();
+                    wakeLock = null;
                 }
+
+                keepScreenOnCheckbox.disabled = false;
+
                 // TODO: this value should ideally come from the model, not the UI.
                 state = newStateStopped(Number(elapsedDurationElement.textContent));
                 render(state);

@@ -97,6 +97,10 @@
                     <input type="checkbox" id="halftime-warning-checkbox" name="halftime-warning">
                     Warn at halftime (&gt; 10 min)
                 </label>
+                <label class="checkbox-label" for="keep-screen-on">
+                    <input type="checkbox" id="keep-screen-on-checkbox" name="keep-screen-on">
+                    Keep screen on
+                </label>
             </div>
             <p id="duration-running"></p>
             <button id="toggle-timer">START</button>
@@ -124,6 +128,7 @@
         const form = document.querySelector('form');
         const settingsElement = document.querySelector('#settings');
         const halftimeWarningCheckbox = document.getElementById('halftime-warning-checkbox');
+        const keepScreenOnCheckbox = document.getElementById('keep-screen-on-checkbox');
         const durationInput = document.querySelector('#duration-input');
         const durationRunningElement = document.querySelector('#duration-running');
         const toggleTimerButton = document.querySelector('#toggle-timer');
@@ -133,9 +138,11 @@
 
         const STORAGE_KEY_HALFTIME = 'halftime-warning';
         const STORAGE_KEY_DURATION = 'duration';
+        const STORAGE_KEY_KEEP_SCREEN_ON = 'keepScreenOn';
 
         halftimeWarningCheckbox.checked = localStorage.getItem(STORAGE_KEY_HALFTIME) === 'true';
         durationInput.value = localStorage.getItem(STORAGE_KEY_DURATION) ?? '';
+        keepScreenOnCheckbox.checked = localStorage.getItem(STORAGE_KEY_KEEP_SCREEN_ON) ?? false;
 
         halftimeWarningCheckbox.addEventListener('change', () => {
             localStorage.setItem(STORAGE_KEY_HALFTIME, halftimeWarningCheckbox.checked);
@@ -143,11 +150,43 @@
         durationInput.addEventListener('input', () => {
             localStorage.setItem(STORAGE_KEY_DURATION, durationInput.value);
         });
+        keepScreenOnCheckbox.addEventListener('change', () => {
+            localStorage.setItem(STORAGE_KEY_KEEP_SCREEN_ON, keepScreenOnCheckbox.checked);
+        });
 
         // Definition duplicated in stop().
         let state = {
             type: STATE_STOPPED,
         };
+
+        let wakeLock = null;
+
+        async function acquireWakeLock() {
+            if (!('wakeLock' in navigator)) {
+                console.warn('WAKELOCK: navigator.wakeLock is unavailable; cannot keep screen on');
+                return;
+            }
+
+            try {
+                wakeLock = await navigator.wakeLock.request('screen');
+                console.info('WAKELOCK: acquired');
+                wakeLock.addEventListener('release', () => {
+                    console.info('WAKELOCK: released');
+                    wakeLock = null;
+                });
+            } catch (e) {
+                console.error(`WAKELOCK: unable to acquire: ${e}`);
+            }
+        }
+
+        document.addEventListener('visibilitychange', () => {
+            console.debug(`VISIBILITY: ${document.visibilityState}`);
+
+            // The wake lock is automatically released when the tab/app is backgrounded, so reacquire it when it returns.
+            if (document.visibilityState === 'visible' && state.type === STATE_RUNNING && keepScreenOnCheckbox.checked) {
+                acquireWakeLock();
+            }
+        });
 
         toggleTimerButton.addEventListener('click', (e) => {
             function start() {
@@ -160,6 +199,10 @@
                 if (durationMinutes <= 5) {
                     alert('ERROR: duration must be greater than five minutes to have a five minute warning.');
                     return;
+                }
+
+                if (keepScreenOnCheckbox.checked) {
+                    acquireWakeLock();
                 }
 
                 toggleTimerButton.textContent = 'STOP';
@@ -239,6 +282,12 @@
             }
 
             function stop() {
+                // Release wakeLock.
+                if (wakeLock) {
+                    wakeLock.release();
+                    wakeLock = null;
+                }
+
                 document.title = documentInitialTitle;
                 form.style.background = '';
                 setFormEnableStateForStopped(true);

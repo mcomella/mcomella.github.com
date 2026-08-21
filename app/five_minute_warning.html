@@ -199,11 +199,6 @@
                     return;
                 }
 
-                if (durationMinutes <= 5) {
-                    alert('ERROR: duration must be greater than five minutes to have a five minute warning.');
-                    return;
-                }
-
                 if (keepScreenOnCheckbox.checked) {
                     acquireWakeLock();
                 }
@@ -268,13 +263,17 @@
                     type: STATE_RUNNING,
                     timerId,
                     // Sorted with the warning that should occur next at the end of the array.
-                    sortedWarnings: [{
+                    sortedWarnings: [],
+                };
+
+                if (durationMinutes > 5) {
+                    state.sortedWarnings.push({
                         consoleDescription: 'five minute warning',
                         date: new Date(startDate.getTime() + minToMillis(durationMinutes - 5)),
                         spokenText: 'Wrap it up! Five minutes remaining.',
                         styleBackground: '#fc8',
-                    }],
-                };
+                    });
+                }
 
                 if (halftimeWarningCheckbox.checked && (durationMinutes / 2) > 5) {
                     state.sortedWarnings.push({

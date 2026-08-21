@@ -113,6 +113,10 @@
                     <input type="checkbox" id="keep-screen-on-checkbox" name="keep-screen-on">
                     Keep screen on
                 </label>
+                <label class="checkbox-label" for="countdown-checkbox">
+                    <input type="checkbox" id="countdown-checkbox" name="countdown">
+                    Count down last 5 seconds
+                </label>
             </div>
             <p id="duration-running"></p>
             <div id="buttons">
@@ -146,6 +150,7 @@
         const settingsElement = document.querySelector('#settings');
         const halftimeWarningCheckbox = document.getElementById('halftime-warning-checkbox');
         const keepScreenOnCheckbox = document.getElementById('keep-screen-on-checkbox');
+        const countdownCheckbox = document.getElementById('countdown-checkbox');
         const durationInput = document.querySelector('#duration-input');
         const durationRunningElement = document.querySelector('#duration-running');
         const toggleTimerButton = document.querySelector('#toggle-timer');
@@ -158,10 +163,12 @@
         const STORAGE_KEY_HALFTIME = 'halftime-warning';
         const STORAGE_KEY_DURATION = 'duration';
         const STORAGE_KEY_KEEP_SCREEN_ON = 'keepScreenOn';
+        const STORAGE_KEY_COUNTDOWN = 'countdown';
 
         halftimeWarningCheckbox.checked = localStorage.getItem(STORAGE_KEY_HALFTIME) === 'true';
         durationInput.value = localStorage.getItem(STORAGE_KEY_DURATION) ?? '';
         keepScreenOnCheckbox.checked = localStorage.getItem(STORAGE_KEY_KEEP_SCREEN_ON) === 'true';
+        countdownCheckbox.checked = localStorage.getItem(STORAGE_KEY_COUNTDOWN) === 'true';
 
         halftimeWarningCheckbox.addEventListener('change', () => {
             localStorage.setItem(STORAGE_KEY_HALFTIME, halftimeWarningCheckbox.checked);
@@ -171,6 +178,9 @@
         });
         keepScreenOnCheckbox.addEventListener('change', () => {
             localStorage.setItem(STORAGE_KEY_KEEP_SCREEN_ON, keepScreenOnCheckbox.checked);
+        });
+        countdownCheckbox.addEventListener('change', () => {
+            localStorage.setItem(STORAGE_KEY_COUNTDOWN, countdownCheckbox.checked);
         });
 
         // Definition duplicated in stop().
@@ -254,6 +264,30 @@
             }, 20 * 1000);
         }
 
+        // Schedules the spoken 5, 4, 3, 2, 1 countdown in the final seconds before endDate, if enabled. Returns the
+        // scheduled timeout ids so they can be cancelled on pause/stop.
+        function scheduleCountdown(endDate) {
+            if (!countdownCheckbox.checked) {
+                return [];
+            }
+
+            const timeoutIds = [];
+            for (let secondsRemaining = 5; secondsRemaining >= 1; secondsRemaining--) {
+                const delayMillis = (endDate.getTime() - secondsRemaining * 1000) - Date.now();
+                if (delayMillis > 0) {
+                    timeoutIds.push(setTimeout(() => speak(String(secondsRemaining)), delayMillis));
+                }
+            }
+
+            return timeoutIds;
+        }
+
+        function clearCountdown(timeoutIds = []) {
+            for (const timeoutId of timeoutIds) {
+                clearTimeout(timeoutId);
+            }
+        }
+
         function start() {
             const durationMinutes = parseInt(durationInput.value);
             if (!durationMinutes) {
@@ -300,12 +334,14 @@
             }
 
             const timerId = runInterval(endDate, sortedWarnings);
+            const countdownTimeoutIds = scheduleCountdown(endDate);
 
             state = {
                 type: STATE_RUNNING,
                 timerId,
                 endDate,
                 sortedWarnings,
+                countdownTimeoutIds,
             };
 
             console.info(`START: ${startDate.toLocaleTimeString()} until ${endDate.toLocaleTimeString()} (${durationMinutes} minutes)`);
@@ -316,6 +352,7 @@
 
         function pause() {
             clearInterval(state.timerId);
+            clearCountdown(state.countdownTimeoutIds);
             speechSynthesis.cancel(); // stop in-progress announcements.
 
             if (wakeLock) {
@@ -351,12 +388,14 @@
             }));
 
             const timerId = runInterval(endDate, sortedWarnings);
+            const countdownTimeoutIds = scheduleCountdown(endDate);
 
             state = {
                 type: STATE_RUNNING,
                 timerId,
                 endDate,
                 sortedWarnings,
+                countdownTimeoutIds,
             };
 
             setUiForState(STATE_RUNNING);
@@ -377,6 +416,7 @@
             speechSynthesis.cancel(); // stop in-progress announcements.
 
             clearInterval(state.timerId);
+            clearCountdown(state.countdownTimeoutIds);
 
             // Definition duplicated with initial setting.
             state = {
@@ -389,6 +429,7 @@
             settingsElement.style.display = isStopped ? 'flex' : 'none';
             durationRunningElement.style.display = isStopped ? 'none' : 'block';
             halftimeWarningCheckbox.disabled = !isStopped;
+            countdownCheckbox.disabled = !isStopped;
 
             pauseButton.hidden = stateType !== STATE_RUNNING;
             unpauseButton.hidden = stateType !== STATE_PAUSED;

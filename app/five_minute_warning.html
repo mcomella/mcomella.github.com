@@ -83,9 +83,18 @@
             font-size: 4rem;
         }
 
+        #buttons {
+            display: flex;
+            gap: 8px;
+        }
+
         button {
             margin-top: 12px;
             font-size: 1.2rem;
+        }
+
+        button[hidden] {
+            display: none;
         }
     </style>
 </head>
@@ -106,7 +115,11 @@
                 </label>
             </div>
             <p id="duration-running"></p>
-            <button id="toggle-timer">START</button>
+            <div id="buttons">
+                <button id="toggle-timer">START</button>
+                <button id="pause-timer" type="button" hidden>PAUSE</button>
+                <button id="unpause-timer" type="button" hidden>UNPAUSE</button>
+            </div>
         </form>
     </div>
 
@@ -126,6 +139,7 @@
 
         const STATE_STOPPED = 'STOPPED';
         const STATE_RUNNING = 'RUNNING';
+        const STATE_PAUSED = 'PAUSED';
         const STATE_COMPLETE = 'COMPLETE';
 
         const form = document.querySelector('form');
@@ -135,6 +149,8 @@
         const durationInput = document.querySelector('#duration-input');
         const durationRunningElement = document.querySelector('#duration-running');
         const toggleTimerButton = document.querySelector('#toggle-timer');
+        const pauseButton = document.querySelector('#pause-timer');
+        const unpauseButton = document.querySelector('#unpause-timer');
 
         const documentInitialTitle = document.title;
         const toggleTimerButtonInitialText = toggleTimerButton.textContent;
@@ -191,141 +207,231 @@
             }
         });
 
-        toggleTimerButton.addEventListener('click', (e) => {
-            function start() {
-                const durationMinutes = parseInt(durationInput.value);
-                if (!durationMinutes) {
-                    alert('ERROR: duration must be an int');
+        // Runs the interval that ticks down to endDate, updating the UI and firing warnings from sortedWarnings.
+        // Returns the interval id. Assumes sortedWarnings is sorted with the warning that should occur next at the
+        // end of the array.
+        function runInterval(endDate, sortedWarnings) {
+            // We check the time via an interval to handle the computer going to sleep.
+            return setInterval(() => {
+                console.debug('tick');
+
+                const now = new Date();
+                const remainingMinutes = Math.floor(millisToMin(endDate - now));
+                durationRunningElement.textContent = remainingMinutes;
+                document.title = `${remainingMinutes} min | ${documentInitialTitle}`;
+
+                if (now >= endDate) {
+                    speak('Timer complete');
+
+                    if (state.type === STATE_RUNNING) {
+                        state = {
+                            type: STATE_COMPLETE,
+                            timerId: state.timerId,
+                        };
+                        console.info(`COMPLETE: at ${new Date().toLocaleTimeString()}`);
+                    }
+
                     return;
                 }
 
-                if (keepScreenOnCheckbox.checked) {
-                    acquireWakeLock();
+                // Activate the most recently passed warning, removing it and prior warnings from the list, skipping
+                // activation of them even if they have never been activated (eg device slept through them).
+                // Assumes list is sorted in order of activation.
+                let mostRecentWarning;
+                const warnings = state.sortedWarnings;
+                while (warnings.at(-1) !== undefined && now >= warnings.at(-1).date) {
+                    mostRecentWarning = warnings.pop();
                 }
 
-                // Fix iOS Safari. It only allows TTS when initially started from a user gesture. We start it here so
-                // future utterances occur as expected.
-                const unlockUtterance = new SpeechSynthesisUtterance(' ');
-                unlockUtterance.volume = 0;
-                speechSynthesis.speak(unlockUtterance);
-
-                toggleTimerButton.textContent = 'STOP';
-                setFormEnableStateForStopped(false);
-                durationRunningElement.textContent = durationMinutes - 1;
-                document.title = `${durationMinutes - 1} min | ${documentInitialTitle}`
-
-                const startDate = new Date();
-                const endDate = new Date(startDate.getTime() + minToMillis(durationMinutes));
-
-                // We check the time via an interval to handle the computer going to sleep.
-                const timerId = setInterval(() => {
-                    console.debug('tick');
-
-                    const now = new Date();
-                    const remainingMinutes = Math.floor(millisToMin(endDate - now));
-                    durationRunningElement.textContent = remainingMinutes;
-                    document.title = `${remainingMinutes} min | ${documentInitialTitle}`;
-
-                    if (now >= endDate) {
-                        speak('Timer complete');
-
-                        if (state.type === STATE_RUNNING) {
-                            state = {
-                                type: STATE_COMPLETE,
-                                timerId: state.timerId,
-                            };
-                            console.info(`COMPLETE: at ${new Date().toLocaleTimeString()}`);
-                        }
-
-                        return;
+                if (mostRecentWarning !== undefined) {
+                    if (mostRecentWarning.styleBackground) {
+                        form.style.background = mostRecentWarning.styleBackground;
                     }
 
-                    // Activate the most recently passed warning, removing it and prior warnings from the list, skipping
-                    // activation of them even if they have never been activated (eg device slept through them).
-                    // Assumes list is sorted in order of activation.
-                    let mostRecentWarning;
-                    const warnings = state.sortedWarnings;
-                    while (warnings.at(-1) !== undefined && now >= warnings.at(-1).date) {
-                        mostRecentWarning = warnings.pop();
-                    }
-
-                    if (mostRecentWarning !== undefined) {
-                        if (mostRecentWarning.styleBackground) {
-                            form.style.background = mostRecentWarning.styleBackground;
-                        }
-
-                        speak(mostRecentWarning.spokenText);
-                        console.info(`WARNING: ${mostRecentWarning.consoleDescription} at ${new Date().toLocaleTimeString()}`);
-                    }
-                }, 20 * 1000);
-
-                state = {
-                    type: STATE_RUNNING,
-                    timerId,
-                    // Sorted with the warning that should occur next at the end of the array.
-                    sortedWarnings: [],
-                };
-
-                if (durationMinutes > 5) {
-                    state.sortedWarnings.push({
-                        consoleDescription: 'five minute warning',
-                        date: new Date(startDate.getTime() + minToMillis(durationMinutes - 5)),
-                        spokenText: 'Wrap it up! Five minutes remaining.',
-                        styleBackground: '#fc8',
-                    });
+                    speak(mostRecentWarning.spokenText);
+                    console.info(`WARNING: ${mostRecentWarning.consoleDescription} at ${new Date().toLocaleTimeString()}`);
                 }
+            }, 20 * 1000);
+        }
 
-                if (halftimeWarningCheckbox.checked && (durationMinutes / 2) > 5) {
-                    state.sortedWarnings.push({
-                        consoleDescription: 'halftime warning',
-                        date: new Date(startDate.getTime() + minToMillis(durationMinutes / 2)),
-                        spokenText: `Halftime! Roughly ${Math.ceil(durationMinutes / 2)} minutes remaining.`,
-                    });
-                }
-
-                console.info(`START: ${startDate.toLocaleTimeString()} until ${endDate.toLocaleTimeString()} (${durationMinutes} minutes)`);
-                for (const warning of state.sortedWarnings.toReversed()) {
-                    console.debug(`  ${warning.consoleDescription} at ${warning.date.toLocaleTimeString()}.`)
-                }
+        function start() {
+            const durationMinutes = parseInt(durationInput.value);
+            if (!durationMinutes) {
+                alert('ERROR: duration must be an int');
+                return;
             }
 
-            function stop() {
-                // Release wakeLock.
-                if (wakeLock) {
-                    wakeLock.release();
-                    wakeLock = null;
-                }
-
-                document.title = documentInitialTitle;
-                form.style.background = '';
-                setFormEnableStateForStopped(true);
-                toggleTimerButton.textContent = toggleTimerButtonInitialText;
-                speechSynthesis.cancel(); // stop in-progress announcements.
-
-                clearInterval(state.timerId);
-
-                // Definition duplicated with initial setting.
-                state = {
-                    type: STATE_STOPPED,
-                };
+            if (keepScreenOnCheckbox.checked) {
+                acquireWakeLock();
             }
 
-            function setFormEnableStateForStopped(isStopped) {
-                settingsElement.style.display = isStopped ? 'flex' : 'none';
-                durationRunningElement.style.display = isStopped ? 'none' : 'block';
-                halftimeWarningCheckbox.disabled = !isStopped;
-                (isStopped ? durationInput : toggleTimerButton).focus();
+            // Fix iOS Safari. It only allows TTS when initially started from a user gesture. We start it here so
+            // future utterances occur as expected.
+            const unlockUtterance = new SpeechSynthesisUtterance(' ');
+            unlockUtterance.volume = 0;
+            speechSynthesis.speak(unlockUtterance);
+
+            toggleTimerButton.textContent = 'STOP';
+            setUiForState(STATE_RUNNING);
+            durationRunningElement.textContent = durationMinutes - 1;
+            document.title = `${durationMinutes - 1} min | ${documentInitialTitle}`
+
+            const startDate = new Date();
+            const endDate = new Date(startDate.getTime() + minToMillis(durationMinutes));
+
+            // Sorted with the warning that should occur next at the end of the array.
+            const sortedWarnings = [];
+
+            if (durationMinutes > 5) {
+                sortedWarnings.push({
+                    consoleDescription: 'five minute warning',
+                    date: new Date(startDate.getTime() + minToMillis(durationMinutes - 5)),
+                    spokenText: 'Wrap it up! Five minutes remaining.',
+                    styleBackground: '#fc8',
+                });
             }
 
+            if (halftimeWarningCheckbox.checked && (durationMinutes / 2) > 5) {
+                sortedWarnings.push({
+                    consoleDescription: 'halftime warning',
+                    date: new Date(startDate.getTime() + minToMillis(durationMinutes / 2)),
+                    spokenText: `Halftime! Roughly ${Math.ceil(durationMinutes / 2)} minutes remaining.`,
+                });
+            }
+
+            const timerId = runInterval(endDate, sortedWarnings);
+
+            state = {
+                type: STATE_RUNNING,
+                timerId,
+                endDate,
+                sortedWarnings,
+            };
+
+            console.info(`START: ${startDate.toLocaleTimeString()} until ${endDate.toLocaleTimeString()} (${durationMinutes} minutes)`);
+            for (const warning of state.sortedWarnings.toReversed()) {
+                console.debug(`  ${warning.consoleDescription} at ${warning.date.toLocaleTimeString()}.`)
+            }
+        }
+
+        function pause() {
+            clearInterval(state.timerId);
+            speechSynthesis.cancel(); // stop in-progress announcements.
+
+            if (wakeLock) {
+                wakeLock.release();
+                wakeLock = null;
+            }
+
+            const now = new Date();
+            state = {
+                type: STATE_PAUSED,
+                remainingMillis: state.endDate - now,
+                // Preserve each warning's offset from the end of the timer so it can be recomputed on unpause.
+                warnings: state.sortedWarnings.map((warning) => ({
+                    ...warning,
+                    offsetMillis: warning.date - state.endDate,
+                })),
+            };
+
+            setUiForState(STATE_PAUSED);
+            console.info(`PAUSE: at ${now.toLocaleTimeString()}`);
+        }
+
+        function unpause() {
+            if (keepScreenOnCheckbox.checked) {
+                acquireWakeLock();
+            }
+
+            const now = new Date();
+            const endDate = new Date(now.getTime() + state.remainingMillis);
+            const sortedWarnings = state.warnings.map((warning) => ({
+                ...warning,
+                date: new Date(endDate.getTime() + warning.offsetMillis),
+            }));
+
+            const timerId = runInterval(endDate, sortedWarnings);
+
+            state = {
+                type: STATE_RUNNING,
+                timerId,
+                endDate,
+                sortedWarnings,
+            };
+
+            setUiForState(STATE_RUNNING);
+            console.info(`UNPAUSE: at ${now.toLocaleTimeString()}`);
+        }
+
+        function stop() {
+            // Release wakeLock.
+            if (wakeLock) {
+                wakeLock.release();
+                wakeLock = null;
+            }
+
+            document.title = documentInitialTitle;
+            form.style.background = '';
+            setUiForState(STATE_STOPPED);
+            toggleTimerButton.textContent = toggleTimerButtonInitialText;
+            speechSynthesis.cancel(); // stop in-progress announcements.
+
+            clearInterval(state.timerId);
+
+            // Definition duplicated with initial setting.
+            state = {
+                type: STATE_STOPPED,
+            };
+        }
+
+        function setUiForState(stateType) {
+            const isStopped = stateType === STATE_STOPPED;
+            settingsElement.style.display = isStopped ? 'flex' : 'none';
+            durationRunningElement.style.display = isStopped ? 'none' : 'block';
+            halftimeWarningCheckbox.disabled = !isStopped;
+
+            pauseButton.hidden = stateType !== STATE_RUNNING;
+            unpauseButton.hidden = stateType !== STATE_PAUSED;
+
+            if (isStopped) {
+                durationInput.focus();
+            } else if (stateType === STATE_PAUSED) {
+                unpauseButton.focus();
+            } else {
+                toggleTimerButton.focus();
+            }
+        }
+
+        toggleTimerButton.addEventListener('click', (e) => {
             e.preventDefault();
 
             if (state.type === STATE_STOPPED) {
                 start();
-            } else if (state.type === STATE_RUNNING || state.type === STATE_COMPLETE) {
+            } else if (state.type === STATE_RUNNING || state.type === STATE_PAUSED || state.type === STATE_COMPLETE) {
                 console.info(`STOP: at ${new Date().toLocaleTimeString()} while ${state.type}`);
                 stop();
             } else {
                 console.error(`Unknown state ${state.type}`);
+            }
+        });
+
+        pauseButton.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            if (state.type === STATE_RUNNING) {
+                pause();
+            } else {
+                console.error(`Cannot pause from state ${state.type}`);
+            }
+        });
+
+        unpauseButton.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            if (state.type === STATE_PAUSED) {
+                unpause();
+            } else {
+                console.error(`Cannot unpause from state ${state.type}`);
             }
         });
     </script>

@@ -208,6 +208,13 @@
             }
         }
 
+        function releaseWakeLock() {
+            if (wakeLock) {
+                wakeLock.release();
+                wakeLock = null;
+            }
+        }
+
         document.addEventListener('visibilitychange', () => {
             console.debug(`VISIBILITY: ${document.visibilityState}`);
 
@@ -354,11 +361,7 @@
             clearInterval(state.timerId);
             clearCountdown(state.countdownTimeoutIds);
             speechSynthesis.cancel(); // stop in-progress announcements.
-
-            if (wakeLock) {
-                wakeLock.release();
-                wakeLock = null;
-            }
+            releaseWakeLock();
 
             const now = new Date();
             state = {
@@ -403,11 +406,7 @@
         }
 
         function stop() {
-            // Release wakeLock.
-            if (wakeLock) {
-                wakeLock.release();
-                wakeLock = null;
-            }
+            releaseWakeLock();
 
             document.title = documentInitialTitle;
             form.style.background = '';
